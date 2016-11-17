@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<rdf:RDF
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+        xmlns:lom="http://www.tao.lu/Ontologies/TAOLom.rdf#"
+        xml:base="http://www.tao.lu/Ontologies/TAOLom.rdf#"
+>
+    <!--LOM properties for Metadata category-->
+
+    <!--Metadata identifier-->
+    <rdf:Description rdf:about="http://www.tao.lu/Ontologies/TAOLom.rdf#metadata-identifier">
+        <rdf:type rdf:resource="http://www.tao.lu/Ontologies/TAOLom.rdf#lomProperty"/>
+        <rdfs:label xml:lang="en-US"><![CDATA[LOM Metadata identifier]]></rdfs:label>
+        <rdfs:comment xml:lang="en-US"><![CDATA[LOM identifier metadata of Metadata category]]></rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#AssessmentContentObject"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>
+        <lom:lomCategoryProperty rdf:resource="http://www.tao.lu/Ontologies/TAOLom.rdf#Metadata"/>
+    </rdf:Description>
+
+    <!--Metadata contribute-->
+    <rdf:Description rdf:about="http://www.tao.lu/Ontologies/TAOLom.rdf#metadata-contribute">
+        <rdf:type rdf:resource="http://www.tao.lu/Ontologies/TAOLom.rdf#lomProperty"/>
+        <rdfs:label xml:lang="en-US"><![CDATA[LOM Metadata contribute]]></rdfs:label>
+        <rdfs:comment xml:lang="en-US"><![CDATA[LOM contribute metadata of Metadata category]]></rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#AssessmentContentObject"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>
+        <lom:lomCategoryProperty rdf:resource="http://www.tao.lu/Ontologies/TAOLom.rdf#Metadata"/>
+    </rdf:Description>
+
+    <!--Metadata schema-->
+    <rdf:Description rdf:about="http://www.tao.lu/Ontologies/TAOLom.rdf#metadata-schema">
+        <rdf:type rdf:resource="http://www.tao.lu/Ontologies/TAOLom.rdf#lomProperty"/>
+        <rdfs:label xml:lang="en-US"><![CDATA[LOM Metadata schema]]></rdfs:label>
+        <rdfs:comment xml:lang="en-US"><![CDATA[LOM schema metadata of Metadata category]]></rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#AssessmentContentObject"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>
+        <lom:lomCategoryProperty rdf:resource="http://www.tao.lu/Ontologies/TAOLom.rdf#Metadata"/>
+    </rdf:Description>
+
+    <!--Metadata language-->
+    <rdf:Description rdf:about="http://www.tao.lu/Ontologies/TAOLom.rdf#metadata-language">
+        <rdf:type rdf:resource="http://www.tao.lu/Ontologies/TAOLom.rdf#lomProperty"/>
+        <rdfs:label xml:lang="en-US"><![CDATA[LOM Metadata language]]></rdfs:label>
+        <rdfs:comment xml:lang="en-US"><![CDATA[LOM language metadata of Metadata category]]></rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#AssessmentContentObject"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>
+        <lom:lomCategoryProperty rdf:resource="http://www.tao.lu/Ontologies/TAOLom.rdf#Metadata"/>
+    </rdf:Description>
+
+</rdf:RDF>

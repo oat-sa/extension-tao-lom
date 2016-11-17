@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<rdf:RDF
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+        xmlns:lom="http://www.tao.lu/Ontologies/TAOLom.rdf#"
+        xml:base="http://www.tao.lu/Ontologies/TAOLom.rdf#"
+        xmlns:generis="http://www.tao.lu/Ontologies/generis.rdf#"
+        xmlns:widget="http://www.tao.lu/datatypes/WidgetDefinitions.rdf#"
+>
+    4.5. Educational
+    Note that the LOM-defined Interactivity Type, Interactivity Level, Semantic Density, Intended End User Role, Typical Age Range and Difficulty fields are not recommended by this profile.
+
+    4.5.1. learning_resource_type
+    QTI items are designed to be reusable in a variety of assessment scenarios. Therefore, the LOM-defined values self assessment and exam are forbidden. If the standard LOM vocabulary is used then only the values exercise or questionnaire should be used to describe an item. An alternative vocabulary for this field has been defined in [RDN], when using that vocabulary the value AssessmentItem is recommended.
+
+    4.5.2. Context
+    This is used to provide an educational context for the value given in typical learning time.
+
+    4.5.3. typical_learning_time
+    In the context of a QTI item, the typical learning time is interpreted as the length of time the candidate would normally be allocated to complete the item. It is not a time limit, however, when building a time-limited test from an item bank the typical learning times of the selected items may be added together to estimate the expected duration of the test and used to calculate a time limit for the test if required.
+
+    4.5.4. description
+    Item objectives should be included in this field if required.
+
+    4.5.5. language
+    Usage as defined by [LOM].
