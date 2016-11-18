@@ -26,7 +26,7 @@ return array(
     'label' => 'LOM',
     'description' => 'Learning Object Meta-data',
     'license' => 'GPL-2.0',
-    'version' => '0.1.0',
+    'version' => '0.0.1',
     'author' => 'Open Assessment Technologies SA',
     'requires' => array(
         'tao' => '>=7.26.0'
@@ -37,12 +37,6 @@ return array(
     ),
     'install' => array(
         'rdf' => array(
-            dirname(__FILE__) . '/install/ontology/lom.rdf',
-            dirname(__FILE__) . '/install/ontology/category.rdf',
-            dirname(__FILE__) . '/install/ontology/general.rdf',
-            dirname(__FILE__) . '/install/ontology/lifecycle.rdf',
-            dirname(__FILE__) . '/install/ontology/metadata.rdf',
-
         )
     ),
     'uninstall' => array(
