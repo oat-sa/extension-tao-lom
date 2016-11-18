@@ -1,5 +1,22 @@
 <?php
-
+/**
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; under version 2
+ * of the License (non-upgradable).
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ * Copyright (c) 2016 (original work) Open Assessment Technologies SA (under the project TAO-PRODUCT);
+ *
+ */
 namespace oat\taoLom\test;
 
 use oat\generis\model\OntologyAwareTrait;
@@ -9,40 +26,32 @@ class OntologyTest extends TaoPhpUnitTestRunner
 {
     use OntologyAwareTrait;
     
-    public function testClasses()
+    public function testGeneralOntologyClass()
     {
-        // Get all LOM categories
-        $categories = [];
-        $categoryClasses = $this->getClass('http://www.tao.lu/Ontologies/TAOLom.rdf#LomCategory')->getInstances();
-        foreach ($categoryClasses as $category) {
-            $categories[$category->getLabel()] = [];
-        }
+        $categoryClass = $this->getClass('http://www.tao.lu/Ontologies/TAOLom.rdf#LomCategory');
+        $this->assertTrue($categoryClass->exists());
+
+        $generalCategoryProperty = $this->getProperty('http://www.tao.lu/Ontologies/TAOLom.rdf#General');
+        $this->assertTrue($generalCategoryProperty->exists());
+
+        $lomProperty = $this->getClass('http://www.tao.lu/Ontologies/TAOLom.rdf#lomProperty');
+        $this->assertTrue($lomProperty->exists());
 
         $lomCategoryProperty = $this->getProperty('http://www.tao.lu/Ontologies/TAOLom.rdf#lomCategoryProperty');
+        $this->assertTrue($lomCategoryProperty->exists());
 
-        // Get all LOM properties & sort them by category
-        $lomProperties = $this->getClass('http://www.tao.lu/Ontologies/TAOLom.rdf#lomProperty')->getInstances();
-        foreach ($lomProperties as $lomProperty) {
-            $categories[$lomProperty->getUniquePropertyValue($lomCategoryProperty)->getLabel()][] = $this->getProperty($lomProperty);
-        }
+        $identifierProperty = $this->getProperty('http://www.tao.lu/Ontologies/TAOLom.rdf#general-identifier');
+        $this->assertTrue($identifierProperty->exists());
+        $this->assertEquals(
+            $generalCategoryProperty,
+            $this->getProperty($identifierProperty->getUniquePropertyValue($lomCategoryProperty))
+        );
 
-        // Display LOM properties by category
-        foreach ($categories as $category => $properties) {
-            echo PHP_EOL . 'Category : ' . $category . PHP_EOL;
-
-            if (empty($properties)) {
-                echo ' No LOM property associated to this category' . PHP_EOL;
-                continue;
-            }
-
-            echo ' -- LOM properties -- ' . PHP_EOL;
-            foreach ($properties as $property) {
-                echo '   * uri   = ' . $property->getUri() . PHP_EOL;
-                echo '   * label = ' . $property->getLabel() . PHP_EOL;
-                echo '   * range = ' . reset($property->getRange()) . PHP_EOL;
-                echo ' -- ' . PHP_EOL;
-            }
-        }
-        
+        $titleProperty = $this->getProperty('http://www.tao.lu/Ontologies/TAOLom.rdf#general-title');
+        $this->assertTrue($titleProperty->exists());
+        $this->assertEquals(
+            $generalCategoryProperty,
+            $this->getProperty($titleProperty->getUniquePropertyValue($lomCategoryProperty))
+        );
     }
 }

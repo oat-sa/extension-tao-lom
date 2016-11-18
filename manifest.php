@@ -40,9 +40,6 @@ return array(
             dirname(__FILE__) . '/install/ontology/lom.rdf',
             dirname(__FILE__) . '/install/ontology/category.rdf',
             dirname(__FILE__) . '/install/ontology/general.rdf',
-            dirname(__FILE__) . '/install/ontology/lifecycle.rdf',
-            dirname(__FILE__) . '/install/ontology/metadata.rdf',
-
         )
     ),
     'uninstall' => array(
