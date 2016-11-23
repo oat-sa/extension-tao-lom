@@ -25,11 +25,11 @@
         <lom:lomCategoryProperty rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#General"/>
         <generis:is_language_dependent rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#False"/>
         <widget:widget rdf:resource="http://www.tao.lu/datatypes/WidgetDefinitions.rdf#TextBox"/>
-        <tao:PropertyIndex rdf:resource="http://www.taotesting.com/ontologies/TAO.rdf#GeneralIdentifierIndex"/>
+        <tao:PropertyIndex rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#GeneralIdentifierIndex"/>
     </rdf:Description>
     <!-- Search Indexes to create searchable token -->
     <rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#GeneralIdentifierIndex">
-        <rdf:type rdf:resource="http://www.taotesting.com/ontologies/TAO.rdf#Index"/>
+        <rdf:type rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#Index"/>
         <rdfs:label xml:lang="en-US"><![CDATA[LOM General identifier Index]]></rdfs:label>
         <tao:IndexIdentifier><![CDATA[general-identifier]]></tao:IndexIdentifier>
         <tao:IndexFuzzyMatching rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#True" />
@@ -46,16 +46,16 @@
         <rdf:type rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#lomProperty"/>
         <rdfs:label xml:lang="en-US"><![CDATA[LOM General title]]></rdfs:label>
         <rdfs:comment xml:lang="en-US"><![CDATA[LOM title metadata of General category. The title must have a value that matches the value of the associated object's title attribute.]]></rdfs:comment>
-        <rdfs:domain rdf:resource="http://www.taotesting.com/ontologies/TAO.rdf#AssessmentContentObject"/>
+        <rdfs:domain rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#AssessmentContentObject"/>
         <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>
         <lom:lomCategoryProperty rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#General"/>
-        <generis:is_language_dependent rdf:resource="http://www.taotesting.com/ontologies/generis.rdf#True"/>
-        <widget:widget rdf:resource="http://www.taotesting.com/datatypes/WidgetDefinitions.rdf#TextBox"/>
-        <tao:PropertyIndex rdf:resource="http://www.taotesting.com/ontologies/TAO.rdf#GeneralTitleIndex"/>
+        <generis:is_language_dependent rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#True"/>
+        <widget:widget rdf:resource="http://www.tao.lu/datatypes/WidgetDefinitions.rdf#TextBox"/>
+        <tao:PropertyIndex rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#GeneralTitleIndex"/>
     </rdf:Description>
     <!-- Search Indexes to create searchable token -->
     <rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#GeneralTitleIndex">
-        <rdf:type rdf:resource="http://www.taotesting.com/ontologies/TAO.rdf#Index"/>
+        <rdf:type rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#Index"/>
         <rdfs:label xml:lang="en-US"><![CDATA[LOM General title Index]]></rdfs:label>
         <tao:IndexIdentifier><![CDATA[general-title]]></tao:IndexIdentifier>
         <tao:IndexFuzzyMatching rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#True" />

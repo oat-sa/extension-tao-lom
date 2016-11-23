@@ -7,7 +7,7 @@
 
     <!--LOM property-->
     <rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#lomProperty">
-        <rdfs:subClassOf rdf:resource="http://www.taotesting.com/ontologies/TAO.rdf#property"/>
+        <rdfs:subClassOf rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#property"/>
         <rdfs:label xml:lang="en-US"><![CDATA[LOM property]]></rdfs:label>
         <rdfs:comment xml:lang="en-US"><![CDATA[Property to define LOM metadata]]></rdfs:comment>
     </rdf:Description>
