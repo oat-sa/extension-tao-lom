@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xml:base="http://www.taotesting.com/ontologies/lom.rdf#"
+>
+
+    <!--LOM property-->
+    <rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#lomProperty">
+        <rdfs:subClassOf rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#property"/>
+        <rdfs:label xml:lang="en-US"><![CDATA[LOM property]]></rdfs:label>
+        <rdfs:comment xml:lang="en-US"><![CDATA[Property to define LOM metadata]]></rdfs:comment>
+    </rdf:Description>
+
+    <!--LOM Category class-->
+    <rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#LomCategory">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Class"/>
+        <rdfs:label xml:lang="en-US"><![CDATA[LOM category]]></rdfs:label>
+        <rdfs:comment xml:lang="en-US"><![CDATA[Category to sort LOM property]]></rdfs:comment>
+    </rdf:Description>
+
+    <!--LOM category property-->
+    <rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#lomCategoryProperty">
+        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+        <rdfs:domain rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#lomProperty"/>
+        <rdfs:range rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#LomCategory"/>
+        <rdfs:label xml:lang="en-US"><![CDATA[Category of LOM metadata]]></rdfs:label>
+        <rdfs:comment xml:lang="en-US"><![CDATA[Category to identify LOM metadata]]></rdfs:comment>
+    </rdf:Description>
+
+</rdf:RDF>

@@ -20,11 +20,17 @@
 
 namespace oat\taoLom\scripts\update;
 
+use oat\tao\scripts\update\OntologyUpdater;
+
 class Updater extends \common_ext_ExtensionUpdater
 {
     public function update($initialVersion)
     {
         $this->setVersion('0.0.1');
-    }
 
+        if ($this->isVersion('0.0.1')) {
+            OntologyUpdater::syncModels();
+            $this->setVersion('0.1.0');
+        }
+    }
 }
