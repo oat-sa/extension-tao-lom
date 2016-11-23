@@ -2,13 +2,13 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xml:base="http://www.tao.lu/Ontologies/TAOLom.rdf#">
+    xml:base="http://www.tao.lu/Ontologies/lom.rdf#">
     <!--xmlns:generis="http://www.tao.lu/Ontologies/generis.rdf#">-->
 
 
     <!--LOM category : General-->
-    <rdf:Description rdf:about="http://www.tao.lu/Ontologies/TAOLom.rdf#General">
-        <rdf:type rdf:resource="http://www.tao.lu/Ontologies/TAOLom.rdf#LomCategory"/>
+    <rdf:Description rdf:about="http://www.tao.lu/Ontologies/lom.rdf#General">
+        <rdf:type rdf:resource="http://www.tao.lu/Ontologies/lom.rdf#LomCategory"/>
         <rdfs:label xml:lang="en-US"><![CDATA[LOM general]]></rdfs:label>
         <rdfs:comment xml:lang="en-US"><![CDATA[LOM general category]]></rdfs:comment>
     </rdf:Description>

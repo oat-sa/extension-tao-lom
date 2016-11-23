@@ -1,6 +1,6 @@
 {
 
-    "name": "oat/taoLom",
+    "name": "oat-sa/extension-tao-lom",
     "description" : "Learning Object Meta-data",
     "type" : "tao-extension",
     "authors" : [
