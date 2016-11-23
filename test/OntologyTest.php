@@ -28,26 +28,26 @@ class OntologyTest extends TaoPhpUnitTestRunner
     
     public function testGeneralOntologyClass()
     {
-        $categoryClass = $this->getClass('http://www.tao.lu/Ontologies/TAOLom.rdf#LomCategory');
+        $categoryClass = $this->getClass('http://www.taotesting.com/ontologies/lom.rdf#LomCategory');
         $this->assertTrue($categoryClass->exists());
 
-        $generalCategoryProperty = $this->getProperty('http://www.tao.lu/Ontologies/TAOLom.rdf#General');
+        $generalCategoryProperty = $this->getProperty('http://www.taotesting.com/ontologies/lom.rdf#General');
         $this->assertTrue($generalCategoryProperty->exists());
 
-        $lomProperty = $this->getClass('http://www.tao.lu/Ontologies/TAOLom.rdf#lomProperty');
+        $lomProperty = $this->getClass('http://www.taotesting.com/ontologies/lom.rdf#lomProperty');
         $this->assertTrue($lomProperty->exists());
 
-        $lomCategoryProperty = $this->getProperty('http://www.tao.lu/Ontologies/TAOLom.rdf#lomCategoryProperty');
+        $lomCategoryProperty = $this->getProperty('http://www.taotesting.com/ontologies/lom.rdf#lomCategoryProperty');
         $this->assertTrue($lomCategoryProperty->exists());
 
-        $identifierProperty = $this->getProperty('http://www.tao.lu/Ontologies/TAOLom.rdf#general-identifier');
+        $identifierProperty = $this->getProperty('http://www.taotesting.com/ontologies/lom.rdf#general-identifier');
         $this->assertTrue($identifierProperty->exists());
         $this->assertEquals(
             $generalCategoryProperty,
             $this->getProperty($identifierProperty->getUniquePropertyValue($lomCategoryProperty))
         );
 
-        $titleProperty = $this->getProperty('http://www.tao.lu/Ontologies/TAOLom.rdf#general-title');
+        $titleProperty = $this->getProperty('http://www.taotesting.com/ontologies/lom.rdf#general-title');
         $this->assertTrue($titleProperty->exists());
         $this->assertEquals(
             $generalCategoryProperty,
