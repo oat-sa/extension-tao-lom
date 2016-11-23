@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<rdf:RDF
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+        xmlns:lom="http://www.taotesting.com/ontologies/lom.rdf#"
+        xmlns:tao="http://www.tao.lu/Ontologies/TAO.rdf#"
+        xml:base="http://www.taotesting.com/ontologies/lom.rdf#"
+        xmlns:generis="http://www.tao.lu/Ontologies/generis.rdf#"
+        xmlns:widget="http://www.tao.lu/datatypes/WidgetDefinitions.rdf#"
+>
+
+    <!-- LOM properties for General category -->
+    <!-- General fields to define AssessmentContentObject definition -->
+
+    <!--
+      - General identifier -
+      - Identifier value must have an entry that matches the identifier of the associated AssessmentContentObject.
+    -->
+    <rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#general-identifier">
+        <rdf:type rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#lomProperty"/>
+        <rdfs:label xml:lang="en-US"><![CDATA[LOM General identifier]]></rdfs:label>
+        <rdfs:comment xml:lang="en-US"><![CDATA[LOM identifier into General category]]></rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#AssessmentContentObject"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>
+        <lom:lomCategoryProperty rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#General"/>
+        <generis:is_language_dependent rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#False"/>
+        <widget:widget rdf:resource="http://www.tao.lu/datatypes/WidgetDefinitions.rdf#TextBox"/>
+        <tao:PropertyIndex rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#GeneralIdentifierIndex"/>
+    </rdf:Description>
+    <!-- Search Indexes to create searchable token -->
+    <rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#GeneralIdentifierIndex">
+        <rdf:type rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#Index"/>
+        <rdfs:label xml:lang="en-US"><![CDATA[LOM General identifier Index]]></rdfs:label>
+        <tao:IndexIdentifier><![CDATA[general-identifier]]></tao:IndexIdentifier>
+        <tao:IndexFuzzyMatching rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#True" />
+        <tao:IndexDefaultSearch rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#True" />
+        <tao:IndexTokenizer rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#RawValueTokenizer"/>
+    </rdf:Description>
+
+    <!--
+      - General title -
+      - The title must have a value that matches the value of the title attribute of the associated AssessmentContentObject.
+      - The language used to interpret the title is taken from the lang attribute of the associated AssessmentContentObject.
+    -->
+    <rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#general-title">
+        <rdf:type rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#lomProperty"/>
+        <rdfs:label xml:lang="en-US"><![CDATA[LOM General title]]></rdfs:label>
+        <rdfs:comment xml:lang="en-US"><![CDATA[LOM title metadata of General category. The title must have a value that matches the value of the associated object's title attribute.]]></rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#AssessmentContentObject"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>
+        <lom:lomCategoryProperty rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#General"/>
+        <generis:is_language_dependent rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#True"/>
+        <widget:widget rdf:resource="http://www.tao.lu/datatypes/WidgetDefinitions.rdf#TextBox"/>
+        <tao:PropertyIndex rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#GeneralTitleIndex"/>
+    </rdf:Description>
+    <!-- Search Indexes to create searchable token -->
+    <rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#GeneralTitleIndex">
+        <rdf:type rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#Index"/>
+        <rdfs:label xml:lang="en-US"><![CDATA[LOM General title Index]]></rdfs:label>
+        <tao:IndexIdentifier><![CDATA[general-title]]></tao:IndexIdentifier>
+        <tao:IndexFuzzyMatching rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#True" />
+        <tao:IndexDefaultSearch rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#True" />
+        <tao:IndexTokenizer rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#RawValueTokenizer"/>
+    </rdf:Description>
+
+    <!--General language-->
+    <!--<rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#general-language">-->
+        <!--<rdf:type rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#lomProperty"/>-->
+        <!--<rdfs:label xml:lang="en-US"><![CDATA[LOM General language]]></rdfs:label>-->
+        <!--<rdfs:comment xml:lang="en-US"><![CDATA[LOM language metadata of General category]]></rdfs:comment>-->
+        <!--<rdfs:domain rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#AssessmentContentObject"/>-->
+        <!--<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>-->
+        <!--<lom:lomCategoryProperty rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#General"/>-->
+    <!--</rdf:Description>-->
+
+    <!--General description-->
+    <!--<rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#general-description">-->
+        <!--<rdf:type rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#lomProperty"/>-->
+        <!--<rdfs:label xml:lang="en-US"><![CDATA[LOM General description]]></rdfs:label>-->
+        <!--<rdfs:comment xml:lang="en-US"><![CDATA[LOM description metadata of General category]]></rdfs:comment>-->
+        <!--<rdfs:domain rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#AssessmentContentObject"/>-->
+        <!--<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>-->
+        <!--<lom:lomCategoryProperty rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#General"/>-->
+        <!--<widget:widget rdf:resource="http://www.tao.lu/datatypes/WidgetDefinitions.rdf#TextArea"/>-->
+    <!--</rdf:Description>-->
+
+    <!--General keyword-->
+    <!--<rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#general-keyword">-->
+        <!--<rdf:type rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#lomProperty"/>-->
+        <!--<rdfs:label xml:lang="en-US"><![CDATA[LOM General keyword]]></rdfs:label>-->
+        <!--<rdfs:comment xml:lang="en-US"><![CDATA[LOM keyword metadata of General category]]></rdfs:comment>-->
+        <!--<rdfs:domain rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#AssessmentContentObject"/>-->
+        <!--<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>-->
+        <!--<lom:lomCategoryProperty rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#General"/>-->
+        <!--<generis:Multiple rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#True" />-->
+    <!--</rdf:Description>-->
+
+    <!--General coverage-->
+    <!--<rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#general-coverage">-->
+        <!--<rdf:type rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#lomProperty"/>-->
+        <!--<rdfs:label xml:lang="en-US"><![CDATA[LOM General coverage]]></rdfs:label>-->
+        <!--<rdfs:comment xml:lang="en-US"><![CDATA[LOM coverage metadata of General category]]></rdfs:comment>-->
+        <!--<rdfs:domain rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#AssessmentContentObject"/>-->
+        <!--<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>-->
+        <!--<lom:lomCategoryProperty rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#General"/>-->
+        <!--<widget:widget rdf:resource="http://www.tao.lu/datatypes/WidgetDefinitions.rdf#TextBox"/>-->
+    <!--</rdf:Description>-->
+
+</rdf:RDF>

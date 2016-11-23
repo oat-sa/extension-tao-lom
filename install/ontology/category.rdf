@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xml:base="http://www.taotesting.com/ontologies/lom.rdf#">
+    <!--xmlns:generis="http://www.tao.lu/Ontologies/generis.rdf#">-->
+
+
+    <!--LOM category : General-->
+    <rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#General">
+        <rdf:type rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#LomCategory"/>
+        <rdfs:label xml:lang="en-US"><![CDATA[LOM general]]></rdfs:label>
+        <rdfs:comment xml:lang="en-US"><![CDATA[LOM general category]]></rdfs:comment>
+    </rdf:Description>
+
+    <!--LOM category : Lifecycle-->
+    <!--<rdf:Description rdf:about="http://www.taotesting.com/ontologies/TAOLom.rdf#Lifecycle">-->
+        <!--<rdf:type rdf:resource="http://www.taotesting.com/ontologies/TAOLom.rdf#LomCategory"/>-->
+        <!--<rdfs:label xml:lang="en-US"><![CDATA[LOM lifecycle]]></rdfs:label>-->
+        <!--<rdfs:comment xml:lang="en-US"><![CDATA[LOM lifecycle category]]></rdfs:comment>-->
+    <!--</rdf:Description>-->
+
+    <!--LOM category : Metadata-->
+    <!--<rdf:Description rdf:about="http://www.taotesting.com/ontologies/TAOLom.rdf#Metadata">-->
+        <!--<rdf:type rdf:resource="http://www.taotesting.com/ontologies/TAOLom.rdf#LomCategory"/>-->
+        <!--<rdfs:label xml:lang="en-US"><![CDATA[LOM metadata]]></rdfs:label>-->
+        <!--<rdfs:comment xml:lang="en-US"><![CDATA[LOM metadata category]]></rdfs:comment>-->
+    <!--</rdf:Description>-->
+
+    <!--LOM category : Technical-->
+    <!--<rdf:Description rdf:about="http://www.taotesting.com/ontologies/TAOLom.rdf#Technical">-->
+        <!--<rdf:type rdf:resource="http://www.taotesting.com/ontologies/TAOLom.rdf#LomCategory"/>-->
+        <!--<rdfs:label xml:lang="en-US"><![CDATA[LOM technical]]></rdfs:label>-->
+        <!--<rdfs:comment xml:lang="en-US"><![CDATA[LOM technical category]]></rdfs:comment>-->
+    <!--</rdf:Description>-->
+
+    <!--LOM category : Educational-->
+    <!--<rdf:Description rdf:about="http://www.taotesting.com/ontologies/TAOLom.rdf#Educational">-->
+        <!--<rdf:type rdf:resource="http://www.taotesting.com/ontologies/TAOLom.rdf#LomCategory"/>-->
+        <!--<rdfs:label xml:lang="en-US"><![CDATA[LOM educational]]></rdfs:label>-->
+        <!--<rdfs:comment xml:lang="en-US"><![CDATA[LOM educational category]]></rdfs:comment>-->
+    <!--</rdf:Description>-->
+
+    <!--LOM category : Rights-->
+    <!--<rdf:Description rdf:about="http://www.taotesting.com/ontologies/TAOLom.rdf#Rights">-->
+        <!--<rdf:type rdf:resource="http://www.taotesting.com/ontologies/TAOLom.rdf#LomCategory"/>-->
+        <!--<rdfs:label xml:lang="en-US"><![CDATA[LOM rights]]></rdfs:label>-->
+        <!--<rdfs:comment xml:lang="en-US"><![CDATA[LOM rights category]]></rdfs:comment>-->
+    <!--</rdf:Description>-->
+
+    <!--LOM category : Annotation-->
+    <!--<rdf:Description rdf:about="http://www.taotesting.com/ontologies/TAOLom.rdf#Annotation">-->
+        <!--<rdf:type rdf:resource="http://www.taotesting.com/ontologies/TAOLom.rdf#LomCategory"/>-->
+        <!--<rdfs:label xml:lang="en-US"><![CDATA[LOM annotation]]></rdfs:label>-->
+        <!--<rdfs:comment xml:lang="en-US"><![CDATA[LOM annotation category]]></rdfs:comment>-->
+    <!--</rdf:Description>-->
+
+    <!--LOM category : Classification-->
+    <!--<rdf:Description rdf:about="http://www.taotesting.com/ontologies/TAOLom.rdf#Classification">-->
+        <!--<rdf:type rdf:resource="http://www.taotesting.com/ontologies/TAOLom.rdf#LomCategory"/>-->
+        <!--<rdfs:label xml:lang="en-US"><![CDATA[LOM classification]]></rdfs:label>-->
+        <!--<rdfs:comment xml:lang="en-US"><![CDATA[LOM classification category]]></rdfs:comment>-->
+        <!--<generis:Multiple rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#True" />-->
+    <!--</rdf:Description>-->
+
+</rdf:RDF>
