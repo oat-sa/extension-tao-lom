@@ -24,7 +24,6 @@
         <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>
         <lom:lomCategoryProperty rdf:resource="http://www.tao.lu/Ontologies/lom.rdf#General"/>
         <generis:is_language_dependent rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#False"/>
-        <generis:validationRule><![CDATA[notEmpty]]></generis:validationRule>
         <widget:widget rdf:resource="http://www.tao.lu/datatypes/WidgetDefinitions.rdf#TextBox"/>
         <tao:PropertyIndex rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#GeneralIdentifierIndex"/>
     </rdf:Description>
@@ -51,7 +50,6 @@
         <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>
         <lom:lomCategoryProperty rdf:resource="http://www.tao.lu/Ontologies/lom.rdf#General"/>
         <generis:is_language_dependent rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#True"/>
-        <generis:validationRule><![CDATA[notEmpty]]></generis:validationRule>
         <widget:widget rdf:resource="http://www.tao.lu/datatypes/WidgetDefinitions.rdf#TextBox"/>
         <tao:PropertyIndex rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#GeneralTitleIndex"/>
     </rdf:Description>
