@@ -37,10 +37,10 @@ class Updater extends \common_ext_ExtensionUpdater
         
         if ($this->isVersion('0.1.0')) {
             $extractors = new AddMetadataExtractors();
-            $extractors();
+            $extractors([]);
             
             $injectors = new AddMetadataInjectors();
-            $injectors();
+            $injectors([]);
             
             $this->setVersion('0.2.0');
         }
