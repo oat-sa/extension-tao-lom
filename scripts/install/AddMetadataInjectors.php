@@ -21,8 +21,9 @@ namespace oat\taoLom\scripts\install;
 
 use oat\taoQtiItem\model\qti\Service;
 use oat\taoLom\model\LomMetadataInjector;
+use oat\oatbox\extension\InstallAction;
 
-class AddMetadataInjectors extends \common_ext_action_InstallAction
+class AddMetadataInjectors extends InstallAction
 {
     public function __invoke($params)
     {

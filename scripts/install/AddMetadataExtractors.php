@@ -21,8 +21,9 @@ namespace oat\taoLom\scripts\install;
 
 use oat\taoQtiItem\model\qti\Service;
 use oat\taoLom\model\LomMetadataExtractor;
+use oat\oatbox\extension\InstallAction;
 
-class AddMetadataExtractors extends \common_ext_action_InstallAction
+class AddMetadataExtractors extends InstallAction
 {
     public function __invoke($params)
     {
