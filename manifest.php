@@ -25,12 +25,12 @@ use oat\taoLom\scripts\install\AddMetadataInjectors;
  * Generated using taoDevTools 2.15.0
  */
 return array(
-    'name' => 'taoLom',
-    'label' => 'Learning Object Metadata',
+    'name'        => 'taoLom',
+    'label'       => 'Learning Object Metadata',
     'description' => 'An extension supporting the IMS Global Loose version of the Learning Object Metadata standard.',
-    'license' => 'GPL-2.0',
-    'version' => '0.2.0',
-    'author' => 'Open Assessment Technologies SA',
+    'license'     => 'GPL-2.0',
+    'version'     => '0.2.0',
+    'author'      => 'Open Assessment Technologies SA',
     'requires' => array(
         'tao' => '>=7.26.0',
         'taoQtiItem' => '>=6.4.0'

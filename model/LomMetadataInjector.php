@@ -20,8 +20,6 @@
 namespace oat\taoLom\model;
 
 use oat\taoQtiItem\model\qti\metadata\ontology\OntologyMetadataInjector;
-use oat\taoLom\model\LomOntology;
-use oat\taoLom\model\ImsMdLoose1p3p2Schema;
 
 class LomMetadataInjector extends OntologyMetadataInjector
 {
