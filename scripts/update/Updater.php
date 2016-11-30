@@ -17,7 +17,6 @@
  * Copyright (c) 2016 (original work) Open Assessment Technologies SA;
  *
  */
-
 namespace oat\taoLom\scripts\update;
 
 use oat\tao\scripts\update\OntologyUpdater;

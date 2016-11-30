@@ -1,5 +1,5 @@
 <?php
-/*  
+/**  
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; under version 2
@@ -14,10 +14,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  * 
- * Copyright (c) 2016 (original work) Open Assessment Technologies SA (under the project TAO-PRODUCT);
- *               
- * 
+ * Copyright (c) 2016 (original work) Open Assessment Technologies SA;
+ *
  */
+ 
 $todefine = array(
     // TAO LOM Ontology Properties
     'TAOLOM_PROPERTY_IDENTFIER' => 'http://www.taotesting.com/ontologies/lom.rdf#general-identifier',
