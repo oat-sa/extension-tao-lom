@@ -20,6 +20,8 @@
 namespace oat\taoLom\model;
 
 use oat\taoQtiItem\model\qti\metadata\ontology\OntologyMetadataInjector;
+use oat\taoLom\model\LomOntology;
+use oat\taoLom\model\ImsMdLoose1p3p2Schema;
 
 class LomMetadataInjector extends OntologyMetadataInjector
 {
@@ -27,28 +29,25 @@ class LomMetadataInjector extends OntologyMetadataInjector
     {
         parent::__construct();
 
-        // Make sure that constants are REALLY loaded in the current execution context.
-        \common_ext_ExtensionsManager::singleton()->getExtensionById('taoLom')->load();
-
         // LOM General Category Injection Rules.
         $this->addInjectionRule(
             array(
-                TAOLOM_IMSMD_LOOSE_1P3P2_PATH_ROOT,
-                TAOLOM_IMSMD_LOOSE_1P3P2_PATH_GENERAL,
-                TAOLOM_IMSMD_LOOSE_1P3P2_PATH_IDENTIFIER,
-                TAOLOM_IMSMD_LOOSE_1P3P2_PATH_ENTRY
+                ImsMdLoose1p3p2Schema::PATH_ROOT,
+                ImsMdLoose1p3p2Schema::PATH_GENERAL,
+                ImsMdLoose1p3p2Schema::PATH_IDENTIFIER,
+                ImsMdLoose1p3p2Schema::PATH_ENTRY
             ),
-            TAOLOM_PROPERTY_IDENTFIER
+            LomOntology::PROPERTY_IDENTFIER
         );
 
         $this->addInjectionRule(
             array(
-                TAOLOM_IMSMD_LOOSE_1P3P2_PATH_ROOT,
-                TAOLOM_IMSMD_LOOSE_1P3P2_PATH_GENERAL,
-                TAOLOM_IMSMD_LOOSE_1P3P2_PATH_TITLE,
-                TAOLOM_IMSMD_LOOSE_1P3P2_PATH_STRING,
+                ImsMdLoose1p3p2Schema::PATH_ROOT,
+                ImsMdLoose1p3p2Schema::PATH_GENERAL,
+                ImsMdLoose1p3p2Schema::PATH_TITLE,
+                ImsMdLoose1p3p2Schema::PATH_STRING,
             ),
-            TAOLOM_PROPERTY_TITLE
+            LomOntology::PROPERTY_TITLE
         );
     }
 }
