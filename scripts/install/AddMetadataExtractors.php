@@ -17,31 +17,20 @@
  * Copyright (c) 2016 (original work) Open Assessment Technologies SA;
  *
  */
-namespace oat\taoLom\scripts\update;
+namespace oat\taoLom\scripts\install;
 
-use oat\tao\scripts\update\OntologyUpdater;
-use oat\taoLom\scripts\install\AddMetadataExtractors;
-use oat\taoLom\scripts\install\AddMetadataInjectors;
+use oat\taoQtiItem\model\qti\Service;
+use oat\taoLom\model\LomMetadataExtractor;
+use oat\oatbox\extension\InstallAction;
 
-class Updater extends \common_ext_ExtensionUpdater
+class AddMetadataExtractors extends InstallAction
 {
-    public function update($initialVersion)
+    public function __invoke($params)
     {
-        $this->setVersion('0.0.1');
-
-        if ($this->isVersion('0.0.1')) {
-            OntologyUpdater::syncModels();
-            $this->setVersion('0.1.0');
-        }
+        $qtiService = Service::singleton();
+        $metadataRegistry = $qtiService->getMetadataRegistry();
+        $metadataRegistry->registerMetadataExtractor(LomMetadataExtractor::class);
         
-        if ($this->isVersion('0.1.0')) {
-            $extractors = new AddMetadataExtractors();
-            $extractors([]);
-            
-            $injectors = new AddMetadataInjectors();
-            $injectors([]);
-            
-            $this->setVersion('0.2.0');
-        }
+        return new \common_report_Report(\common_report_Report::TYPE_SUCCESS, 'LOM Metadata Extractor(s) successfully registered.');
     }
 }

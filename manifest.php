@@ -18,18 +18,22 @@
  *
  */
 
+use oat\taoLom\scripts\install\AddMetadataExtractors;
+use oat\taoLom\scripts\install\AddMetadataInjectors;
+
 /**
  * Generated using taoDevTools 2.15.0
  */
 return array(
-    'name' => 'taoLom',
-    'label' => 'LOM',
-    'description' => 'Learning Object Meta-data',
-    'license' => 'GPL-2.0',
-    'version' => '0.1.0',
-    'author' => 'Open Assessment Technologies SA',
+    'name'        => 'taoLom',
+    'label'       => 'Learning Object Metadata',
+    'description' => 'An extension supporting the IMS Global Loose version of the Learning Object Metadata standard.',
+    'license'     => 'GPL-2.0',
+    'version'     => '0.2.0',
+    'author'      => 'Open Assessment Technologies SA',
     'requires' => array(
-        'tao' => '>=7.26.0'
+        'tao' => '>=7.26.0',
+        'taoQtiItem' => '>=6.4.0'
     ),
     'managementRole' => 'http://www.tao.lu/Ontologies/generis.rdf#taoLomManager',
     'acl' => array(
@@ -40,7 +44,11 @@ return array(
             dirname(__FILE__) . '/install/ontology/lom.rdf',
             dirname(__FILE__) . '/install/ontology/category.rdf',
             dirname(__FILE__) . '/install/ontology/general.rdf',
-        )
+        ),
+        'php' => array(
+            AddMetadataExtractors::class,
+            AddMetadataInjectors::class
+		)
     ),
     'uninstall' => array(
     ),
