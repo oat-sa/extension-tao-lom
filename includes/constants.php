@@ -18,16 +18,4 @@
  *
  */
  
-$todefine = array(
-    // TAO LOM Ontology Properties
-    'TAOLOM_PROPERTY_IDENTFIER' => 'http://www.taotesting.com/ontologies/lom.rdf#general-identifier',
-    'TAOLOM_PROPERTY_TITLE' => 'http://www.taotesting.com/ontologies/lom.rdf#general-title',
-    
-    // IMSMD Loose 1.3.2
-    'TAOLOM_IMSMD_LOOSE_1P3P2_PATH_ROOT' => 'http://ltsc.ieee.org/xsd/LOM#lom',
-    'TAOLOM_IMSMD_LOOSE_1P3P2_PATH_GENERAL' => 'http://ltsc.ieee.org/xsd/LOM#general',
-    'TAOLOM_IMSMD_LOOSE_1P3P2_PATH_IDENTIFIER' => 'http://ltsc.ieee.org/xsd/LOM#identifier',
-    'TAOLOM_IMSMD_LOOSE_1P3P2_PATH_ENTRY' => 'http://ltsc.ieee.org/xsd/LOM#entry',
-    'TAOLOM_IMSMD_LOOSE_1P3P2_PATH_TITLE' => 'http://ltsc.ieee.org/xsd/LOM#title',
-    'TAOLOM_IMSMD_LOOSE_1P3P2_PATH_STRING' => 'http://ltsc.ieee.org/xsd/LOM#string',
-);
+$todefine = array();
