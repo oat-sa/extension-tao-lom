@@ -1,7 +1,7 @@
 {
 
     "name": "oat-sa/extension-tao-lom",
-    "description" : "Learning Object Meta-data",
+    "description" : "Learning Object Metadata Extension for TAO",
     "type" : "tao-extension",
     "authors" : [
         {
@@ -10,7 +10,12 @@
     ],
     "keywords" : [
         "tao",
-        "computer-based-assessment"
+        "computer-based-assessment",
+        "metadata",
+        "meta-data",
+        "QTI",
+        "LOM",
+        "Learning Object Metadata"
     ],
     "homepage" : "http://www.taotesting.com",
     "license" : [
