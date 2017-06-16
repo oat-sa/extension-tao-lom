@@ -1,12 +1,34 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: vilmos
- * Date: 14/06/17
- * Time: 12:19
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; under version 2
+ * of the License (non-upgradable).
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ * Copyright (c) 2017 (original work) Open Assessment Technologies SA
+ *
  */
 
-class aaaa
-{
+namespace oat\taoLom\model\import\extractor;
 
+use oat\taoLom\model\ontology\TestMetaData;
+use oat\taoQtiItem\model\qti\metadata\imsManifest\classificationMetadata\ImsManifestClassificationMetadataExtractor;
+
+class NccerMetadataExtractor extends ImsManifestClassificationMetadataExtractor
+{
+    public function __construct()
+    {
+        $this->setClassificationMapping(TestMetaData::PROPERTY_NCCER_TEST_CATEGORY, 'Test Category');
+        $this->setClassificationMapping(TestMetaData::PROPERTY_NCCER_TEST_PROFILE, 'Profile');
+        $this->setClassificationMapping(TestMetaData::PROPERTY_NCCER_TEST_MODULE_NUMBER, 'Module Number');
+    }
 }

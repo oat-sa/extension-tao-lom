@@ -19,9 +19,12 @@
  */
 
 
-namespace oat\taoQtiItem\model\qti\metadata\imsManifest;
+namespace oat\taoLom\model\export\injector;
 
-class LomInjector extends ImsManifestMetadataInjector
+use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMapping;
+use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataInjector;
+
+class LomExportInjector extends ImsManifestMetadataInjector
 {
     public function __construct()
     {

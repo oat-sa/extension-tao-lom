@@ -22,13 +22,17 @@ namespace oat\taoLom\model\export\extractor;
 
 use oat\generis\model\OntologyAwareTrait;
 use oat\taoLom\model\ontology\TestMetaData;
+use oat\taoLom\model\schema\general\LomGeneralIdentifierMetadata;
+use oat\taoLom\model\schema\general\LomGeneralMetadata;
+use oat\taoLom\model\schema\general\LomGeneralTitleMetadata;
+use oat\taoLom\model\schema\LomMetadataGroup;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\classificationMetadata\ClassificationEntryMetadataValue;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\classificationMetadata\ClassificationMetadataValue;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\classificationMetadata\ClassificationSourceMetadataValue;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractionException;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
 
-class NccerTestCategoryExtractor implements MetadataExtractor
+class LomExportExtractor implements MetadataExtractor
 {
     use OntologyAwareTrait;
 
@@ -36,7 +40,9 @@ class NccerTestCategoryExtractor implements MetadataExtractor
      * Extract resource metadata and transform it to ClassificationMetadataValue
      *
      * @param \core_kernel_classes_Resource $resource
+     *
      * @return array
+     *
      * @throws MetadataExtractionException
      */
     public function extract($resource)
@@ -44,6 +50,13 @@ class NccerTestCategoryExtractor implements MetadataExtractor
         if (! $resource instanceof \core_kernel_classes_Resource) {
             throw new MetadataExtractionException(__('The given target is not an instance of core_kernel_classes_Resource'));
         }
+
+        \common_Logger::d(
+            var_export(
+                $resource
+                , true
+            )
+        );
 
         $identifier = \tao_helpers_Uri::getUniqueId($resource->getUri());
         $metadata = array($identifier => []);
@@ -81,13 +94,6 @@ class NccerTestCategoryExtractor implements MetadataExtractor
             );
         }
 
-\common_Logger::d(
-    var_export(
-        $this->getProperty('http://www.taotesting.com/ontologies/lom.rdf#general-identifier')->getRdfTriples()
-        , true
-    )
-);
-
         /** @var \core_kernel_classes_Resource $profile */
         $profile = $resource->getOnePropertyValue($this->getProperty('http://clean.dev#i1497437397380667'));
         if (! is_null($profile)) {
@@ -98,6 +104,10 @@ class NccerTestCategoryExtractor implements MetadataExtractor
                 ]
             );
         }
+
+        $metadata[$identifier][] = new LomGeneralIdentifierMetadata($resource->getUri(), 'abcd');
+        $metadata[$identifier][] = new LomGeneralTitleMetadata($resource->getUri(), 'OhLalala');
+
 
         \common_Logger::d(
             var_export(

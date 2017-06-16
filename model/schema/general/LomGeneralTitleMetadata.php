@@ -21,7 +21,7 @@
 namespace oat\taoLom\model\schema\general;
 
 
-class LomGeneralIdentifierMetadata extends LomGeneralMetadata
+class LomGeneralTitleMetadata extends LomGeneralMetadata
 {
     /**
      * Get the default general source path
@@ -33,7 +33,8 @@ class LomGeneralIdentifierMetadata extends LomGeneralMetadata
         return array_merge(
             $parentDefaultPath,
             array(
-                'http://www.imsglobal.org/xsd/imsmd_v1p2#identifier',
+                'http://www.imsglobal.org/xsd/imsmd_v1p2#title',
+                'http://www.imsglobal.org/xsd/imsmd_v1p2#langstring',
             )
         );
     }

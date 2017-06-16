@@ -21,18 +21,21 @@
 namespace oat\taoLom\model\schema\general;
 
 
-use oat\taoLom\model\schema\LomMetadataAbstract;
-
-class LomGeneralMetadata extends LomMetadataAbstract
+class LomGeneralIdentifierMetadata extends LomGeneralMetadata
 {
     /**
      * Get the default general source path
      */
     protected function getDefaultPath()
     {
-        return array(
-            'http://www.imsglobal.org/xsd/imsmd_v1p2#lom',
-            'http://www.imsglobal.org/xsd/imsmd_v1p2#general',
+        $parentDefaultPath = parent::getDefaultPath();
+
+        return array_merge(
+            $parentDefaultPath,
+            array(
+                'http://www.imsglobal.org/xsd/imsmd_v1p2#identifier',
+                'http://www.imsglobal.org/xsd/imsmd_v1p2#langstring',
+            )
         );
     }
 

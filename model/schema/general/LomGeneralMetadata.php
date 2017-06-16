@@ -18,7 +18,10 @@
  *
  */
 
-namespace oat\taoLom\model\schema;
+namespace oat\taoLom\model\schema\general;
+
+
+use oat\taoLom\model\schema\LomMetadataAbstract;
 
 class LomGeneralMetadata extends LomMetadataAbstract
 {
