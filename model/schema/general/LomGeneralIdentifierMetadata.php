@@ -21,6 +21,8 @@
 namespace oat\taoLom\model\schema\general;
 
 
+use oat\taoLom\model\ImsMdLoose1p3p2Schema;
+
 class LomGeneralIdentifierMetadata extends LomGeneralMetadata
 {
     /**
@@ -33,8 +35,8 @@ class LomGeneralIdentifierMetadata extends LomGeneralMetadata
         return array_merge(
             $parentDefaultPath,
             array(
-                'http://www.imsglobal.org/xsd/imsmd_v1p2#identifier',
-                'http://www.imsglobal.org/xsd/imsmd_v1p2#langstring',
+                ImsMdLoose1p3p2Schema::PATH_GENERAL_IDENTIFIER,
+                ImsMdLoose1p3p2Schema::PATH_STRING,
             )
         );
     }

@@ -95,15 +95,15 @@ class LomExportExtractor implements MetadataExtractor
         }
 
         /** @var \core_kernel_classes_Resource $profile */
-        $profile = $resource->getOnePropertyValue($this->getProperty('http://clean.dev#i1497437397380667'));
-        if (! is_null($profile)) {
-            $metadata[$identifier][] = new ClassificationMetadataValue(
-                new ClassificationSourceMetadataValue($resource->getUri(), 'GeneralIdentifier'),
-                [
-                    new ClassificationEntryMetadataValue($resource->getUri(), $profile->literal),
-                ]
-            );
-        }
+//        $profile = $resource->getOnePropertyValue($this->getProperty('http://clean.dev#i1497437397380667'));
+//        if (! is_null($profile)) {
+//            $metadata[$identifier][] = new ClassificationMetadataValue(
+//                new ClassificationSourceMetadataValue($resource->getUri(), 'GeneralIdentifier'),
+//                [
+//                    new ClassificationEntryMetadataValue($resource->getUri(), $profile->literal),
+//                ]
+//            );
+//        }
 
         $metadata[$identifier][] = new LomGeneralIdentifierMetadata($resource->getUri(), 'abcd');
         $metadata[$identifier][] = new LomGeneralTitleMetadata($resource->getUri(), 'OhLalala');

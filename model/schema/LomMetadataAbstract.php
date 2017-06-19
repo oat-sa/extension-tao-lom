@@ -21,7 +21,6 @@
 namespace oat\taoLom\model\schema;
 
 
-use oat\taoQtiItem\model\qti\metadata\MetadataValue;
 use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
 abstract class LomMetadataAbstract extends SimpleMetadataValue

@@ -30,9 +30,9 @@ class LomMetadataInjector extends OntologyMetadataInjector
         // LOM General Category Injection Rules.
         $this->addInjectionRule(
             array(
-                ImsMdLoose1p3p2Schema::PATH_ROOT,
+                ImsMdLoose1p3p2Schema::PATH_NAMESPACE,
                 ImsMdLoose1p3p2Schema::PATH_GENERAL,
-                ImsMdLoose1p3p2Schema::PATH_IDENTIFIER,
+                ImsMdLoose1p3p2Schema::PATH_GENERAL_IDENTIFIER,
                 ImsMdLoose1p3p2Schema::PATH_ENTRY
             ),
             LomOntology::PROPERTY_IDENTFIER
@@ -40,9 +40,9 @@ class LomMetadataInjector extends OntologyMetadataInjector
 
         $this->addInjectionRule(
             array(
-                ImsMdLoose1p3p2Schema::PATH_ROOT,
+                ImsMdLoose1p3p2Schema::PATH_NAMESPACE,
                 ImsMdLoose1p3p2Schema::PATH_GENERAL,
-                ImsMdLoose1p3p2Schema::PATH_TITLE,
+                ImsMdLoose1p3p2Schema::PATH_GENERAL_TITLE,
                 ImsMdLoose1p3p2Schema::PATH_STRING,
             ),
             LomOntology::PROPERTY_TITLE

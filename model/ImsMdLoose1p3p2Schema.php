@@ -21,10 +21,21 @@ namespace oat\taoLom\model;
 
 interface ImsMdLoose1p3p2Schema
 {
-    const PATH_ROOT = 'http://ltsc.ieee.org/xsd/LOM#lom';
-    const PATH_GENERAL = 'http://ltsc.ieee.org/xsd/LOM#general';
-    const PATH_IDENTIFIER = 'http://ltsc.ieee.org/xsd/LOM#identifier';
-    const PATH_ENTRY = 'http://ltsc.ieee.org/xsd/LOM#entry';
-    const PATH_TITLE = 'http://ltsc.ieee.org/xsd/LOM#title';
-    const PATH_STRING = 'http://ltsc.ieee.org/xsd/LOM#string';
+    /** Base details. */
+    const PATH_NAMESPACE = 'http://ltsc.ieee.org/xsd/LOM';
+    const PATH_SCHEMA    = 'https://standards.ieee.org/downloads/LOM/lomv1.0/xsd/lom.xsd';
+//    const PATH_NAMESPACE = 'http://www.imsglobal.org/xsd/imsmd_v1p2';
+    CONST FIELD_PREFIX   = 'lom';
+
+    /** LOM structure url. */
+    const PATH_LOM  = self::PATH_NAMESPACE . '#lom';
+
+    /** General node. */
+    const PATH_GENERAL            = self::PATH_NAMESPACE . '#general';
+    const PATH_GENERAL_IDENTIFIER = self::PATH_NAMESPACE . '#identifier';
+    const PATH_GENERAL_TITLE      = self::PATH_NAMESPACE . '#title';
+
+    /** Value types. */
+    const PATH_ENTRY      = self::PATH_NAMESPACE . '#entry';
+    const PATH_STRING     = self::PATH_NAMESPACE . '#string';
 }

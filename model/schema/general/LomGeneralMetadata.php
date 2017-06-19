@@ -22,6 +22,7 @@ namespace oat\taoLom\model\schema\general;
 
 
 use oat\taoLom\model\schema\LomMetadataAbstract;
+use oat\taoLom\model\ImsMdLoose1p3p2Schema;
 
 class LomGeneralMetadata extends LomMetadataAbstract
 {
@@ -31,8 +32,8 @@ class LomGeneralMetadata extends LomMetadataAbstract
     protected function getDefaultPath()
     {
         return array(
-            'http://www.imsglobal.org/xsd/imsmd_v1p2#lom',
-            'http://www.imsglobal.org/xsd/imsmd_v1p2#general',
+            ImsMdLoose1p3p2Schema::PATH_LOM,
+            ImsMdLoose1p3p2Schema::PATH_GENERAL,
         );
     }
 
