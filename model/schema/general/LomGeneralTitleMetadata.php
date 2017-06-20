@@ -21,24 +21,34 @@
 namespace oat\taoLom\model\schema\general;
 
 
-use oat\taoLom\model\ImsMdLoose1p3p2Schema;
+use oat\taoLom\model\schema\LomMetadataAbstract;
+use oat\taoQtiItem\model\qti\metadata\LomMetadata;
 
-class LomGeneralTitleMetadata extends LomGeneralMetadata
+class LomGeneralTitleMetadata extends LomMetadataAbstract
 {
-    /**
-     * Get the default general source path
-     */
-    protected function getDefaultPath()
-    {
-        $parentDefaultPath = parent::getDefaultPath();
+    // Adding the getBaseNodePath method.
+    use LomGeneralMetadataTrait;
 
-        return array_merge(
-            $parentDefaultPath,
-            array(
-                ImsMdLoose1p3p2Schema::PATH_GENERAL_TITLE,
-                ImsMdLoose1p3p2Schema::PATH_STRING,
-            )
-        );
+    /**
+     * Get the classification source node's extract path.
+     *
+     * @return array
+     */
+    public static function getNodePath()
+    {
+        return static::getNodeAbsolutePath();
     }
 
+    /**
+     * Get the classification source node's relative path.
+     *
+     * @return array
+     */
+    public static function getNodeRelativePath()
+    {
+        return [
+            LomMetadata::LOM_NAMESPACE . '#title',
+            LomMetadata::LOM_NAMESPACE . '#string'
+        ];
+    }
 }

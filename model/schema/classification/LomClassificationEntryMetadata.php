@@ -14,27 +14,41 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2017 (original work) Open Assessment Technologies SA
+ * Copyright (c) 2017 Open Assessment Technologies SA
  *
  */
 
-namespace oat\taoLom\model\schema\general;
-
+namespace oat\taoLom\model\schema\classification;
 
 use oat\taoLom\model\schema\LomMetadataAbstract;
-use oat\taoLom\model\ImsMdLoose1p3p2Schema;
+use oat\taoQtiItem\model\qti\metadata\LomMetadata;
 
-class LomGeneralMetadata extends LomMetadataAbstract
+class LomClassificationEntryMetadata extends LomMetadataAbstract
 {
+    // Adding the getBaseNodePath method.
+    use LomClassificationMetadataTrait;
+
     /**
-     * Get the default general source path
+     * Get the classification source node's extract path.
+     *
+     * @return array
      */
-    protected function getDefaultPath()
+    public static function getNodePath()
     {
-        return array(
-            ImsMdLoose1p3p2Schema::PATH_LOM,
-            ImsMdLoose1p3p2Schema::PATH_GENERAL,
-        );
+        return static::getNodeRelativePath();
     }
 
+    /**
+     * Get the classification source node's relative path.
+     *
+     * @return array
+     */
+    static public function getNodeRelativePath()
+    {
+        return array(
+            LomMetadata::LOM_NAMESPACE . '#taxon',
+            LomMetadata::LOM_NAMESPACE . '#entry',
+            LomMetadata::LOM_NAMESPACE . '#string',
+        );
+    }
 }

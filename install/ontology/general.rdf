@@ -64,14 +64,14 @@
     </rdf:Description>
 
     <!--General language-->
-    <!--<rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#general-language">-->
-        <!--<rdf:type rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#lomProperty"/>-->
-        <!--<rdfs:label xml:lang="en-US"><![CDATA[LOM General language]]></rdfs:label>-->
-        <!--<rdfs:comment xml:lang="en-US"><![CDATA[LOM language metadata of General category]]></rdfs:comment>-->
-        <!--<rdfs:domain rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#AssessmentContentObject"/>-->
-        <!--<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>-->
-        <!--<lom:lomCategoryProperty rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#General"/>-->
-    <!--</rdf:Description>-->
+    <rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#general-language">
+        <rdf:type rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#lomProperty"/>
+        <rdfs:label xml:lang="en-US"><![CDATA[LOM General language]]></rdfs:label>
+        <rdfs:comment xml:lang="en-US"><![CDATA[LOM language metadata of General category]]></rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.tao.lu/Ontologies/TAO.rdf#AssessmentContentObject"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#literal"/>
+        <lom:lomCategoryProperty rdf:resource="http://www.taotesting.com/ontologies/lom.rdf#General"/>
+    </rdf:Description>
 
     <!--General description-->
     <!--<rdf:Description rdf:about="http://www.taotesting.com/ontologies/lom.rdf#general-description">-->

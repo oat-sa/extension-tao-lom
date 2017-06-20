@@ -26,21 +26,47 @@ use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 abstract class LomMetadataAbstract extends SimpleMetadataValue
 {
     /**
-     * LomMetadataAbstract instance constructor.
+     * ClassificationSourceMetadataValue constructor.
      *
      * @param string $resourceIdentifier
      * @param string $value
      * @param string $language
-     *
-     * @throws \InvalidArgumentException
      */
     public function __construct($resourceIdentifier, $value, $language = DEFAULT_LANG)
     {
-        parent::__construct($resourceIdentifier, $this->getDefaultPath(), $value, $language);
+        parent::__construct($resourceIdentifier, static::getNodePath(), $value, $language);
     }
 
     /**
-     * Get the metadata's default source path.
+     * Get the node's path.
      */
-    abstract protected function getDefaultPath();
+    abstract public static function getNodePath();
+
+    /**
+     * Get the node's base path
+     *
+     * @return array
+     */
+    abstract public static function getBaseNodePath();
+
+    /**
+     * Get the node's relative path.
+     *
+     * @return array
+     */
+    abstract public static function getNodeRelativePath();
+
+
+    /**
+     * Get the node's absolute path.
+     *
+     * @return array
+     */
+    static public function getNodeAbsolutePath()
+    {
+        return array_merge(
+            static::getBaseNodePath(),
+            static::getNodeRelativePath()
+        );
+    }
 }

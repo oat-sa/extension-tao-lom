@@ -18,16 +18,15 @@
  *
  */
 
-namespace oat\taoLom\model\schema\general;
-
+namespace oat\taoLom\model\schema\classification;
 
 use oat\taoLom\model\schema\LomMetadataAbstract;
 use oat\taoQtiItem\model\qti\metadata\LomMetadata;
 
-class LomGeneralIdentifierMetadata extends LomMetadataAbstract
+class LomClassificationSourceMetadata extends LomMetadataAbstract
 {
     // Adding the getBaseNodePath method.
-    use LomGeneralMetadataTrait;
+    use LomClassificationMetadataTrait;
 
     /**
      * Get the classification source node's extract path.
@@ -47,9 +46,8 @@ class LomGeneralIdentifierMetadata extends LomMetadataAbstract
     public static function getNodeRelativePath()
     {
         return [
-            LomMetadata::LOM_NAMESPACE . '#identifier',
-            LomMetadata::LOM_NAMESPACE . '#entry',
-            LomMetadata::LOM_NAMESPACE . '#string',
+            LomMetadata::LOM_NAMESPACE . '#source',
+            LomMetadata::LOM_NAMESPACE . '#string'
         ];
     }
 }

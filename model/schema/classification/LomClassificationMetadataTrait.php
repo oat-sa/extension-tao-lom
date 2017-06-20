@@ -14,23 +14,28 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2016 (original work) Open Assessment Technologies SA;
+ * Copyright (c) 2017 (original work) Open Assessment Technologies SA
  *
  */
-namespace oat\taoLom\scripts\install;
 
-use oat\taoLom\model\export\extractor\LomExportExtractor;
-use oat\taoQtiItem\model\qti\Service;
-use oat\oatbox\extension\InstallAction;
+namespace oat\taoLom\model\schema\classification;
 
-class AddMetadataExtractors extends InstallAction
+
+use oat\taoQtiItem\model\qti\metadata\LomMetadata;
+
+trait LomClassificationMetadataTrait
 {
-    public function __invoke($params)
+    /**
+     * Get the default general source path
+     *
+     * @return array
+     */
+    public static function getBaseNodePath()
     {
-        $qtiService = Service::singleton();
-        $metadataRegistry = $qtiService->getMetadataRegistry();
-        $metadataRegistry->registerMetadataExtractor(LomExportExtractor::class);
-        
-        return new \common_report_Report(\common_report_Report::TYPE_SUCCESS, 'LOM Metadata Extractor(s) successfully registered.');
+        return array(
+            LomMetadata::LOM_NAMESPACE . '#lom',
+            LomMetadata::LOM_NAMESPACE . '#classification',
+            LomMetadata::LOM_NAMESPACE . '#taxonPath',
+        );
     }
 }
