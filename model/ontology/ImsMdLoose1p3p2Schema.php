@@ -12,14 +12,24 @@ namespace oat\taoLom\model\ontology;
 interface ImsMdLoose1p3p2Schema
 {
     /**
+     * LOM General details.
+     */
+    /**
      * The LOM property namespace.
      */
     const LOM_NAMESPACE = 'http://ltsc.ieee.org/xsd/LOM';
-
     /**
      * The LOM node property path.
      */
     const LOM_PATH = self::LOM_NAMESPACE . '#lom';
+    /**
+     * The LOM schema.
+     */
+    const LOM_SCHEMA = 'https://standards.ieee.org/downloads/LOM/lomv1.0/xsd/lom.xsd';
+    /**
+     * The LOM prefix.
+     */
+    const LOM_PREFIX = 'lom';
 
 
     /**

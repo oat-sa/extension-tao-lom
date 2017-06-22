@@ -21,7 +21,7 @@
 
 namespace oat\taoLom\model\export\injector;
 
-use oat\taoLom\model\ImsMdLoose1p3p2Schema;
+use oat\taoLom\model\ontology\ImsMdLoose1p3p2Schema;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMapping;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataInjector;
 
@@ -31,12 +31,9 @@ class LomExportInjector extends ImsManifestMetadataInjector
     {
         $mappings = [];
         $mappings[] = new ImsManifestMapping(
-            ImsMdLoose1p3p2Schema::PATH_NAMESPACE,
-            ImsMdLoose1p3p2Schema::FIELD_PREFIX,
-            ImsMdLoose1p3p2Schema::PATH_SCHEMA
-//            'http://www.imsglobal.org/xsd/imsmd_v1p2',
-//            'imsmd',
-//            'http://www.imsglobal.org/xsd/imsmd_v1p2p2.xsd'
+            ImsMdLoose1p3p2Schema::LOM_NAMESPACE,
+            ImsMdLoose1p3p2Schema::LOM_PREFIX,
+            ImsMdLoose1p3p2Schema::LOM_SCHEMA
         );
         parent::__construct($mappings);
     }
