@@ -18,17 +18,37 @@
  *
  */
 
-namespace oat\taoLom\model\import\extractor;
+namespace oat\taoLom\model\schema\general;
 
-use oat\taoLom\model\ontology\TestMetaData;
-use oat\taoQtiItem\model\qti\metadata\imsManifest\classificationMetadata\ImsManifestClassificationMetadataExtractor;
 
-class NccerMetadataExtractor extends ImsManifestClassificationMetadataExtractor
+use oat\taoLom\model\schema\LomMetadataAbstract;
+use oat\taoQtiItem\model\qti\metadata\LomMetadata;
+
+class LomGeneralTitleMetadata extends LomMetadataAbstract
 {
-    public function __construct()
+    // Adding the getBaseNodePath method.
+    use LomGeneralMetadataTrait;
+
+    /**
+     * Get the classification source node's extract path.
+     *
+     * @return array
+     */
+    public static function getNodePath()
     {
-        $this->setClassificationMapping(TestMetaData::PROPERTY_NCCER_TEST_CATEGORY, 'Test Category');
-        $this->setClassificationMapping(TestMetaData::PROPERTY_NCCER_TEST_PROFILE, 'Profile');
-        $this->setClassificationMapping(TestMetaData::PROPERTY_NCCER_TEST_MODULE_NUMBER, 'Module Number');
+        return static::getNodeAbsolutePath();
+    }
+
+    /**
+     * Get the classification source node's relative path.
+     *
+     * @return array
+     */
+    public static function getNodeRelativePath()
+    {
+        return [
+            LomMetadata::LOM_NAMESPACE . '#title',
+            LomMetadata::LOM_NAMESPACE . '#string'
+        ];
     }
 }
