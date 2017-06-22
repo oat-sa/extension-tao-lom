@@ -40,6 +40,8 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
  */
 class AddLomMetadataServices implements Action, ServiceLocatorAwareInterface
 {
+    use ServiceManagerAwareTrait;
+
     /**
      * Register metadataService
      *
