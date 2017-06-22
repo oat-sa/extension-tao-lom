@@ -26,7 +26,7 @@ use oat\taoQtiItem\model\qti\metadata\MetadataInjectionException;
 use oat\taoQtiItem\model\qti\metadata\MetadataInjector;
 use oat\taoQtiItem\model\qti\metadata\MetadataValue;
 
-class LomClassificationImportInjector implements MetadataInjector
+class LomImportInjector implements MetadataInjector
 {
     use OntologyAwareTrait;
 
@@ -53,6 +53,8 @@ class LomClassificationImportInjector implements MetadataInjector
         foreach ($classProperties as $property) {
             $properties[] = $property->getUri();
         }
+
+        // Removing excluded properties.
         $properties = array_diff($properties, LomClassificationExportExtractor::$excludedProperties);
 
         foreach ($values as $metadataValues) {

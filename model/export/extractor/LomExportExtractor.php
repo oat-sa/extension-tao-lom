@@ -21,7 +21,7 @@
 namespace oat\taoLom\model\export\extractor;
 
 use oat\generis\model\OntologyAwareTrait;
-use oat\taoLom\model\ontology\TestMetaData;
+use oat\taoLom\model\ontology\LomTaoMetaData;
 use oat\taoLom\model\schema\general\LomGeneralIdentifierMetadata;
 use oat\taoLom\model\schema\general\LomClassificationMetadataTrait;
 use oat\taoLom\model\schema\general\LomGeneralTitleMetadata;
@@ -61,79 +61,30 @@ class LomExportExtractor implements MetadataExtractor
         $identifier = \tao_helpers_Uri::getUniqueId($resource->getUri());
         $metadata = array($identifier => []);
 
-//        /** @var \core_kernel_classes_Resource $category */
-//        $category = $resource->getOnePropertyValue($this->getProperty(TestMetaData::PROPERTY_NCCER_TEST_CATEGORY));
-//        if (! is_null($category) && ! $category instanceof \core_kernel_classes_Literal) {
-//            $metadata[$identifier][] = new ClassificationMetadataValue(
-//                new ClassificationSourceMetadataValue($resource->getUri(), 'Test Category'),
-//                [
-//                    new ClassificationEntryMetadataValue($resource->getUri(), $category->getLabel()),
-//                ]
-//            );
-//        }
-//
-//        /** @var \core_kernel_classes_Resource $profile */
-//        $profile = $resource->getOnePropertyValue($this->getProperty(TestMetaData::PROPERTY_NCCER_TEST_PROFILE));
-//        if (! is_null($profile) && ! $profile instanceof \core_kernel_classes_Literal) {
-//            $metadata[$identifier][] = new ClassificationMetadataValue(
-//                new ClassificationSourceMetadataValue($resource->getUri(), 'Profile'),
-//                [
-//                    new ClassificationEntryMetadataValue($resource->getUri(), $profile->getLabel()),
-//                ]
-//            );
-//        }
-//
-//        /** @var \core_kernel_classes_Literal $moduleNumber */
-//        $moduleNumber = $resource->getOnePropertyValue($this->getProperty(TestMetaData::PROPERTY_NCCER_TEST_MODULE_NUMBER));
-//        if (! is_null($moduleNumber)) {
-//            $metadata[$identifier][] = new ClassificationMetadataValue(
-//                new ClassificationSourceMetadataValue($resource->getUri(), 'Module Number'),
-//                [
-//                    new ClassificationEntryMetadataValue($resource->getUri(), $moduleNumber->literal),
-//                ]
-//            );
-//        }
-//
-//        /** @var \core_kernel_classes_Resource $profile */
-//        $profile = $resource->getOnePropertyValue($this->getProperty('http://clean.dev#i1497437397380667'));
-//        if (! is_null($profile)) {
-//            $metadata[$identifier][] = new ClassificationMetadataValue(
-//                new ClassificationSourceMetadataValue($resource->getUri(), 'GeneralIdentifier'),
-//                [
-//                    new ClassificationEntryMetadataValue($resource->getUri(), $profile->literal),
-//                ]
-//            );
-//        }
-
-//        $metadata[$identifier][] = new LomGeneralIdentifierMetadata($resource->getUri(), 'abcd');
-//        $metadata[$identifier][] = new LomGeneralTitleMetadata($resource->getUri(), 'OhLalala');
+        // Defining the language for the export.
+        $language = $resource->getOnePropertyValue($this->getProperty('http://www.taotesting.com/ontologies/lom.rdf#general-language'));
+        $languageCode = \tao_helpers_translation_Utils::getDefaultLanguage();
+        if ($language !== null) {
+            $languageCode = \tao_models_classes_LanguageService::singleton()->getCode($language);
+        }
 
         // Exporting general metadata.
-        $generalExtractor = new LomGeneralExportExtractor();
+        $generalExtractor = new LomGeneralExportExtractor($languageCode);
         $metadata[$identifier] = array_merge(
             $metadata[$identifier],
             $generalExtractor->extract($resource)
         );
 
         // Exporting classification metadata.
-        $classificationExtractor = new LomClassificationExportExtractor();
+        $classificationExtractor = new LomClassificationExportExtractor($languageCode);
         $metadata[$identifier] = array_merge(
             $metadata[$identifier],
             $classificationExtractor->extract($resource)
         );
-//
-//        \common_Logger::d(
-//            var_export(
-//                $metadata
-//                , true
-//            )
-//        );
 
-        if (empty($metadata[$identifier])) {
-            return [];
-        }
-
-        return $metadata;
+        return empty($metadata[$identifier])
+            ? []
+            : $metadata;
     }
 
 }

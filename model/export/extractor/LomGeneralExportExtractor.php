@@ -21,15 +21,17 @@
 namespace oat\taoLom\model\export\extractor;
 
 use oat\generis\model\OntologyAwareTrait;
+use oat\taoLom\model\export\LomExportExtractorAbstract;
+use oat\taoLom\model\ontology\LomTaoMetaData;
+use oat\taoLom\model\schema\general\LomGeneralCoverageMetadata;
+use oat\taoLom\model\schema\general\LomGeneralDescriptionMetadata;
 use oat\taoLom\model\schema\general\LomGeneralIdentifierMetadata;
+use oat\taoLom\model\schema\general\LomGeneralKeywordMetadata;
+use oat\taoLom\model\schema\general\LomGeneralLanguageMetadata;
 use oat\taoLom\model\schema\general\LomGeneralTitleMetadata;
-use oat\taoQtiItem\model\qti\metadata\imsManifest\classificationMetadata\ClassificationMetadataValue;
-use oat\taoLom\model\schema\classification\LomClassificationSourceMetadata;
-use oat\taoLom\model\schema\classification\LomClassificationEntryMetadata;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractionException;
-use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
 
-class LomGeneralExportExtractor implements MetadataExtractor
+class LomGeneralExportExtractor extends LomExportExtractorAbstract
 {
     use OntologyAwareTrait;
 
@@ -49,21 +51,46 @@ class LomGeneralExportExtractor implements MetadataExtractor
         }
 
         // Adding identifier.
-        $id = $resource->getOnePropertyValue($this->getProperty('http://www.taotesting.com/ontologies/lom.rdf#general-identifier'));
+        $id = $resource->getOnePropertyValue($this->getProperty(LomTaoMetaData::GENERAL_IDENTIFIER));
         if ($id !== null) {
-            $metadata[] = new LomGeneralIdentifierMetadata($resource->getUri(), $id);
+            $metadata[] = new LomGeneralIdentifierMetadata($resource->getUri(), $id, $this->getLanguageCode());
         }
 
         // Adding title.
-        $title = $resource->getOnePropertyValue($this->getProperty('http://www.taotesting.com/ontologies/lom.rdf#general-title'));
+        $title = $resource->getOnePropertyValue($this->getProperty(LomTaoMetaData::GENERAL_TITLE));
         if ($title !== null) {
-            $metadata[] = new LomGeneralTitleMetadata($resource->getUri(), $title);
+            $metadata[] = new LomGeneralTitleMetadata($resource->getUri(), $title, $this->getLanguageCode());
         }
 
-        // Adding title.
-        $title = $resource->getOnePropertyValue($this->getProperty('http://www.taotesting.com/ontologies/lom.rdf#general-title'));
-        if ($title !== null) {
-            $metadata[] = new LomGeneralTitleMetadata($resource->getUri(), $title);
+        // Adding language.
+        $language = $resource->getOnePropertyValue($this->getProperty(LomTaoMetaData::GENERAL_LANGUAGE));
+        if ($language !== null) {
+// @todo: which way should we store the language?
+            // Language url
+            $metadata[] = new LomGeneralLanguageMetadata($resource->getUri(), $language, $this->getLanguageCode());
+//            // Language code
+//            $metadata[] = new LomGeneralLanguageMetadata(
+//                $resource->getUri(),
+//                \tao_models_classes_LanguageService::singleton()->getCode($language)
+//            );
+        }
+
+        // Adding description.
+        $description = $resource->getOnePropertyValue($this->getProperty(LomTaoMetaData::GENERAL_DESCRIPTION));
+        if ($description !== null) {
+            $metadata[] = new LomGeneralDescriptionMetadata($resource->getUri(), $description, $this->getLanguageCode());
+        }
+
+        // Adding keyword.
+        $keyword = $resource->getOnePropertyValue($this->getProperty(LomTaoMetaData::GENERAL_KEYWORD));
+        if ($keyword !== null) {
+            $metadata[] = new LomGeneralKeywordMetadata($resource->getUri(), $keyword, $this->getLanguageCode());
+        }
+
+        // Adding coverage.
+        $coverage = $resource->getOnePropertyValue($this->getProperty(LomTaoMetaData::GENERAL_COVERAGE));
+        if ($coverage !== null) {
+            $metadata[] = new LomGeneralCoverageMetadata($resource->getUri(), $coverage, $this->getLanguageCode());
         }
 
         return empty($metadata)

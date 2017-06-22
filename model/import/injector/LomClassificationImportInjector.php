@@ -18,14 +18,15 @@
  *
  */
 
-namespace oat\taoQtiItem\model\qti\metadata\ontology;
+namespace oat\taoLom\model\import\injector;
 
 use oat\generis\model\OntologyAwareTrait;
+use oat\taoLom\model\export\extractor\LomClassificationExportExtractor;
 use oat\taoQtiItem\model\qti\metadata\MetadataInjectionException;
 use oat\taoQtiItem\model\qti\metadata\MetadataInjector;
 use oat\taoQtiItem\model\qti\metadata\MetadataValue;
 
-class GenericLomOntologyClassificationInjector implements MetadataInjector
+class LomClassificationImportInjector implements MetadataInjector
 {
     use OntologyAwareTrait;
 
@@ -52,7 +53,7 @@ class GenericLomOntologyClassificationInjector implements MetadataInjector
         foreach ($classProperties as $property) {
             $properties[] = $property->getUri();
         }
-        $properties = array_diff($properties, GenericLomOntologyClassificationExtractor::$excludedProperties);
+        $properties = array_diff($properties, LomClassificationExportExtractor::$excludedProperties);
 
         foreach ($values as $metadataValues) {
             /** @var MetadataValue $metadataValue */

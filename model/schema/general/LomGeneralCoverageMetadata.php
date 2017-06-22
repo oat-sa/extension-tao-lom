@@ -24,7 +24,7 @@ namespace oat\taoLom\model\schema\general;
 use oat\taoLom\model\schema\LomMetadataAbstract;
 use oat\taoQtiItem\model\qti\metadata\LomMetadata;
 
-class LomGeneralKeywordMetadata extends LomMetadataAbstract
+class LomGeneralCoverageMetadata extends LomMetadataAbstract
 {
     // Adding the getBaseNodePath method.
     use LomGeneralMetadataTrait;
@@ -47,7 +47,7 @@ class LomGeneralKeywordMetadata extends LomMetadataAbstract
     public static function getNodeRelativePath()
     {
         return [
-            LomMetadata::LOM_NAMESPACE . '#keyword',
+            LomMetadata::LOM_NAMESPACE . '#coverage',
             LomMetadata::LOM_NAMESPACE . '#string'
         ];
     }

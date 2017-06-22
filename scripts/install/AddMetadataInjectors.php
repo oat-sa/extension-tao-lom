@@ -27,10 +27,5 @@ class AddMetadataInjectors extends InstallAction
 {
     public function __invoke($params)
     {
-        $qtiService = Service::singleton();
-        $metadataRegistry = $qtiService->getMetadataRegistry();
-        $metadataRegistry->registerMetadataInjector(LomMetadataInjector::class);
-        
-        return new \common_report_Report(\common_report_Report::TYPE_SUCCESS, 'LOM Metadata Injector(s) successfully registered.');
     }
 }

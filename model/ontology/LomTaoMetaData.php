@@ -19,12 +19,16 @@
 
 namespace oat\taoLom\model\ontology;
 
-interface TestMetaData
+interface LomTaoMetaData
 {
+    const GENERAL_IDENTIFIER = 'http://www.taotesting.com/ontologies/lom.rdf#general-identifier';
+    const GENERAL_TITLE = 'http://www.taotesting.com/ontologies/lom.rdf#general-title';
+    const GENERAL_LANGUAGE = 'http://www.taotesting.com/ontologies/lom.rdf#general-language';
+    const GENERAL_DESCRIPTION = 'http://www.taotesting.com/ontologies/lom.rdf#general-description';
+    const GENERAL_KEYWORD = 'http://www.taotesting.com/ontologies/lom.rdf#general-keyword';
+    const GENERAL_COVERAGE = 'http://www.taotesting.com/ontologies/lom.rdf#general-coverage';
+
     const PROPERTY_NCCER_TEST_CATEGORY      = 'http://www.nccer.org/testmodel#testCategory';
     const PROPERTY_NCCER_TEST_MODULE_NUMBER = 'http://www.nccer.org/testmodel#testModuleNumber';
     const PROPERTY_NCCER_TEST_PROFILE       = 'http://www.nccer.org/delivery#TestProfile';
-
-    const NCCER_TEST_CATEGORY_ONE_DAY = 5,
-        NCCER_TEST_CATEGORY_TWO_DAY = 4;
 }

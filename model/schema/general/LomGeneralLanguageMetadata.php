@@ -24,7 +24,7 @@ namespace oat\taoLom\model\schema\general;
 use oat\taoLom\model\schema\LomMetadataAbstract;
 use oat\taoQtiItem\model\qti\metadata\LomMetadata;
 
-class LomGeneralTitleMetadata extends LomMetadataAbstract
+class LomGeneralLanguageMetadata extends LomMetadataAbstract
 {
     // Adding the getBaseNodePath method.
     use LomGeneralMetadataTrait;
@@ -47,7 +47,7 @@ class LomGeneralTitleMetadata extends LomMetadataAbstract
     public static function getNodeRelativePath()
     {
         return [
-            LomMetadata::LOM_NAMESPACE . '#title',
+            LomMetadata::LOM_NAMESPACE . '#language',
             LomMetadata::LOM_NAMESPACE . '#string'
         ];
     }

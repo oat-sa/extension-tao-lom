@@ -56,11 +56,11 @@
     <!--</rdf:Description>-->
 
     <!--LOM category : Classification-->
-    <!--<rdf:Description rdf:about="http://www.taotesting.com/ontologies/TAOLom.rdf#Classification">-->
-        <!--<rdf:type rdf:resource="http://www.taotesting.com/ontologies/TAOLom.rdf#LomCategory"/>-->
-        <!--<rdfs:label xml:lang="en-US"><![CDATA[LOM classification]]></rdfs:label>-->
-        <!--<rdfs:comment xml:lang="en-US"><![CDATA[LOM classification category]]></rdfs:comment>-->
-        <!--<generis:Multiple rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#True" />-->
-    <!--</rdf:Description>-->
+    <rdf:Description rdf:about="http://www.taotesting.com/ontologies/TAOLom.rdf#Classification">-->
+        <rdf:type rdf:resource="http://www.taotesting.com/ontologies/TAOLom.rdf#LomCategory"/>
+        <rdfs:label xml:lang="en-US"><![CDATA[LOM classification]]></rdfs:label>
+        <rdfs:comment xml:lang="en-US"><![CDATA[LOM classification category]]></rdfs:comment>
+        <generis:Multiple rdf:resource="http://www.tao.lu/Ontologies/generis.rdf#True" />
+    </rdf:Description>
 
 </rdf:RDF>

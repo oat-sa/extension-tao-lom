@@ -20,15 +20,9 @@
 
 namespace oat\taoLom\model\import\extractor;
 
-use oat\taoLom\model\schema\classification\LomClassificationEntryMetadata;
-use oat\taoLom\model\schema\classification\LomClassificationSourceMetadata;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataExtractor;
-use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataValue;
-use oat\taoQtiItem\model\qti\metadata\LomMetadata;
-use oat\taoQtiItem\model\qti\metadata\MetadataValue;
-use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
-class LomClassificationImportExtractor extends ImsManifestMetadataExtractor
+class LomImportExtractor extends ImsManifestMetadataExtractor
 {
     /**
      * @see ImsManifestDataExtractor::extract()
@@ -39,38 +33,14 @@ class LomClassificationImportExtractor extends ImsManifestMetadataExtractor
     public function extract($manifest)
     {
         $values = parent::extract($manifest);
-        $newValues = array();
 
-        foreach ($values as $resourceIdentifier => $metadataValueCollection) {
+        $lomGeneral        = new LomGeneralImportExtractor();
+        $lomClassification = new LomClassificationImportExtractor();
 
-            /** @var ImsManifestMetadataValue $metadataValue */
-            foreach ($metadataValueCollection as $key => $metadataValue) {
-
-                // If metadata is not a source or is empty then skip
-                if ($metadataValue->getValue() === '' || $metadataValue->getPath() !== LomClassificationSourceMetadata::getNodeAbsolutePath()) {
-                    continue;
-                }
-
-                // If next metadata does not exist then skip
-                if (! isset($metadataValueCollection[$key + 1])) {
-                    continue;
-                }
-
-                /** @var MetadataValue $entryMetadata */
-                $entryMetadata = $metadataValueCollection[$key + 1];
-
-                // Handle metadata if it is an entry and is not empty
-                if ($entryMetadata->getPath() === LomClassificationEntryMetadata::getNodeAbsolutePath() && $entryMetadata->getValue() !== '') {
-                    $newValues[$resourceIdentifier][] = new SimpleMetadataValue(
-                        $resourceIdentifier,
-                        array(LomMetadata::LOM_NAMESPACE . '#lom', $metadataValue->getValue()),
-                        $entryMetadata->getValue()
-                    );
-                }
-            }
-        }
-
-        return $newValues;
+        return array_merge_recursive(
+            $lomGeneral->extract($values),
+            $lomClassification->extract($values)
+        );
     }
 
 }

@@ -18,26 +18,28 @@
  *
  */
 
-namespace oat\taoQtiItem\model\qti\metadata\imsManifest\classificationMetadata;
+namespace oat\taoLom\model\import\extractor;
 
-use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataExtractor;
+use oat\taoLom\model\schema\classification\LomClassificationEntryMetadata;
+use oat\taoLom\model\schema\classification\LomClassificationSourceMetadata;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataValue;
 use oat\taoQtiItem\model\qti\metadata\LomMetadata;
+use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
 use oat\taoQtiItem\model\qti\metadata\MetadataValue;
 use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
-class GenericLomManifestClassificationExtractor extends ImsManifestMetadataExtractor
+class LomClassificationImportExtractor implements MetadataExtractor
 {
     /**
      * @see ImsManifestDataExtractor::extract()
      *
-     * @param mixed $manifest
+     * @param array $values
+     *
      * @return array
      */
-    public function extract($manifest)
+    public function extract($values)
     {
-        $values = parent::extract($manifest);
-        $newValues = array();
+        $valuesToImport = array();
 
         foreach ($values as $resourceIdentifier => $metadataValueCollection) {
 
@@ -45,7 +47,7 @@ class GenericLomManifestClassificationExtractor extends ImsManifestMetadataExtra
             foreach ($metadataValueCollection as $key => $metadataValue) {
 
                 // If metadata is not a source or is empty then skip
-                if ($metadataValue->getValue() === '' || $metadataValue->getPath() !== ClassificationSourceMetadataValue::getSourcePath()) {
+                if ($metadataValue->getValue() === '' || $metadataValue->getPath() !== LomClassificationSourceMetadata::getNodeAbsolutePath()) {
                     continue;
                 }
 
@@ -58,8 +60,8 @@ class GenericLomManifestClassificationExtractor extends ImsManifestMetadataExtra
                 $entryMetadata = $metadataValueCollection[$key + 1];
 
                 // Handle metadata if it is an entry and is not empty
-                if ($entryMetadata->getPath() === ClassificationEntryMetadataValue::getEntryPath() && $entryMetadata->getValue() !== '') {
-                    $newValues[$resourceIdentifier][] = new SimpleMetadataValue(
+                if ($entryMetadata->getPath() === LomClassificationEntryMetadata::getNodeAbsolutePath() && $entryMetadata->getValue() !== '') {
+                    $valuesToImport[$resourceIdentifier][] = new SimpleMetadataValue(
                         $resourceIdentifier,
                         array(LomMetadata::LOM_NAMESPACE . '#lom', $metadataValue->getValue()),
                         $entryMetadata->getValue()
@@ -68,7 +70,7 @@ class GenericLomManifestClassificationExtractor extends ImsManifestMetadataExtra
             }
         }
 
-        return $newValues;
+        return $valuesToImport;
     }
 
 }

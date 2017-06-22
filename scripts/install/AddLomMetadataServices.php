@@ -19,13 +19,68 @@
  */
 namespace oat\taoLom\scripts\install;
 
-use oat\taoLom\model\export\extractor\LomExportExtractor;
-use oat\taoQtiItem\model\qti\Service;
+use oat\oatbox\action\Action;
 use oat\oatbox\extension\InstallAction;
+use oat\oatbox\service\ServiceManager;
+use oat\oatbox\service\ServiceManagerAwareTrait;
+use oat\taoLom\model\export\extractor\LomExportExtractor;
+use oat\taoLom\model\export\injector\LomExportInjector;
+use oat\taoLom\model\import\extractor\LomImportExtractor;
+use oat\taoLom\model\import\injector\LomImportInjector;
+use oat\taoQtiItem\model\qti\metadata\exporter\MetadataExporter;
+use oat\taoQtiItem\model\qti\metadata\importer\MetadataImporter;
+use oat\taoQtiItem\model\qti\metadata\MetadataService;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class AddMetadataExtractors extends InstallAction
+/**
+ * Class InitMetadataService
+ *
+ * @package oat\taoQtiItem\scripts\install
+ */
+class AddLomMetadataServices implements Action, ServiceLocatorAwareInterface
 {
-    public function __invoke($params)
+    /**
+     * Register metadataService
+     *
+     * Check if taoQtiItem/metadata_registry config exists
+     * If yes, get content of the config
+     * Create metadataService with oldConfig or default config & register it
+     * Delete old metadataRegistry if exists
+     *
+     * @param $params
+     * @return \common_report_Report
+     */
+    public function __invoke($params = [])
     {
+        $metaDataService = ServiceManager::getServiceManager()->get(MetadataService::SERVICE_ID);
+        $importer = $metaDataService->getImporter();
+        $exporter = $metaDataService->getExporter();
+
+        // Register ImportInjectors.
+        $importer->register(
+            MetadataImporter::INJECTOR_KEY,
+            LomImportInjector::class
+        );
+
+        // Register ImportExtractors.
+        $importer->register(
+            MetadataImporter::EXTRACTOR_KEY,
+            LomImportExtractor::class
+        );
+
+        // Register ExportInjectors.
+        $exporter->register(
+            MetadataExporter::INJECTOR_KEY,
+            LomExportInjector::class
+        );
+
+        // Register ExportExtractors.
+        $exporter->register(
+            MetadataExporter::EXTRACTOR_KEY,
+            LomExportExtractor::class
+        );
+
+        return \common_report_Report::createSuccess(__('Metadata service successfully registered.'));
     }
 }

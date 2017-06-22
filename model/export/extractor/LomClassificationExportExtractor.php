@@ -21,17 +21,17 @@
 namespace oat\taoLom\model\export\extractor;
 
 use oat\generis\model\OntologyAwareTrait;
+use oat\taoLom\model\export\LomExportExtractorAbstract;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\classificationMetadata\ClassificationMetadataValue;
 use oat\taoLom\model\schema\classification\LomClassificationSourceMetadata;
 use oat\taoLom\model\schema\classification\LomClassificationEntryMetadata;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractionException;
-use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
 
-class LomClassificationExportExtractor implements MetadataExtractor
+class LomClassificationExportExtractor extends LomExportExtractorAbstract
 {
     use OntologyAwareTrait;
 
-    protected static $excludedProperties = [
+    public static $excludedProperties = [
         RDF_TYPE,
         RDFS_LABEL,
         \taoItems_models_classes_ItemsService::PROPERTY_ITEM_CONTENT,
@@ -66,8 +66,8 @@ class LomClassificationExportExtractor implements MetadataExtractor
 
             if (! empty($value) && $property->isProperty() && ! in_array($property->getUri(), self::$excludedProperties)) {
                 $metadata[] = new ClassificationMetadataValue(
-                    new LomClassificationSourceMetadata($resource->getUri(), $property->getUri()),
-                    [new LomClassificationEntryMetadata($resource->getUri(), $value)]
+                    new LomClassificationSourceMetadata($resource->getUri(), $property->getUri(), $this->getLanguageCode()),
+                    [new LomClassificationEntryMetadata($resource->getUri(), $value, $this->getLanguageCode())]
                 );
             }
         }

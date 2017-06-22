@@ -20,15 +20,19 @@
 
 namespace oat\taoLom\model\import\extractor;
 
-use oat\taoLom\model\schema\classification\LomClassificationEntryMetadata;
-use oat\taoLom\model\schema\classification\LomClassificationSourceMetadata;
+use oat\taoLom\model\ontology\LomTaoMetaData;
+use oat\taoLom\model\schema\general\LomGeneralCoverageMetadata;
+use oat\taoLom\model\schema\general\LomGeneralDescriptionMetadata;
+use oat\taoLom\model\schema\general\LomGeneralIdentifierMetadata;
+use oat\taoLom\model\schema\general\LomGeneralKeywordMetadata;
+use oat\taoLom\model\schema\general\LomGeneralLanguageMetadata;
+use oat\taoLom\model\schema\general\LomGeneralTitleMetadata;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataValue;
 use oat\taoQtiItem\model\qti\metadata\LomMetadata;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
-use oat\taoQtiItem\model\qti\metadata\MetadataValue;
 use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
-class LomClassificationImportExtractor implements MetadataExtractor
+class LomGeneralImportExtractor implements MetadataExtractor
 {
     /**
      * @see ImsManifestDataExtractor::extract()
@@ -45,26 +49,34 @@ class LomClassificationImportExtractor implements MetadataExtractor
 
             /** @var ImsManifestMetadataValue $metadataValue */
             foreach ($metadataValueCollection as $key => $metadataValue) {
-
-                // If metadata is not a source or is empty then skip
-                if ($metadataValue->getValue() === '' || $metadataValue->getPath() !== LomClassificationSourceMetadata::getNodeAbsolutePath()) {
-                    continue;
+                switch ($metadataValue->getPath()) {
+                    case LomGeneralIdentifierMetadata::getNodeAbsolutePath():
+                        $path = LomTaoMetaData::GENERAL_IDENTIFIER;
+                        break;
+                    case LomGeneralTitleMetadata::getNodeAbsolutePath():
+                        $path = LomTaoMetaData::GENERAL_TITLE;
+                        break;
+                    case LomGeneralLanguageMetadata::getNodeAbsolutePath():
+                        $path = LomTaoMetaData::GENERAL_LANGUAGE;
+                        break;
+                    case LomGeneralDescriptionMetadata::getNodeAbsolutePath():
+                        $path = LomTaoMetaData::GENERAL_DESCRIPTION;
+                        break;
+                    case LomGeneralKeywordMetadata::getNodeAbsolutePath():
+                        $path = LomTaoMetaData::GENERAL_KEYWORD;
+                        break;
+                    case LomGeneralCoverageMetadata::getNodeAbsolutePath():
+                        $path = LomTaoMetaData::GENERAL_COVERAGE;
+                        break;
+                    default:
+                        $path = '';
                 }
 
-                // If next metadata does not exist then skip
-                if (! isset($metadataValueCollection[$key + 1])) {
-                    continue;
-                }
-
-                /** @var MetadataValue $entryMetadata */
-                $entryMetadata = $metadataValueCollection[$key + 1];
-
-                // Handle metadata if it is an entry and is not empty
-                if ($entryMetadata->getPath() === LomClassificationEntryMetadata::getNodeAbsolutePath() && $entryMetadata->getValue() !== '') {
+                if (!empty($path)) {
                     $valuesToImport[$resourceIdentifier][] = new SimpleMetadataValue(
                         $resourceIdentifier,
-                        array(LomMetadata::LOM_NAMESPACE . '#lom', $metadataValue->getValue()),
-                        $entryMetadata->getValue()
+                        [$path],
+                        $metadataValue->getValue()
                     );
                 }
             }
