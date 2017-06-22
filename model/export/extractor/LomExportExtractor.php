@@ -21,14 +21,7 @@
 namespace oat\taoLom\model\export\extractor;
 
 use oat\generis\model\OntologyAwareTrait;
-use oat\taoLom\model\ontology\LomTaoMetaData;
-use oat\taoLom\model\schema\general\LomGeneralIdentifierMetadata;
-use oat\taoLom\model\schema\general\LomClassificationMetadataTrait;
-use oat\taoLom\model\schema\general\LomGeneralTitleMetadata;
-use oat\taoLom\model\schema\LomMetadataGroup;
-use oat\taoQtiItem\model\qti\metadata\imsManifest\classificationMetadata\LomClassificationEntryMetadata;
-use oat\taoQtiItem\model\qti\metadata\imsManifest\classificationMetadata\ClassificationMetadataValue;
-use oat\taoQtiItem\model\qti\metadata\imsManifest\classificationMetadata\ClassificationSourceMetadataValue;
+use oat\taoLom\model\ontology\LomTaoSchema;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractionException;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
 
@@ -51,20 +44,13 @@ class LomExportExtractor implements MetadataExtractor
             throw new MetadataExtractionException(__('The given target is not an instance of core_kernel_classes_Resource'));
         }
 
-        \common_Logger::d(
-            var_export(
-                $resource
-                , true
-            )
-        );
-
         $identifier = \tao_helpers_Uri::getUniqueId($resource->getUri());
         $metadata = array($identifier => []);
 
         // Defining the language for the export.
-        $language = $resource->getOnePropertyValue($this->getProperty('http://www.taotesting.com/ontologies/lom.rdf#general-language'));
+        $language = $resource->getOnePropertyValue($this->getProperty(LomTaoSchema::GENERAL_LANGUAGE));
         $languageCode = \tao_helpers_translation_Utils::getDefaultLanguage();
-        if ($language !== null) {
+        if ($language instanceof \core_kernel_classes_Resource) {
             $languageCode = \tao_models_classes_LanguageService::singleton()->getCode($language);
         }
 

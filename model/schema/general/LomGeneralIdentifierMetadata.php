@@ -21,8 +21,8 @@
 namespace oat\taoLom\model\schema\general;
 
 
+use oat\taoLom\model\ontology\ImsMdLoose1p3p2Schema;
 use oat\taoLom\model\schema\LomMetadataAbstract;
-use oat\taoQtiItem\model\qti\metadata\LomMetadata;
 
 class LomGeneralIdentifierMetadata extends LomMetadataAbstract
 {
@@ -47,9 +47,9 @@ class LomGeneralIdentifierMetadata extends LomMetadataAbstract
     public static function getNodeRelativePath()
     {
         return [
-            LomMetadata::LOM_NAMESPACE . '#identifier',
-            LomMetadata::LOM_NAMESPACE . '#entry',
-            LomMetadata::LOM_NAMESPACE . '#string',
+            ImsMdLoose1p3p2Schema::LOM_IDENTIFIER_PATH,
+            ImsMdLoose1p3p2Schema::LOM_ENTRY_PATH,
+            ImsMdLoose1p3p2Schema::LOM_STRING_PATH,
         ];
     }
 }

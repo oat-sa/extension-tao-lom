@@ -21,8 +21,8 @@
 namespace oat\taoLom\model\schema\general;
 
 
+use oat\taoLom\model\ontology\ImsMdLoose1p3p2Schema;
 use oat\taoLom\model\schema\LomMetadataAbstract;
-use oat\taoQtiItem\model\qti\metadata\LomMetadata;
 
 class LomGeneralLanguageMetadata extends LomMetadataAbstract
 {
@@ -47,8 +47,8 @@ class LomGeneralLanguageMetadata extends LomMetadataAbstract
     public static function getNodeRelativePath()
     {
         return [
-            LomMetadata::LOM_NAMESPACE . '#language',
-            LomMetadata::LOM_NAMESPACE . '#string'
+            ImsMdLoose1p3p2Schema::LOM_LANGUAGE_PATH,
+            ImsMdLoose1p3p2Schema::LOM_STRING_PATH,
         ];
     }
 }

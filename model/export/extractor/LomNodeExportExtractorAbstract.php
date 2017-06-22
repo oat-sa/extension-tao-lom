@@ -18,12 +18,12 @@
  *
  */
 
-namespace oat\taoLom\model\export;
+namespace oat\taoLom\model\export\extractor;
 
 
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
 
-abstract class LomExportExtractorAbstract implements MetadataExtractor
+abstract class LomNodeExportExtractorAbstract implements MetadataExtractor
 {
     /**
      * @var string

@@ -20,8 +20,8 @@
 
 namespace oat\taoLom\model\schema\classification;
 
+use oat\taoLom\model\ontology\ImsMdLoose1p3p2Schema;
 use oat\taoLom\model\schema\LomMetadataAbstract;
-use oat\taoQtiItem\model\qti\metadata\LomMetadata;
 
 class LomClassificationEntryMetadata extends LomMetadataAbstract
 {
@@ -46,9 +46,9 @@ class LomClassificationEntryMetadata extends LomMetadataAbstract
     static public function getNodeRelativePath()
     {
         return array(
-            LomMetadata::LOM_NAMESPACE . '#taxon',
-            LomMetadata::LOM_NAMESPACE . '#entry',
-            LomMetadata::LOM_NAMESPACE . '#string',
+            ImsMdLoose1p3p2Schema::LOM_TAXON_PATH,
+            ImsMdLoose1p3p2Schema::LOM_ENTRY_PATH,
+            ImsMdLoose1p3p2Schema::LOM_STRING_PATH,
         );
     }
 }

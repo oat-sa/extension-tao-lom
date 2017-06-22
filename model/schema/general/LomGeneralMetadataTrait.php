@@ -21,7 +21,7 @@
 namespace oat\taoLom\model\schema\general;
 
 
-use oat\taoQtiItem\model\qti\metadata\LomMetadata;
+use oat\taoLom\model\ontology\ImsMdLoose1p3p2Schema;
 
 trait LomGeneralMetadataTrait
 {
@@ -33,8 +33,8 @@ trait LomGeneralMetadataTrait
     public static function getBaseNodePath()
     {
         return array(
-            LomMetadata::LOM_NAMESPACE . '#lom',
-            LomMetadata::LOM_NAMESPACE . '#general',
+            ImsMdLoose1p3p2Schema::LOM_PATH,
+            ImsMdLoose1p3p2Schema::LOM_GENERAL_PATH,
         );
     }
 }

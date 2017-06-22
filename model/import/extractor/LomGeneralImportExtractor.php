@@ -20,7 +20,7 @@
 
 namespace oat\taoLom\model\import\extractor;
 
-use oat\taoLom\model\ontology\LomTaoMetaData;
+use oat\taoLom\model\ontology\LomTaoSchema;
 use oat\taoLom\model\schema\general\LomGeneralCoverageMetadata;
 use oat\taoLom\model\schema\general\LomGeneralDescriptionMetadata;
 use oat\taoLom\model\schema\general\LomGeneralIdentifierMetadata;
@@ -28,7 +28,6 @@ use oat\taoLom\model\schema\general\LomGeneralKeywordMetadata;
 use oat\taoLom\model\schema\general\LomGeneralLanguageMetadata;
 use oat\taoLom\model\schema\general\LomGeneralTitleMetadata;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataValue;
-use oat\taoQtiItem\model\qti\metadata\LomMetadata;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
 use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
@@ -51,22 +50,22 @@ class LomGeneralImportExtractor implements MetadataExtractor
             foreach ($metadataValueCollection as $key => $metadataValue) {
                 switch ($metadataValue->getPath()) {
                     case LomGeneralIdentifierMetadata::getNodeAbsolutePath():
-                        $path = LomTaoMetaData::GENERAL_IDENTIFIER;
+                        $path = LomTaoSchema::GENERAL_IDENTIFIER;
                         break;
                     case LomGeneralTitleMetadata::getNodeAbsolutePath():
-                        $path = LomTaoMetaData::GENERAL_TITLE;
+                        $path = LomTaoSchema::GENERAL_TITLE;
                         break;
                     case LomGeneralLanguageMetadata::getNodeAbsolutePath():
-                        $path = LomTaoMetaData::GENERAL_LANGUAGE;
+                        $path = LomTaoSchema::GENERAL_LANGUAGE;
                         break;
                     case LomGeneralDescriptionMetadata::getNodeAbsolutePath():
-                        $path = LomTaoMetaData::GENERAL_DESCRIPTION;
+                        $path = LomTaoSchema::GENERAL_DESCRIPTION;
                         break;
                     case LomGeneralKeywordMetadata::getNodeAbsolutePath():
-                        $path = LomTaoMetaData::GENERAL_KEYWORD;
+                        $path = LomTaoSchema::GENERAL_KEYWORD;
                         break;
                     case LomGeneralCoverageMetadata::getNodeAbsolutePath():
-                        $path = LomTaoMetaData::GENERAL_COVERAGE;
+                        $path = LomTaoSchema::GENERAL_COVERAGE;
                         break;
                     default:
                         $path = '';

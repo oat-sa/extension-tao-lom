@@ -21,7 +21,7 @@
 namespace oat\taoLom\model\schema\classification;
 
 
-use oat\taoQtiItem\model\qti\metadata\LomMetadata;
+use oat\taoLom\model\ontology\ImsMdLoose1p3p2Schema;
 
 trait LomClassificationMetadataTrait
 {
@@ -33,9 +33,9 @@ trait LomClassificationMetadataTrait
     public static function getBaseNodePath()
     {
         return array(
-            LomMetadata::LOM_NAMESPACE . '#lom',
-            LomMetadata::LOM_NAMESPACE . '#classification',
-            LomMetadata::LOM_NAMESPACE . '#taxonPath',
+            ImsMdLoose1p3p2Schema::LOM_PATH,
+            ImsMdLoose1p3p2Schema::LOM_CLASSIFICATION_PATH,
+            ImsMdLoose1p3p2Schema::LOM_TAXONPATH_PATH,
         );
     }
 }

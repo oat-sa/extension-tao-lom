@@ -21,13 +21,12 @@
 namespace oat\taoLom\model\export\extractor;
 
 use oat\generis\model\OntologyAwareTrait;
-use oat\taoLom\model\export\LomExportExtractorAbstract;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\classificationMetadata\ClassificationMetadataValue;
 use oat\taoLom\model\schema\classification\LomClassificationSourceMetadata;
 use oat\taoLom\model\schema\classification\LomClassificationEntryMetadata;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractionException;
 
-class LomClassificationExportExtractor extends LomExportExtractorAbstract
+class LomClassificationExportExtractor extends LomNodeExportExtractorAbstract
 {
     use OntologyAwareTrait;
 

@@ -20,10 +20,10 @@
 
 namespace oat\taoLom\model\import\extractor;
 
+use oat\taoLom\model\ontology\ImsMdLoose1p3p2Schema;
 use oat\taoLom\model\schema\classification\LomClassificationEntryMetadata;
 use oat\taoLom\model\schema\classification\LomClassificationSourceMetadata;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataValue;
-use oat\taoQtiItem\model\qti\metadata\LomMetadata;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
 use oat\taoQtiItem\model\qti\metadata\MetadataValue;
 use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
@@ -52,7 +52,7 @@ class LomClassificationImportExtractor implements MetadataExtractor
                 }
 
                 // If next metadata does not exist then skip
-                if (! isset($metadataValueCollection[$key + 1])) {
+                if (!isset($metadataValueCollection[$key + 1])) {
                     continue;
                 }
 
@@ -63,7 +63,7 @@ class LomClassificationImportExtractor implements MetadataExtractor
                 if ($entryMetadata->getPath() === LomClassificationEntryMetadata::getNodeAbsolutePath() && $entryMetadata->getValue() !== '') {
                     $valuesToImport[$resourceIdentifier][] = new SimpleMetadataValue(
                         $resourceIdentifier,
-                        array(LomMetadata::LOM_NAMESPACE . '#lom', $metadataValue->getValue()),
+                        array(ImsMdLoose1p3p2Schema::LOM_PATH, $metadataValue->getValue()),
                         $entryMetadata->getValue()
                     );
                 }

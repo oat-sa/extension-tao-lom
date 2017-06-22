@@ -19,7 +19,7 @@
 
 namespace oat\taoLom\model\ontology;
 
-interface LomTaoMetaData
+interface LomTaoSchema
 {
     const GENERAL_IDENTIFIER = 'http://www.taotesting.com/ontologies/lom.rdf#general-identifier';
     const GENERAL_TITLE = 'http://www.taotesting.com/ontologies/lom.rdf#general-title';
@@ -27,8 +27,4 @@ interface LomTaoMetaData
     const GENERAL_DESCRIPTION = 'http://www.taotesting.com/ontologies/lom.rdf#general-description';
     const GENERAL_KEYWORD = 'http://www.taotesting.com/ontologies/lom.rdf#general-keyword';
     const GENERAL_COVERAGE = 'http://www.taotesting.com/ontologies/lom.rdf#general-coverage';
-
-    const PROPERTY_NCCER_TEST_CATEGORY      = 'http://www.nccer.org/testmodel#testCategory';
-    const PROPERTY_NCCER_TEST_MODULE_NUMBER = 'http://www.nccer.org/testmodel#testModuleNumber';
-    const PROPERTY_NCCER_TEST_PROFILE       = 'http://www.nccer.org/delivery#TestProfile';
 }
