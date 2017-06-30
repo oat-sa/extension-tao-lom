@@ -42,6 +42,7 @@ class LomGeneralExportExtractor extends LomNodeExportExtractorAbstract
      * @return array
      *
      * @throws MetadataExtractionException
+     * @throws \InvalidArgumentException
      */
     public function extract($resource)
     {

@@ -21,6 +21,7 @@
 namespace oat\taoLom\model\export\extractor;
 
 use oat\generis\model\OntologyAwareTrait;
+use oat\tao\model\metadata\exception\writer\MetadataWriterException;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\classificationMetadata\ClassificationMetadataValue;
 use oat\taoLom\model\schema\classification\LomClassificationSourceMetadata;
 use oat\taoLom\model\schema\classification\LomClassificationEntryMetadata;
@@ -47,6 +48,8 @@ class LomClassificationExportExtractor extends LomNodeExportExtractorAbstract
      * @return array
      *
      * @throws MetadataExtractionException
+     * @throws MetadataWriterException
+     * @throws \InvalidArgumentException
      */
     public function extract($resource)
     {
@@ -75,5 +78,4 @@ class LomClassificationExportExtractor extends LomNodeExportExtractorAbstract
             ? []
             : $metadata;
     }
-
 }

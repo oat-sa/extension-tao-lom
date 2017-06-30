@@ -36,6 +36,8 @@ class LomClassificationImportExtractor implements MetadataExtractor
      * @param array $values
      *
      * @return array
+     *
+     * @throws \InvalidArgumentException
      */
     public function extract($values)
     {

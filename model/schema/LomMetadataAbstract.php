@@ -23,14 +23,16 @@ namespace oat\taoLom\model\schema;
 
 use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
-abstract class LomMetadataAbstract extends SimpleMetadataValue
+abstract class LomMetadataAbstract extends SimpleMetadataValue implements LomMetadataInterface
 {
     /**
-     * ClassificationSourceMetadataValue constructor.
+     * LomMetadataAbstract constructor.
      *
      * @param string $resourceIdentifier
      * @param string $value
      * @param string $language
+     *
+     * @throws \InvalidArgumentException If one of the argument contains an invalid value.
      */
     public function __construct($resourceIdentifier, $value, $language = DEFAULT_LANG)
     {
@@ -38,31 +40,11 @@ abstract class LomMetadataAbstract extends SimpleMetadataValue
     }
 
     /**
-     * Get the node's path.
-     */
-    abstract public static function getNodePath();
-
-    /**
-     * Get the node's base path
-     *
-     * @return array
-     */
-    abstract public static function getBaseNodePath();
-
-    /**
-     * Get the node's relative path.
-     *
-     * @return array
-     */
-    abstract public static function getNodeRelativePath();
-
-
-    /**
      * Get the node's absolute path.
      *
      * @return array
      */
-    static public function getNodeAbsolutePath()
+    public static function getNodeAbsolutePath()
     {
         return array_merge(
             static::getBaseNodePath(),

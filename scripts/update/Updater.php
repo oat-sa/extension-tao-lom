@@ -20,16 +20,9 @@
 namespace oat\taoLom\scripts\update;
 
 use oat\tao\scripts\update\OntologyUpdater;
-use oat\taoLom\model\export\extractor\LomExportExtractor;
-use oat\taoLom\model\export\injector\LomExportInjector;
-use oat\taoLom\model\import\extractor\LomImportExtractor;
-use oat\taoLom\model\import\injector\LomImportInjector;
 use oat\taoLom\scripts\install\AddLomMetadataServices;
 use oat\taoLom\scripts\install\AddMetadataExtractors;
 use oat\taoLom\scripts\install\AddMetadataInjectors;
-use oat\taoQtiItem\model\qti\metadata\exporter\MetadataExporter;
-use oat\taoQtiItem\model\qti\metadata\importer\MetadataImporter;
-use oat\taoQtiItem\model\qti\metadata\MetadataService;
 
 class Updater extends \common_ext_ExtensionUpdater
 {
@@ -59,8 +52,10 @@ class Updater extends \common_ext_ExtensionUpdater
                 new AddLomMetadataServices(),
                 []
             );
+            OntologyUpdater::syncModels();
 
             $this->setVersion('1.0.0');
+//            $this->setVersion('2.0.0');
         }
     }
 }

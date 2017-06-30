@@ -21,6 +21,7 @@
 namespace oat\taoLom\model\export\extractor;
 
 use oat\generis\model\OntologyAwareTrait;
+use oat\tao\model\metadata\exception\writer\MetadataWriterException;
 use oat\taoLom\model\ontology\LomTaoSchema;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractionException;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
@@ -37,6 +38,8 @@ class LomExportExtractor implements MetadataExtractor
      * @return array
      *
      * @throws MetadataExtractionException
+     * @throws MetadataWriterException
+     * @throws \InvalidArgumentException
      */
     public function extract($resource)
     {

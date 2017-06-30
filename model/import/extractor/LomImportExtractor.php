@@ -28,7 +28,10 @@ class LomImportExtractor extends ImsManifestMetadataExtractor
      * @see ImsManifestDataExtractor::extract()
      *
      * @param mixed $manifest
+     *
      * @return array
+     *
+     * @throws \InvalidArgumentException
      */
     public function extract($manifest)
     {

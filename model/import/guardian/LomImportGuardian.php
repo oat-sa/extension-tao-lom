@@ -14,29 +14,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2017 (original work) Open Assessment Technologies SA
+ * Copyright (c) 2017 Open Assessment Technologies SA
  *
  */
 
+namespace oat\taoLom\model\import\guardian;
 
-namespace oat\taoLom\model\export\injector;
 
-use oat\taoLom\model\ontology\ImsMdLoose1p3p2Schema;
-use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMapping;
-use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataInjector;
+use oat\taoQtiItem\model\qti\metadata\MetadataGuardian;
 
-class LomExportInjector extends ImsManifestMetadataInjector
+class LomImportGuardian implements MetadataGuardian
 {
-    public function __construct()
+    /**
+     * @inheritdoc
+     */
+    public function guard(array $metadataValues)
     {
-        $mappings = [];
-        $mappings[] = new ImsManifestMapping(
-            ImsMdLoose1p3p2Schema::LOM_NAMESPACE,
-            ImsMdLoose1p3p2Schema::LOM_PREFIX,
-            ImsMdLoose1p3p2Schema::LOM_SCHEMA
-        );
+        $guardian = new LomGeneralImportGuardian();
+        $guard = $guardian->guard($metadataValues);
 
-        parent::__construct($mappings);
+        return $guard;
     }
-
 }
