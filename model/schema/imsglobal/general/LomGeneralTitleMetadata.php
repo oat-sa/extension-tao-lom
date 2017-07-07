@@ -18,13 +18,12 @@
  *
  */
 
-namespace oat\taoLom\model\schema\general;
+namespace oat\taoLom\model\schema\imsglobal\general;
 
 
-use oat\taoLom\model\ontology\ImsMdLoose1p3p2Schema;
 use oat\taoLom\model\schema\LomMetadataAbstract;
 
-class LomGeneralCoverageMetadata extends LomMetadataAbstract
+class LomGeneralTitleMetadata extends LomMetadataAbstract
 {
     // Adding the getBaseNodePath method.
     use LomGeneralMetadataTrait;
@@ -34,9 +33,9 @@ class LomGeneralCoverageMetadata extends LomMetadataAbstract
      *
      * @return array
      */
-    public static function getNodePath()
+    public function getNodePath()
     {
-        return static::getNodeAbsolutePath();
+        return $this->getNodeAbsolutePath();
     }
 
     /**
@@ -44,11 +43,21 @@ class LomGeneralCoverageMetadata extends LomMetadataAbstract
      *
      * @return array
      */
-    public static function getNodeRelativePath()
+    public function getNodeRelativePath()
     {
         return [
-            ImsMdLoose1p3p2Schema::LOM_COVERAGE_PATH,
-            ImsMdLoose1p3p2Schema::LOM_STRING_PATH,
+            $this->genericMapper->getLomTitlePath(),
+            $this->genericMapper->getLomStringPath(),
         ];
+    }
+
+    /**
+     * Returns the general title place in the TAO system.
+     *
+     * @return string
+     */
+    public function getTaoPath()
+    {
+        return $this->taoMapper->getGeneralTitle();
     }
 }

@@ -20,7 +20,9 @@
 
 namespace oat\taoLom\model\import\extractor;
 
-use oat\taoLom\model\import\LomGeneralImportHelper;
+use oat\oatbox\service\ServiceManager;
+use oat\taoLom\model\schema\LomMetadataInterface;
+use oat\taoLom\model\schema\LomSchemaService;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataValue;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
 use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
@@ -35,15 +37,28 @@ class LomGeneralImportExtractor implements MetadataExtractor
      * @return array
      *
      * @throws \InvalidArgumentException
+     * @throws \common_Exception
+     * @throws \common_exception_NotFound
      */
     public function extract($values)
     {
+        /** @var LomSchemaService $schemaService */
+        $schemaService  = ServiceManager::getServiceManager()->get(LomSchemaService::SERVICE_ID);
+        $generalSchema  = $schemaService->getLomGeneralSchema();
         $valuesToImport = array();
 
         foreach ($values as $resourceIdentifier => $metadataValueCollection) {
             /** @var ImsManifestMetadataValue $metadataValue */
             foreach ($metadataValueCollection as $key => $metadataValue) {
-                $path = LomGeneralImportHelper::getMappedUrl($metadataValue);
+                /** @var LomMetadataInterface $current */
+                $path = '';
+                foreach ($generalSchema as $current) {
+                    if ($metadataValue->getPath() === $current->getNodeAbsolutePath()) {
+                        $path = $current->getTaoPath();
+                        break;
+                    }
+                }
+
                 if (!empty($path)) {
                     $valuesToImport[$resourceIdentifier][] = new SimpleMetadataValue(
                         $resourceIdentifier,

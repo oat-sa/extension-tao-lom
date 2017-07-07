@@ -18,10 +18,8 @@
  *
  */
 
-namespace oat\taoLom\model\schema\general;
+namespace oat\taoLom\model\schema\imsglobal\general;
 
-
-use oat\taoLom\model\ontology\ImsMdLoose1p3p2Schema;
 
 trait LomGeneralMetadataTrait
 {
@@ -30,11 +28,11 @@ trait LomGeneralMetadataTrait
      *
      * @return array
      */
-    public static function getBaseNodePath()
+    public function getBaseNodePath()
     {
         return array(
-            ImsMdLoose1p3p2Schema::LOM_PATH,
-            ImsMdLoose1p3p2Schema::LOM_GENERAL_PATH,
+            $this->genericMapper->getLomPath(),
+            $this->genericMapper->getLomGeneralPath(),
         );
     }
 }

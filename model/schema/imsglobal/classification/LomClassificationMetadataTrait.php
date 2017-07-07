@@ -14,25 +14,26 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2017 Open Assessment Technologies SA
+ * Copyright (c) 2017 (original work) Open Assessment Technologies SA
  *
  */
 
-namespace oat\taoLom\model\import\guardian;
+namespace oat\taoLom\model\schema\imsglobal\classification;
 
 
-use oat\taoQtiItem\model\qti\metadata\MetadataGuardian;
-
-class LomImportGuardian implements MetadataGuardian
+trait LomClassificationMetadataTrait
 {
     /**
-     * @inheritdoc
+     * Get the default general source path
+     *
+     * @return array
      */
-    public function guard(array $metadataValues)
+    public function getBaseNodePath()
     {
-        $guardian = new LomGeneralImportGuardian();
-        $guard = $guardian->guard($metadataValues);
-
-        return $guard;
+        return array(
+            $this->genericMapper->getLomPath(),
+            $this->genericMapper->getClassificationPath(),
+            $this->genericMapper->getTaxonPathPath(),
+        );
     }
 }

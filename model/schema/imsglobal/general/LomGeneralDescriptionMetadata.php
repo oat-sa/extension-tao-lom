@@ -14,28 +14,28 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2017 Open Assessment Technologies SA
+ * Copyright (c) 2017 (original work) Open Assessment Technologies SA
  *
  */
 
-namespace oat\taoLom\model\schema\classification;
+namespace oat\taoLom\model\schema\imsglobal\general;
 
-use oat\taoLom\model\ontology\ImsMdLoose1p3p2Schema;
+
 use oat\taoLom\model\schema\LomMetadataAbstract;
 
-class LomClassificationEntryMetadata extends LomMetadataAbstract
+class LomGeneralDescriptionMetadata extends LomMetadataAbstract
 {
     // Adding the getBaseNodePath method.
-    use LomClassificationMetadataTrait;
+    use LomGeneralMetadataTrait;
 
     /**
      * Get the classification source node's extract path.
      *
      * @return array
      */
-    public static function getNodePath()
+    public function getNodePath()
     {
-        return static::getNodeRelativePath();
+        return $this->getNodeAbsolutePath();
     }
 
     /**
@@ -43,12 +43,21 @@ class LomClassificationEntryMetadata extends LomMetadataAbstract
      *
      * @return array
      */
-    static public function getNodeRelativePath()
+    public function getNodeRelativePath()
     {
-        return array(
-            ImsMdLoose1p3p2Schema::LOM_TAXON_PATH,
-            ImsMdLoose1p3p2Schema::LOM_ENTRY_PATH,
-            ImsMdLoose1p3p2Schema::LOM_STRING_PATH,
-        );
+        return [
+            $this->genericMapper->getLomDescriptionPath(),
+            $this->genericMapper->getLomStringPath(),
+        ];
+    }
+
+    /**
+     * Returns the general description place in the TAO system.
+     *
+     * @return string
+     */
+    public function getTaoPath()
+    {
+        return $this->taoMapper->getGeneralDescription();
     }
 }

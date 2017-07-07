@@ -20,18 +20,13 @@
 namespace oat\taoLom\scripts\install;
 
 use oat\oatbox\action\Action;
-use oat\oatbox\extension\InstallAction;
 use oat\oatbox\service\ServiceManager;
 use oat\oatbox\service\ServiceManagerAwareTrait;
-use oat\taoLom\model\export\extractor\LomExportExtractor;
-use oat\taoLom\model\export\injector\LomExportInjector;
-use oat\taoLom\model\import\extractor\LomImportExtractor;
-use oat\taoLom\model\import\injector\LomImportInjector;
+use oat\oatbox\service\ServiceNotFoundException;
 use oat\taoQtiItem\model\qti\metadata\exporter\MetadataExporter;
 use oat\taoQtiItem\model\qti\metadata\importer\MetadataImporter;
 use oat\taoQtiItem\model\qti\metadata\MetadataService;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
 /**
  * Class InitMetadataService
@@ -51,38 +46,53 @@ class AddLomMetadataServices implements Action, ServiceLocatorAwareInterface
      * Delete old metadataRegistry if exists
      *
      * @param $params
+     *
      * @return \common_report_Report
+     *
+     * @throws \InvalidArgumentException
+     * @throws \common_Exception
+     * @throws ServiceNotFoundException
      */
     public function __invoke($params = [])
     {
+        /** @var MetadataService $metaDataService */
         $metaDataService = ServiceManager::getServiceManager()->get(MetadataService::SERVICE_ID);
         $importer = $metaDataService->getImporter();
         $exporter = $metaDataService->getExporter();
 
+        /** IMPORT */
         // Register ImportInjectors.
-        $importer->register(
-            MetadataImporter::INJECTOR_KEY,
-            LomImportInjector::class
-        );
-
+        $this->registerServices($importer, $params, MetadataService::IMPORTER_KEY, MetadataImporter::INJECTOR_KEY);
         // Register ImportExtractors.
-        $importer->register(
-            MetadataImporter::EXTRACTOR_KEY,
-            LomImportExtractor::class
-        );
+        $this->registerServices($importer, $params, MetadataService::IMPORTER_KEY, MetadataImporter::EXTRACTOR_KEY);
+        // Register ImportGuardians.
+        $this->registerServices($importer, $params, MetadataService::IMPORTER_KEY, MetadataImporter::GUARDIAN_KEY);
+        // Register ImportClassLookups.
+        $this->registerServices($importer, $params, MetadataService::IMPORTER_KEY, MetadataImporter::CLASS_LOOKUP_KEY);
 
+        /** EXPORT */
         // Register ExportInjectors.
-        $exporter->register(
-            MetadataExporter::INJECTOR_KEY,
-            LomExportInjector::class
-        );
-
+        $this->registerServices($exporter, $params, MetadataService::EXPORTER_KEY, MetadataExporter::INJECTOR_KEY);
         // Register ExportExtractors.
-        $exporter->register(
-            MetadataExporter::EXTRACTOR_KEY,
-            LomExportExtractor::class
-        );
+        $this->registerServices($exporter, $params, MetadataService::EXPORTER_KEY, MetadataExporter::EXTRACTOR_KEY);
 
         return \common_report_Report::createSuccess(__('Metadata service successfully registered.'));
+    }
+
+    /**
+     * @param MetadataImporter|MetadataExporter $service
+     * @param array $params
+     * @param string $key
+     * @param string $subKey
+     *
+     * @return bool
+     */
+    private function registerServices($service, $params, $key, $subKey)
+    {
+        if (!empty($params[$key][$subKey]) && is_array($params[$key][$subKey])) {
+            foreach ($params[$key][$subKey] as $classPath) {
+                $service->register($subKey, $classPath);
+            }
+        }
     }
 }

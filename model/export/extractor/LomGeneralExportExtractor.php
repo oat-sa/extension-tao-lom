@@ -21,7 +21,8 @@
 namespace oat\taoLom\model\export\extractor;
 
 use oat\generis\model\OntologyAwareTrait;
-use oat\taoLom\model\ontology\LomTaoSchema;
+use oat\oatbox\service\ServiceManager;
+use oat\taoLom\model\ontology\LomMapperService;
 use oat\taoLom\model\schema\general\LomGeneralCoverageMetadata;
 use oat\taoLom\model\schema\general\LomGeneralDescriptionMetadata;
 use oat\taoLom\model\schema\general\LomGeneralIdentifierMetadata;
@@ -43,6 +44,7 @@ class LomGeneralExportExtractor extends LomNodeExportExtractorAbstract
      *
      * @throws MetadataExtractionException
      * @throws \InvalidArgumentException
+     * @throws \common_Exception
      */
     public function extract($resource)
     {
@@ -50,20 +52,24 @@ class LomGeneralExportExtractor extends LomNodeExportExtractorAbstract
             throw new MetadataExtractionException(__('The given target is not an instance of core_kernel_classes_Resource'));
         }
 
+        /** @var LomMapperService $mappingService */
+        $mappingService = ServiceManager::getServiceManager()->get(LomMapperService::SERVICE_ID);
+        $taoMapper = $mappingService->getLomTaoMapper();
+
         // Adding identifier.
-        $id = $resource->getOnePropertyValue($this->getProperty(LomTaoSchema::GENERAL_IDENTIFIER));
+        $id = $resource->getOnePropertyValue($this->getProperty($taoMapper->getGeneralIdentifier()));
         if ($id !== null) {
             $metadata[] = new LomGeneralIdentifierMetadata($resource->getUri(), $id, $this->getLanguageCode());
         }
 
         // Adding title.
-        $title = $resource->getOnePropertyValue($this->getProperty(LomTaoSchema::GENERAL_TITLE));
+        $title = $resource->getOnePropertyValue($this->getProperty($taoMapper->getGeneralTitle()));
         if ($title !== null) {
             $metadata[] = new LomGeneralTitleMetadata($resource->getUri(), $title, $this->getLanguageCode());
         }
 
         // Adding language.
-        $language = $resource->getOnePropertyValue($this->getProperty(LomTaoSchema::GENERAL_LANGUAGE));
+        $language = $resource->getOnePropertyValue($this->getProperty($taoMapper->getGeneralLanguage()));
         if ($language !== null) {
 // @todo: which way should we store the language?
             // Language url
@@ -76,19 +82,19 @@ class LomGeneralExportExtractor extends LomNodeExportExtractorAbstract
         }
 
         // Adding description.
-        $description = $resource->getOnePropertyValue($this->getProperty(LomTaoSchema::GENERAL_DESCRIPTION));
+        $description = $resource->getOnePropertyValue($this->getProperty($taoMapper->getGeneralDescription()));
         if ($description !== null) {
             $metadata[] = new LomGeneralDescriptionMetadata($resource->getUri(), $description, $this->getLanguageCode());
         }
 
         // Adding keyword.
-        $keyword = $resource->getOnePropertyValue($this->getProperty(LomTaoSchema::GENERAL_KEYWORD));
+        $keyword = $resource->getOnePropertyValue($this->getProperty($taoMapper->getGeneralKeyWord()));
         if ($keyword !== null) {
             $metadata[] = new LomGeneralKeywordMetadata($resource->getUri(), $keyword, $this->getLanguageCode());
         }
 
         // Adding coverage.
-        $coverage = $resource->getOnePropertyValue($this->getProperty(LomTaoSchema::GENERAL_COVERAGE));
+        $coverage = $resource->getOnePropertyValue($this->getProperty($taoMapper->getGeneralCoverage()));
         if ($coverage !== null) {
             $metadata[] = new LomGeneralCoverageMetadata($resource->getUri(), $coverage, $this->getLanguageCode());
         }

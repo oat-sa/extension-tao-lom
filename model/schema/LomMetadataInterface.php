@@ -26,26 +26,33 @@ interface LomMetadataInterface
     /**
      * Get the node's path.
      */
-    public static function getNodePath();
+    public function getNodePath();
 
     /**
      * Get the node's base path
      *
      * @return array
      */
-    public static function getBaseNodePath();
+    public function getBaseNodePath();
 
     /**
      * Get the node's relative path.
      *
      * @return array
      */
-    public static function getNodeRelativePath();
+    public function getNodeRelativePath();
 
     /**
      * Get the node's absolute path.
      *
      * @return array
      */
-    public static function getNodeAbsolutePath();
+    public function getNodeAbsolutePath();
+
+    /**
+     * Returns the node's place in TAO.
+     *
+     * @return string
+     */
+    public function getTaoPath();
 }

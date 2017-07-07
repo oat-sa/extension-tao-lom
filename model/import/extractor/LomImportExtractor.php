@@ -40,10 +40,11 @@ class LomImportExtractor extends ImsManifestMetadataExtractor
         $lomGeneral        = new LomGeneralImportExtractor();
         $lomClassification = new LomClassificationImportExtractor();
 
-        return array_merge_recursive(
-            $lomGeneral->extract($values),
-            $lomClassification->extract($values)
-        );
+        return $lomGeneral->extract($values);
+//        return array_merge_recursive(
+//            $lomGeneral->extract($values),
+//            $lomClassification->extract($values)
+//        );
     }
 
 }

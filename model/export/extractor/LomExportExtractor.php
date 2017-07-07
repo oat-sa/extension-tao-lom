@@ -21,8 +21,9 @@
 namespace oat\taoLom\model\export\extractor;
 
 use oat\generis\model\OntologyAwareTrait;
+use oat\oatbox\service\ServiceManager;
 use oat\tao\model\metadata\exception\writer\MetadataWriterException;
-use oat\taoLom\model\ontology\LomTaoSchema;
+use oat\taoLom\model\ontology\LomMapperService;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractionException;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
 
@@ -40,6 +41,7 @@ class LomExportExtractor implements MetadataExtractor
      * @throws MetadataExtractionException
      * @throws MetadataWriterException
      * @throws \InvalidArgumentException
+     * @throws \common_Exception
      */
     public function extract($resource)
     {
@@ -50,8 +52,12 @@ class LomExportExtractor implements MetadataExtractor
         $identifier = \tao_helpers_Uri::getUniqueId($resource->getUri());
         $metadata = array($identifier => []);
 
+        /** @var LomMapperService $mappingService */
+        $mappingService = ServiceManager::getServiceManager()->get(LomMapperService::SERVICE_ID);
+        $taoMapper = $mappingService->getLomTaoMapper();
+
         // Defining the language for the export.
-        $language = $resource->getOnePropertyValue($this->getProperty(LomTaoSchema::GENERAL_LANGUAGE));
+        $language = $resource->getOnePropertyValue($this->getProperty($taoMapper->getGeneralIdentifier()));
         $languageCode = \tao_helpers_translation_Utils::getDefaultLanguage();
         if ($language instanceof \core_kernel_classes_Resource) {
             $languageCode = \tao_models_classes_LanguageService::singleton()->getCode($language);

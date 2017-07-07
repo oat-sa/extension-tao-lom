@@ -20,9 +20,10 @@
 
 namespace oat\taoLom\model\import\extractor;
 
-use oat\taoLom\model\ontology\ImsMdLoose1p3p2Schema;
-use oat\taoLom\model\schema\classification\LomClassificationEntryMetadata;
-use oat\taoLom\model\schema\classification\LomClassificationSourceMetadata;
+use oat\oatbox\service\ServiceManager;
+use oat\taoLom\model\ontology\LomMapperService;
+use oat\taoLom\model\schema\imsglobal\classification\LomClassificationEntryMetadata;
+use oat\taoLom\model\schema\imsglobal\classification\LomClassificationSourceMetadata;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataValue;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
 use oat\taoQtiItem\model\qti\metadata\MetadataValue;
@@ -38,9 +39,14 @@ class LomClassificationImportExtractor implements MetadataExtractor
      * @return array
      *
      * @throws \InvalidArgumentException
+     * @throws \common_Exception
      */
     public function extract($values)
     {
+        /** @var LomMapperService $mappingService */
+        $mappingService = ServiceManager::getServiceManager()->get(LomMapperService::SERVICE_ID);
+        $mapper = $mappingService->getLomGenericMapper();
+
         $valuesToImport = array();
 
         foreach ($values as $resourceIdentifier => $metadataValueCollection) {
@@ -65,7 +71,7 @@ class LomClassificationImportExtractor implements MetadataExtractor
                 if ($entryMetadata->getPath() === LomClassificationEntryMetadata::getNodeAbsolutePath() && $entryMetadata->getValue() !== '') {
                     $valuesToImport[$resourceIdentifier][] = new SimpleMetadataValue(
                         $resourceIdentifier,
-                        array(ImsMdLoose1p3p2Schema::LOM_PATH, $metadataValue->getValue()),
+                        array($mapper->getLomPath(), $metadataValue->getValue()),
                         $entryMetadata->getValue()
                     );
                 }

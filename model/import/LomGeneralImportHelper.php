@@ -20,7 +20,8 @@
 
 namespace oat\taoLom\model\import;
 
-use oat\taoLom\model\ontology\LomTaoSchema;
+use oat\oatbox\service\ServiceManager;
+use oat\taoLom\model\ontology\LomMapperService;
 use oat\taoLom\model\schema\general\LomGeneralCoverageMetadata;
 use oat\taoLom\model\schema\general\LomGeneralDescriptionMetadata;
 use oat\taoLom\model\schema\general\LomGeneralIdentifierMetadata;
@@ -37,27 +38,33 @@ class LomGeneralImportHelper
      * @param MetadataValue $metaData
      *
      * @return string   The mapped property url.
+     *
+     * @throws \common_Exception
      */
     public static function getMappedUrl($metaData)
     {
+        /** @var LomMapperService $mappingService */
+        $mappingService = ServiceManager::getServiceManager()->get(LomMapperService::SERVICE_ID);
+        $taoMapper = $mappingService->getLomTaoMapper();
+
         switch ($metaData->getPath()) {
             case LomGeneralIdentifierMetadata::getNodeAbsolutePath():
-                return LomTaoSchema::GENERAL_IDENTIFIER;
+                return $taoMapper->getGeneralIdentifier();
                 break;
             case LomGeneralTitleMetadata::getNodeAbsolutePath():
-                return LomTaoSchema::GENERAL_TITLE;
+                return $taoMapper->getGeneralTitle();
                 break;
             case LomGeneralLanguageMetadata::getNodeAbsolutePath():
-                return LomTaoSchema::GENERAL_LANGUAGE;
+                return $taoMapper->getGeneralLanguage();
                 break;
             case LomGeneralDescriptionMetadata::getNodeAbsolutePath():
-                return LomTaoSchema::GENERAL_DESCRIPTION;
+                return $taoMapper->getGeneralDescription();
                 break;
             case LomGeneralKeywordMetadata::getNodeAbsolutePath():
-                return LomTaoSchema::GENERAL_KEYWORD;
+                return $taoMapper->getGeneralKeyWord();
                 break;
             case LomGeneralCoverageMetadata::getNodeAbsolutePath():
-                return LomTaoSchema::GENERAL_COVERAGE;
+                return $taoMapper->getGeneralCoverage();
                 break;
             default:
                 return '';

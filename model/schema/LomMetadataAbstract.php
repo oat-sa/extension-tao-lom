@@ -21,10 +21,25 @@
 namespace oat\taoLom\model\schema;
 
 
+use oat\oatbox\service\ServiceManager;
+use oat\taoLom\model\mapper\interfaces\LomGenericMapperInterface;
+use oat\taoLom\model\mapper\interfaces\LomTaoMapperInterface;
+use oat\taoLom\model\ontology\LomMapperService;
 use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
-abstract class LomMetadataAbstract extends SimpleMetadataValue implements LomMetadataInterface
+//abstract class LomMetadataAbstract extends SimpleMetadataValue implements LomMetadataInterface
+abstract class LomMetadataAbstract implements LomMetadataInterface
 {
+    /**
+     * @var LomTaoMapperInterface
+     */
+    protected $taoMapper;
+
+    /**
+     * @var LomGenericMapperInterface
+     */
+    protected $genericMapper;
+
     /**
      * LomMetadataAbstract constructor.
      *
@@ -33,10 +48,17 @@ abstract class LomMetadataAbstract extends SimpleMetadataValue implements LomMet
      * @param string $language
      *
      * @throws \InvalidArgumentException If one of the argument contains an invalid value.
+     * @throws \common_Exception
      */
-    public function __construct($resourceIdentifier, $value, $language = DEFAULT_LANG)
+//    public function __construct($resourceIdentifier, $value, $language = DEFAULT_LANG)
+    public function __construct()
     {
-        parent::__construct($resourceIdentifier, static::getNodePath(), $value, $language);
+        /** @var LomMapperService $mappingService */
+        $mappingService = ServiceManager::getServiceManager()->get(LomMapperService::SERVICE_ID);
+        $this->taoMapper = $mappingService->getLomTaoMapper();
+        $this->genericMapper = $mappingService->getLomGenericMapper();
+
+        //parent::__construct($resourceIdentifier, $this->getNodePath(), $value, $language);
     }
 
     /**
@@ -44,11 +66,11 @@ abstract class LomMetadataAbstract extends SimpleMetadataValue implements LomMet
      *
      * @return array
      */
-    public static function getNodeAbsolutePath()
+    public function getNodeAbsolutePath()
     {
         return array_merge(
-            static::getBaseNodePath(),
-            static::getNodeRelativePath()
+            $this->getBaseNodePath(),
+            $this->getNodeRelativePath()
         );
     }
 }
