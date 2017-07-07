@@ -32,7 +32,7 @@ trait LomGeneralMetadataTrait
     {
         return array(
             $this->genericMapper->getLomPath(),
-            $this->genericMapper->getLomGeneralPath(),
+            $this->genericMapper->getGeneralPath(),
         );
     }
 }

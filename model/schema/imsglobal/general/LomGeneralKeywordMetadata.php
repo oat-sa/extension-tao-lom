@@ -46,8 +46,8 @@ class LomGeneralKeywordMetadata extends LomMetadataAbstract
     public function getNodeRelativePath()
     {
         return [
-            $this->genericMapper->getLomKeywordPath(),
-            $this->genericMapper->getLomStringPath(),
+            $this->genericMapper->getKeywordPath(),
+            $this->genericMapper->getStringPath(),
         ];
     }
 

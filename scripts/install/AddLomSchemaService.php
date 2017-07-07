@@ -70,9 +70,14 @@ class AddLomSchemaService implements Action, ServiceLocatorAwareInterface
                     $schemaConfig[$offset] = [];
                 }
 
-                foreach ($classes as $class) {
+                foreach ($classes as $classKey => $class) {
                     if (!in_array($class, $schemaConfig[$offset], true)) {
-                        $schemaConfig[$offset][] = $class;
+                        if (is_numeric($classKey)) {
+                            $schemaConfig[$offset][] = $class;
+                        }
+                        else {
+                            $schemaConfig[$offset][$classKey] = $class;
+                        }
                     }
                 }
             }

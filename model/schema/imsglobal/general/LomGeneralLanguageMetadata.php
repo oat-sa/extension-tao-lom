@@ -46,8 +46,8 @@ class LomGeneralLanguageMetadata extends LomMetadataAbstract
     public function getNodeRelativePath()
     {
         return [
-            $this->genericMapper->getLomLanguagePath(),
-            $this->genericMapper->getLomStringPath(),
+            $this->genericMapper->getLanguagePath(),
+            $this->genericMapper->getStringPath(),
         ];
     }
 

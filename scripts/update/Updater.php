@@ -22,6 +22,8 @@ namespace oat\taoLom\scripts\update;
 use oat\tao\scripts\update\OntologyUpdater;
 use oat\taoLom\model\export\extractor\LomExportExtractor;
 use oat\taoLom\model\export\injector\LomExportInjector;
+use oat\taoLom\model\import\extractor\LomAutomaticProcessableSchemaImportExtractor;
+use oat\taoLom\model\import\extractor\LomClassificationImportExtractor;
 use oat\taoLom\model\import\extractor\LomImportExtractor;
 use oat\taoLom\model\import\guardian\LomGeneralImportGuardian;
 use oat\taoLom\model\import\injector\LomImportInjector;
@@ -90,7 +92,8 @@ class Updater extends \common_ext_ExtensionUpdater
                         LomImportInjector::class,
                     ],
                     MetadataImporter::EXTRACTOR_KEY => [
-                        LomImportExtractor::class,
+                        LomAutomaticProcessableSchemaImportExtractor::class,
+                        LomClassificationImportExtractor::class,
                     ],
                     MetadataImporter::GUARDIAN_KEY => [
                         LomGeneralImportGuardian::class,
@@ -109,7 +112,7 @@ class Updater extends \common_ext_ExtensionUpdater
             $lomSchemaService = new AddLomSchemaService();
             $lomSchemaService->setServiceLocator($this->getServiceManager());
             $lomSchemaService([
-                LomSchemaService::LOM_SCHEMA_GENERAL => [
+                LomSchemaService::AUTOMATIC_PROCESSABLE_INSTANCES => [
                     LomGeneralIdentifierMetadata::class,
                     LomGeneralTitleMetadata::class,
                     LomGeneralLanguageMetadata::class,
@@ -117,9 +120,9 @@ class Updater extends \common_ext_ExtensionUpdater
                     LomGeneralKeywordMetadata::class,
                     LomGeneralCoverageMetadata::class,
                 ],
-                LomSchemaService::LOM_SCHEMA_CLASSIFICATION => [
-                    LomClassificationSourceMetadata::class,
-                    LomClassificationEntryMetadata::class,
+                LomSchemaService::CUSTOM_PROCESSABLE_INSTANCES => [
+                    LomClassificationImportExtractor::SCHEMA_CLASSIFICATION_SOURCE => LomClassificationSourceMetadata::class,
+                    LomClassificationImportExtractor::SCHEMA_CLASSIFICATION_ENTRY  => LomClassificationEntryMetadata::class,
                 ],
             ]);
 

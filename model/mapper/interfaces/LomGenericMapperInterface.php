@@ -62,28 +62,28 @@ interface LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomSourcePath();
+    public function getSourcePath();
 
     /**
      * Returns the LOM entry node.
      *
      * @return string
      */
-    public function getLomEntryPath();
+    public function getEntryPath();
 
     /**
      * Returns the LOM string node.
      *
      * @return string
      */
-    public function getLomStringPath();
+    public function getStringPath();
 
     /**
      * Returns the LOM taxonpath node.
      *
      * @return string
      */
-    public function getLomTaxonPathPath();
+    public function getTaxonPathPath();
 
     /**
      * Returns the LOM taxon node.
@@ -101,49 +101,49 @@ interface LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomGeneralPath();
+    public function getGeneralPath();
 
     /**
      * Returns the LOM general identifier node.
      *
      * @return string
      */
-    public function getLomIdentifierPath();
+    public function getIdentifierPath();
 
     /**
      * Returns the LOM general title node.
      *
      * @return string
      */
-    public function getLomTitlePath();
+    public function getTitlePath();
 
     /**
      * Returns the LOM general language node.
      *
      * @return string
      */
-    public function getLomLanguagePath();
+    public function getLanguagePath();
 
     /**
      * Returns the LOM general description node.
      *
      * @return string
      */
-    public function getLomDescriptionPath();
+    public function getDescriptionPath();
 
     /**
      * Returns the LOM general keyword node.
      *
      * @return string
      */
-    public function getLomKeywordPath();
+    public function getKeywordPath();
 
     /**
      * Returns the LOM general coverage node.
      *
      * @return string
      */
-    public function getLomCoveragePath();
+    public function getCoveragePath();
 
 
     /**
@@ -154,5 +154,5 @@ interface LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomClassificationPath();
+    public function getClassificationPath();
 }

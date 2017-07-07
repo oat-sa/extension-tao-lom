@@ -76,7 +76,7 @@ class LomGenericMapper implements LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomSourcePath()
+    public function getSourcePath()
     {
         return $this->getLomNameSpace() . '#source';
     }
@@ -86,7 +86,7 @@ class LomGenericMapper implements LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomEntryPath()
+    public function getEntryPath()
     {
         return $this->getLomNameSpace() . '#entry';
     }
@@ -96,7 +96,7 @@ class LomGenericMapper implements LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomStringPath()
+    public function getStringPath()
     {
         return $this->getLomNameSpace() . '#string';
     }
@@ -106,7 +106,7 @@ class LomGenericMapper implements LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomTaxonPathPath()
+    public function getTaxonPathPath()
     {
         return $this->getLomNameSpace() . '#taxonPath';
     }
@@ -129,7 +129,7 @@ class LomGenericMapper implements LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomGeneralPath()
+    public function getGeneralPath()
     {
         return $this->getLomNameSpace() . '#general';
     }
@@ -139,7 +139,7 @@ class LomGenericMapper implements LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomIdentifierPath()
+    public function getIdentifierPath()
     {
         return $this->getLomNameSpace() . '#identifier';
     }
@@ -149,7 +149,7 @@ class LomGenericMapper implements LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomTitlePath()
+    public function getTitlePath()
     {
         return $this->getLomNameSpace() . '#title';
     }
@@ -159,7 +159,7 @@ class LomGenericMapper implements LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomLanguagePath()
+    public function getLanguagePath()
     {
         return $this->getLomNameSpace() . '#language';
     }
@@ -169,7 +169,7 @@ class LomGenericMapper implements LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomDescriptionPath()
+    public function getDescriptionPath()
     {
         return $this->getLomNameSpace() . '#description';
     }
@@ -179,7 +179,7 @@ class LomGenericMapper implements LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomKeywordPath()
+    public function getKeywordPath()
     {
         return $this->getLomNameSpace() . '#keyword';
     }
@@ -189,7 +189,7 @@ class LomGenericMapper implements LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomCoveragePath()
+    public function getCoveragePath()
     {
         return $this->getLomNameSpace() . '#coverage';
     }
@@ -203,7 +203,7 @@ class LomGenericMapper implements LomGenericMapperInterface
      *
      * @return string
      */
-    public function getLomClassificationPath()
+    public function getClassificationPath()
     {
         return $this->getLomNameSpace() . '#classification';
     }

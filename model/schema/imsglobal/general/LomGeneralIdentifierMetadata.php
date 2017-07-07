@@ -46,9 +46,9 @@ class LomGeneralIdentifierMetadata extends LomMetadataAbstract
     public function getNodeRelativePath()
     {
         return [
-            $this->genericMapper->getLomIdentifierPath(),
-            $this->genericMapper->getLomEntryPath(),
-            $this->genericMapper->getLomStringPath(),
+            $this->genericMapper->getIdentifierPath(),
+            $this->genericMapper->getEntryPath(),
+            $this->genericMapper->getStringPath(),
         ];
     }
 

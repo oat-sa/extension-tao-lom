@@ -26,6 +26,8 @@ use oat\oatbox\action\Action;
 use oat\oatbox\service\ServiceManagerAwareTrait;
 use oat\taoLom\model\export\extractor\LomExportExtractor;
 use oat\taoLom\model\export\injector\LomExportInjector;
+use oat\taoLom\model\import\extractor\LomAutomaticProcessableSchemaImportExtractor;
+use oat\taoLom\model\import\extractor\LomClassificationImportExtractor;
 use oat\taoLom\model\import\extractor\LomImportExtractor;
 use oat\taoLom\model\import\guardian\LomGeneralImportGuardian;
 use oat\taoLom\model\import\injector\LomImportInjector;
@@ -49,7 +51,8 @@ class InstallLomMetadataServices implements Action, ServiceLocatorAwareInterface
                     LomImportInjector::class,
                 ],
                 MetadataImporter::EXTRACTOR_KEY => [
-                    LomImportExtractor::class,
+                    LomAutomaticProcessableSchemaImportExtractor::class,
+                    LomClassificationImportExtractor::class,
                 ],
                 MetadataImporter::GUARDIAN_KEY => [
                     LomGeneralImportGuardian::class,

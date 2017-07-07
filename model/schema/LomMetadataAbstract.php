@@ -25,9 +25,7 @@ use oat\oatbox\service\ServiceManager;
 use oat\taoLom\model\mapper\interfaces\LomGenericMapperInterface;
 use oat\taoLom\model\mapper\interfaces\LomTaoMapperInterface;
 use oat\taoLom\model\ontology\LomMapperService;
-use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
-//abstract class LomMetadataAbstract extends SimpleMetadataValue implements LomMetadataInterface
 abstract class LomMetadataAbstract implements LomMetadataInterface
 {
     /**
@@ -43,22 +41,15 @@ abstract class LomMetadataAbstract implements LomMetadataInterface
     /**
      * LomMetadataAbstract constructor.
      *
-     * @param string $resourceIdentifier
-     * @param string $value
-     * @param string $language
-     *
      * @throws \InvalidArgumentException If one of the argument contains an invalid value.
      * @throws \common_Exception
      */
-//    public function __construct($resourceIdentifier, $value, $language = DEFAULT_LANG)
     public function __construct()
     {
         /** @var LomMapperService $mappingService */
         $mappingService = ServiceManager::getServiceManager()->get(LomMapperService::SERVICE_ID);
         $this->taoMapper = $mappingService->getLomTaoMapper();
         $this->genericMapper = $mappingService->getLomGenericMapper();
-
-        //parent::__construct($resourceIdentifier, $this->getNodePath(), $value, $language);
     }
 
     /**

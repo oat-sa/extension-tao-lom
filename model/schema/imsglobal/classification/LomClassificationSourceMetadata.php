@@ -45,8 +45,16 @@ class LomClassificationSourceMetadata extends LomMetadataAbstract
     public function getNodeRelativePath()
     {
         return [
-            $this->genericMapper->getLomSourcePath(),
-            $this->genericMapper->getLomStringPath(),
+            $this->genericMapper->getSourcePath(),
+            $this->genericMapper->getStringPath(),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTaoPath()
+    {
+        return null;
     }
 }

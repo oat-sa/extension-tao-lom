@@ -40,18 +40,18 @@ class LomSchemaService extends ConfigurableService
      */
     const SERVICE_CONFIG_FILE_NAME = 'lomSchemaService';
 
-    /** The offset for general schema instances. */
-    const LOM_SCHEMA_GENERAL = 'general';
+    /** The offset for automatic processable schema instances. */
+    const AUTOMATIC_PROCESSABLE_INSTANCES = 'automaticProcessableInstances';
 
-    /** The offset for classification schema instances. */
-    const LOM_SCHEMA_CLASSIFICATION = 'classification';
+    /** The offset for custom processable schema instances. */
+    const CUSTOM_PROCESSABLE_INSTANCES = 'customProcessableInstances';
 
     /**
      * @var array Lom metadata schema instances.
      */
     protected static $optionOffsets = [
-        self::LOM_SCHEMA_GENERAL,
-        self::LOM_SCHEMA_CLASSIFICATION,
+        self::AUTOMATIC_PROCESSABLE_INSTANCES,
+        self::CUSTOM_PROCESSABLE_INSTANCES,
     ];
 
     /**
@@ -71,7 +71,7 @@ class LomSchemaService extends ConfigurableService
     }
 
     /**
-     * Returns the lom general schema instances.
+     * Returns the automatic processable schema instances.
      *
      * @return LomMetadataInterface[]
      *
@@ -79,13 +79,13 @@ class LomSchemaService extends ConfigurableService
      * @throws \InvalidArgumentException
      * @throws \common_exception_NotFound
      */
-    public function getLomGeneralSchema()
+    public function getAutomaticProcessableSchemaInstances()
     {
-        return $this->getSchema(self::LOM_SCHEMA_GENERAL);
+        return $this->getSchemaInstances(self::AUTOMATIC_PROCESSABLE_INSTANCES);
     }
 
     /**
-     * Returns the lom classification schema instances.
+     * Returns the custom processable schema instances.
      *
      * @return LomMetadataInterface[]
      *
@@ -93,9 +93,9 @@ class LomSchemaService extends ConfigurableService
      * @throws \InvalidArgumentException
      * @throws \common_exception_NotFound
      */
-    public function getLomClassificationSchema()
+    public function getCustomProcessableSchemaInstances()
     {
-        return $this->getSchema(self::LOM_SCHEMA_CLASSIFICATION);
+        return $this->getSchemaInstances(self::CUSTOM_PROCESSABLE_INSTANCES);
     }
 
     /**
@@ -121,7 +121,7 @@ class LomSchemaService extends ConfigurableService
      * @throws \InvalidArgumentException
      * @throws \common_exception_NotFound
      */
-    protected function getSchema($offset)
+    protected function getSchemaInstances($offset)
     {
         if (!static::isValidOffset($offset)) {
             throw new \InvalidArgumentException(__('The requested LOM Metadata Schema offset is not allowed!'));
@@ -137,13 +137,19 @@ class LomSchemaService extends ConfigurableService
         }
 
         $instances = [];
-        foreach ($classes as $class) {
+        foreach ($classes as $classKey => $class) {
             if (!is_a($class, LomMetadataInterface::class, true)) {
                 throw new \InvalidArgumentException(
                     __('The requested LOM Metadata Schema offset contains invalid schema classes!')
                 );
             }
-            $instances[] = new $class();
+
+            if (is_numeric($classKey)) {
+                $instances[] = new $class();
+            }
+            else {
+                $instances[$classKey] = new $class();
+            }
         }
 
         return $instances;

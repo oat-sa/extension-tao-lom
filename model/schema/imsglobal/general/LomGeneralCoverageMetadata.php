@@ -46,8 +46,8 @@ class LomGeneralCoverageMetadata extends LomMetadataAbstract
     public function getNodeRelativePath()
     {
         return [
-            $this->genericMapper->getLomCoveragePath(),
-            $this->genericMapper->getLomStringPath(),
+            $this->genericMapper->getCoveragePath(),
+            $this->genericMapper->getStringPath(),
         ];
     }
 

@@ -23,16 +23,16 @@ namespace oat\taoLom\model\import\extractor;
 use oat\oatbox\service\ServiceManager;
 use oat\taoLom\model\schema\LomMetadataInterface;
 use oat\taoLom\model\schema\LomSchemaService;
+use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataExtractor;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataValue;
-use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
 use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
-class LomGeneralImportExtractor implements MetadataExtractor
+class LomAutomaticProcessableSchemaImportExtractor extends ImsManifestMetadataExtractor
 {
     /**
      * @see ImsManifestDataExtractor::extract()
      *
-     * @param array $values
+     * @param mixed $manifest
      *
      * @return array
      *
@@ -40,11 +40,13 @@ class LomGeneralImportExtractor implements MetadataExtractor
      * @throws \common_Exception
      * @throws \common_exception_NotFound
      */
-    public function extract($values)
+    public function extract($manifest)
     {
+        $values = parent::extract($manifest);
+
         /** @var LomSchemaService $schemaService */
         $schemaService  = ServiceManager::getServiceManager()->get(LomSchemaService::SERVICE_ID);
-        $generalSchema  = $schemaService->getLomGeneralSchema();
+        $schemaInstances = $schemaService->getAutomaticProcessableSchemaInstances();
         $valuesToImport = array();
 
         foreach ($values as $resourceIdentifier => $metadataValueCollection) {
@@ -52,7 +54,7 @@ class LomGeneralImportExtractor implements MetadataExtractor
             foreach ($metadataValueCollection as $key => $metadataValue) {
                 /** @var LomMetadataInterface $current */
                 $path = '';
-                foreach ($generalSchema as $current) {
+                foreach ($schemaInstances as $current) {
                     if ($metadataValue->getPath() === $current->getNodeAbsolutePath()) {
                         $path = $current->getTaoPath();
                         break;

@@ -22,40 +22,59 @@ namespace oat\taoLom\model\import\extractor;
 
 use oat\oatbox\service\ServiceManager;
 use oat\taoLom\model\ontology\LomMapperService;
-use oat\taoLom\model\schema\imsglobal\classification\LomClassificationEntryMetadata;
-use oat\taoLom\model\schema\imsglobal\classification\LomClassificationSourceMetadata;
+use oat\taoLom\model\schema\LomSchemaService;
+use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataExtractor;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataValue;
-use oat\taoQtiItem\model\qti\metadata\MetadataExtractor;
 use oat\taoQtiItem\model\qti\metadata\MetadataValue;
 use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
-class LomClassificationImportExtractor implements MetadataExtractor
+class LomClassificationImportExtractor extends ImsManifestMetadataExtractor
 {
+    /** The classification source offset in the custom processable schema instances. */
+    const SCHEMA_CLASSIFICATION_SOURCE = 'classificationSource';
+
+    /** The classification entry offset in the custom processable schema instances. */
+    const SCHEMA_CLASSIFICATION_ENTRY = 'classificationEntry';
+
     /**
      * @see ImsManifestDataExtractor::extract()
      *
-     * @param array $values
+     * @param mixed $manifest
      *
      * @return array
      *
      * @throws \InvalidArgumentException
      * @throws \common_Exception
+     * @throws \common_exception_NotFound
      */
-    public function extract($values)
+    public function extract($manifest)
     {
+        $values = parent::extract($manifest);
+
         /** @var LomMapperService $mappingService */
         $mappingService = ServiceManager::getServiceManager()->get(LomMapperService::SERVICE_ID);
         $mapper = $mappingService->getLomGenericMapper();
 
+        /** @var LomSchemaService $schemaService */
+        $schemaService  = ServiceManager::getServiceManager()->get(LomSchemaService::SERVICE_ID);
+        $schemaInstances = $schemaService->getCustomProcessableSchemaInstances();
+
+        if (empty($schemaInstances[self::SCHEMA_CLASSIFICATION_SOURCE]) ||
+            empty($schemaInstances[self::SCHEMA_CLASSIFICATION_ENTRY])
+        ) {
+            throw new \common_exception_NotFound(__('The necessary LOM classification schema instances are missing!'));
+        }
+
+        $sourceSchema = $schemaInstances[self::SCHEMA_CLASSIFICATION_SOURCE];
+        $entrySchema = $schemaInstances[self::SCHEMA_CLASSIFICATION_ENTRY];
+
         $valuesToImport = array();
 
         foreach ($values as $resourceIdentifier => $metadataValueCollection) {
-
             /** @var ImsManifestMetadataValue $metadataValue */
             foreach ($metadataValueCollection as $key => $metadataValue) {
-
                 // If metadata is not a source or is empty then skip
-                if ($metadataValue->getValue() === '' || $metadataValue->getPath() !== LomClassificationSourceMetadata::getNodeAbsolutePath()) {
+                if ($metadataValue->getValue() === '' || $metadataValue->getPath() !== $sourceSchema->getNodeAbsolutePath()) {
                     continue;
                 }
 
@@ -68,7 +87,7 @@ class LomClassificationImportExtractor implements MetadataExtractor
                 $entryMetadata = $metadataValueCollection[$key + 1];
 
                 // Handle metadata if it is an entry and is not empty
-                if ($entryMetadata->getPath() === LomClassificationEntryMetadata::getNodeAbsolutePath() && $entryMetadata->getValue() !== '') {
+                if ($entryMetadata->getPath() === $entrySchema->getNodeAbsolutePath() && $entryMetadata->getValue() !== '') {
                     $valuesToImport[$resourceIdentifier][] = new SimpleMetadataValue(
                         $resourceIdentifier,
                         array($mapper->getLomPath(), $metadataValue->getValue()),
