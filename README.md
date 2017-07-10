@@ -30,8 +30,8 @@ It defines the place of each metadata in the xml files based on the implemented 
 It defines the services which are in charge to define the metadata structure.
 #### Schema instance
 It's a definition of a node. It contains the structure in the xml file and contains the place in the TAO system.
-The structure is based the defined vocabulary in the [Generic mapper service](#Generic mapper service).
-The place in the TAO system is defined in the [TAO mapper service](#TAO mapper service).
+The structure is based the defined vocabulary in the [Generic mapper service](#generic-mapper-service).
+The place in the TAO system is defined in the [TAO mapper service](#tao-mapper-service).
 ##### Auto processable schema instance
 It's a schema instance which can be processed by the unified export/import solutions.  
 *(for example: General elements)*
