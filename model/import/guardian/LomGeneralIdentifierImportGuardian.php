@@ -22,11 +22,11 @@ namespace oat\taoLom\model\import\guardian;
 
 
 use oat\oatbox\service\ServiceManager;
-use oat\taoLom\model\ontology\LomMapperService;
+use oat\taoLom\model\service\LomPathDefinitionService;
 use oat\taoQtiItem\model\qti\metadata\MetadataGuardian;
 use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
-class LomGeneralImportGuardian implements MetadataGuardian
+class LomGeneralIdentifierImportGuardian implements MetadataGuardian
 {
     /**
      * @inheritdoc
@@ -35,17 +35,17 @@ class LomGeneralImportGuardian implements MetadataGuardian
      */
     public function guard(array $metadataValues)
     {
-        /** @var LomMapperService $mappingService */
-        $mappingService = ServiceManager::getServiceManager()->get(LomMapperService::SERVICE_ID);
-        $taoMapper = $mappingService->getLomTaoMapper();
+        /** @var LomPathDefinitionService $pathDefinitionService */
+        $pathDefinitionService = ServiceManager::getServiceManager()->get(LomPathDefinitionService::SERVICE_ID);
+        $taoPathDefinition = $pathDefinitionService->getLomTaoPathDefinition();
 
         /** @var SimpleMetadataValue $metadataValue */
         foreach($metadataValues as $metadataValue) {
-            if ($metadataValue->getPath() === array($taoMapper->getGeneralIdentifier())) {
+            if ($metadataValue->getPath() === array($taoPathDefinition->getGeneralIdentifier())) {
                 \common_Logger::i('Guarding Lom General identifier...');
                 $class = new \core_kernel_classes_Class(TAO_TEST_CLASS);
                 $instances = $class->searchInstances(
-                    array($taoMapper->getGeneralIdentifier() => $metadataValue->getValue()),
+                    array($taoPathDefinition->getGeneralIdentifier() => $metadataValue->getValue()),
                     array('like' => false, 'recursive' => true)
                 );
 

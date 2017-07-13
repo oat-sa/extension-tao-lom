@@ -45,9 +45,9 @@ class LomClassificationEntryMetadata extends LomMetadataAbstract
     public function getNodeRelativePath()
     {
         return array(
-            $this->genericMapper->getTaxonPath(),
-            $this->genericMapper->getEntryPath(),
-            $this->genericMapper->getStringPath(),
+            $this->genericPathDefinition->getTaxonPath(),
+            $this->genericPathDefinition->getEntryPath(),
+            $this->genericPathDefinition->getStringPath(),
         );
     }
 

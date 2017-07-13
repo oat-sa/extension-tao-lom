@@ -46,8 +46,8 @@ class LomGeneralLanguageMetadata extends LomMetadataAbstract
     public function getNodeRelativePath()
     {
         return [
-            $this->genericMapper->getLanguagePath(),
-            $this->genericMapper->getStringPath(),
+            $this->genericPathDefinition->getLanguagePath(),
+            $this->genericPathDefinition->getStringPath(),
         ];
     }
 
@@ -58,6 +58,6 @@ class LomGeneralLanguageMetadata extends LomMetadataAbstract
      */
     public function getTaoPath()
     {
-        return $this->taoMapper->getGeneralLanguage();
+        return $this->taoPathDefinition->getGeneralLanguage();
     }
 }

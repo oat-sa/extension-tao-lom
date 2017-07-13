@@ -24,23 +24,23 @@ namespace oat\taoLom\scripts\install;
 
 use oat\oatbox\action\Action;
 use oat\oatbox\service\ServiceManagerAwareTrait;
-use oat\taoLom\model\mapper\LomGenericMapper;
-use oat\taoLom\model\mapper\LomTaoMapper;
-use oat\taoLom\model\ontology\LomMapperService;
+use oat\taoLom\model\ontology\LomGenericPathDefinition;
+use oat\taoLom\model\ontology\LomTaoPathDefinition;
+use oat\taoLom\model\service\LomPathDefinitionService;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
-class InstallLomMapperServices implements Action, ServiceLocatorAwareInterface
+class InstallLomPathDefinitionServices implements Action, ServiceLocatorAwareInterface
 {
     use ServiceManagerAwareTrait;
 
     public function __invoke($params)
     {
-        $lomMapperServices = new AddLomMapperServices();
-        $lomMapperServices->setServiceLocator($this->getServiceManager());
+        $lomPathDefinitionServices = new AddLomPathDefinitionServices();
+        $lomPathDefinitionServices->setServiceLocator($this->getServiceManager());
 
-        return $lomMapperServices([
-            LomMapperService::LOM_TAO_MAPPER_KEY     => LomTaoMapper::class,
-            LomMapperService::LOM_GENERIC_MAPPER_KEY => LomGenericMapper::class,
+        return $lomPathDefinitionServices([
+            LomPathDefinitionService::LOM_TAO_PATH_DEFINITION_KEY     => LomTaoPathDefinition::class,
+            LomPathDefinitionService::LOM_GENERIC_PATH_DEFINITION_KEY => LomGenericPathDefinition::class,
         ]);
     }
 }

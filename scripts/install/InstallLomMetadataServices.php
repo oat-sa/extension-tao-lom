@@ -24,12 +24,12 @@ namespace oat\taoLom\scripts\install;
 
 use oat\oatbox\action\Action;
 use oat\oatbox\service\ServiceManagerAwareTrait;
-use oat\taoLom\model\export\extractor\LomExportExtractor;
+use oat\taoLom\model\export\extractor\LomAutoProcessableSchemaExportExtractor;
+use oat\taoLom\model\export\extractor\LomClassificationExportExtractor;
 use oat\taoLom\model\export\injector\LomExportInjector;
-use oat\taoLom\model\import\extractor\LomAutomaticProcessableSchemaImportExtractor;
+use oat\taoLom\model\import\extractor\LomAutoProcessableSchemaImportExtractor;
 use oat\taoLom\model\import\extractor\LomClassificationImportExtractor;
-use oat\taoLom\model\import\extractor\LomImportExtractor;
-use oat\taoLom\model\import\guardian\LomGeneralImportGuardian;
+use oat\taoLom\model\import\guardian\LomGeneralIdentifierImportGuardian;
 use oat\taoLom\model\import\injector\LomImportInjector;
 use oat\taoQtiItem\model\qti\metadata\exporter\MetadataExporter;
 use oat\taoQtiItem\model\qti\metadata\importer\MetadataImporter;
@@ -51,11 +51,11 @@ class InstallLomMetadataServices implements Action, ServiceLocatorAwareInterface
                     LomImportInjector::class,
                 ],
                 MetadataImporter::EXTRACTOR_KEY => [
-                    LomAutomaticProcessableSchemaImportExtractor::class,
+                    LomAutoProcessableSchemaImportExtractor::class,
                     LomClassificationImportExtractor::class,
                 ],
                 MetadataImporter::GUARDIAN_KEY => [
-                    LomGeneralImportGuardian::class,
+                    LomGeneralIdentifierImportGuardian::class,
                 ],
             ],
             MetadataService::EXPORTER_KEY => [
@@ -63,7 +63,8 @@ class InstallLomMetadataServices implements Action, ServiceLocatorAwareInterface
                     LomExportInjector::class,
                 ],
                 MetadataExporter::EXTRACTOR_KEY => [
-                    LomExportExtractor::class
+                    LomAutoProcessableSchemaExportExtractor::class,
+                    LomClassificationExportExtractor::class,
                 ],
             ],
         ]);

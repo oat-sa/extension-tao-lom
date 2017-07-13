@@ -20,16 +20,16 @@
 namespace oat\taoLom\scripts\update;
 
 use oat\tao\scripts\update\OntologyUpdater;
-use oat\taoLom\model\export\extractor\LomExportExtractor;
+use oat\taoLom\model\export\extractor\LomAutoProcessableSchemaExportExtractor;
+use oat\taoLom\model\export\extractor\LomClassificationExportExtractor;
 use oat\taoLom\model\export\injector\LomExportInjector;
-use oat\taoLom\model\import\extractor\LomAutomaticProcessableSchemaImportExtractor;
+use oat\taoLom\model\import\extractor\LomAutoProcessableSchemaImportExtractor;
 use oat\taoLom\model\import\extractor\LomClassificationImportExtractor;
-use oat\taoLom\model\import\extractor\LomImportExtractor;
-use oat\taoLom\model\import\guardian\LomGeneralImportGuardian;
+use oat\taoLom\model\import\guardian\LomGeneralIdentifierImportGuardian;
 use oat\taoLom\model\import\injector\LomImportInjector;
-use oat\taoLom\model\mapper\LomGenericMapper;
-use oat\taoLom\model\mapper\LomTaoMapper;
-use oat\taoLom\model\ontology\LomMapperService;
+use oat\taoLom\model\ontology\LomGenericPathDefinition;
+use oat\taoLom\model\ontology\LomTaoPathDefinition;
+use oat\taoLom\model\service\LomPathDefinitionService;
 use oat\taoLom\model\schema\imsglobal\classification\LomClassificationEntryMetadata;
 use oat\taoLom\model\schema\imsglobal\classification\LomClassificationSourceMetadata;
 use oat\taoLom\model\schema\imsglobal\general\LomGeneralCoverageMetadata;
@@ -38,8 +38,9 @@ use oat\taoLom\model\schema\imsglobal\general\LomGeneralIdentifierMetadata;
 use oat\taoLom\model\schema\imsglobal\general\LomGeneralKeywordMetadata;
 use oat\taoLom\model\schema\imsglobal\general\LomGeneralLanguageMetadata;
 use oat\taoLom\model\schema\imsglobal\general\LomGeneralTitleMetadata;
-use oat\taoLom\model\schema\LomSchemaService;
-use oat\taoLom\scripts\install\AddLomMapperServices;
+use oat\taoLom\model\schema\imsglobal\LomSchemaServiceKeys;
+use oat\taoLom\model\service\LomSchemaService;
+use oat\taoLom\scripts\install\AddLomPathDefinitionServices;
 use oat\taoLom\scripts\install\AddLomMetadataServices;
 use oat\taoLom\scripts\install\AddLomSchemaService;
 use oat\taoLom\scripts\install\AddMetadataExtractors;
@@ -75,12 +76,12 @@ class Updater extends \common_ext_ExtensionUpdater
             // Updating the ontology.
             OntologyUpdater::syncModels();
 
-            // Add LOM metadata mapper services.
-            $lomMapperServices = new AddLomMapperServices();
-            $lomMapperServices->setServiceLocator($this->getServiceManager());
-            $lomMapperServices([
-                LomMapperService::LOM_TAO_MAPPER_KEY     => LomTaoMapper::class,
-                LomMapperService::LOM_GENERIC_MAPPER_KEY => LomGenericMapper::class,
+            // Add LOM metadata path definition services.
+            $lomPathDefinitionServices = new AddLomPathDefinitionServices();
+            $lomPathDefinitionServices->setServiceLocator($this->getServiceManager());
+            $lomPathDefinitionServices([
+                LomPathDefinitionService::LOM_TAO_PATH_DEFINITION_KEY     => LomTaoPathDefinition::class,
+                LomPathDefinitionService::LOM_GENERIC_PATH_DEFINITION_KEY => LomGenericPathDefinition::class,
             ]);
 
             // Add LOM metadata export/import services.
@@ -92,11 +93,11 @@ class Updater extends \common_ext_ExtensionUpdater
                         LomImportInjector::class,
                     ],
                     MetadataImporter::EXTRACTOR_KEY => [
-                        LomAutomaticProcessableSchemaImportExtractor::class,
+                        LomAutoProcessableSchemaImportExtractor::class,
                         LomClassificationImportExtractor::class,
                     ],
                     MetadataImporter::GUARDIAN_KEY => [
-                        LomGeneralImportGuardian::class,
+                        LomGeneralIdentifierImportGuardian::class,
                     ],
                 ],
                 MetadataService::EXPORTER_KEY => [
@@ -104,7 +105,8 @@ class Updater extends \common_ext_ExtensionUpdater
                         LomExportInjector::class,
                     ],
                     MetadataExporter::EXTRACTOR_KEY => [
-                        LomExportExtractor::class
+                        LomAutoProcessableSchemaExportExtractor::class,
+                        LomClassificationExportExtractor::class,
                     ],
                 ],
             ]);
@@ -121,8 +123,8 @@ class Updater extends \common_ext_ExtensionUpdater
                     LomGeneralCoverageMetadata::class,
                 ],
                 LomSchemaService::CUSTOM_PROCESSABLE_INSTANCES => [
-                    LomClassificationImportExtractor::SCHEMA_CLASSIFICATION_SOURCE => LomClassificationSourceMetadata::class,
-                    LomClassificationImportExtractor::SCHEMA_CLASSIFICATION_ENTRY  => LomClassificationEntryMetadata::class,
+                    LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_SOURCE => LomClassificationSourceMetadata::class,
+                    LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_ENTRY  => LomClassificationEntryMetadata::class,
                 ],
             ]);
 

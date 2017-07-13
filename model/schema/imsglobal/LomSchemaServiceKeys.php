@@ -18,21 +18,14 @@
  *
  */
 
-namespace oat\taoLom\model\schema\imsglobal\general;
+namespace oat\taoLom\model\schema\imsglobal;
 
 
-trait LomGeneralMetadataTrait
+interface LomSchemaServiceKeys
 {
-    /**
-     * Get the default general source path
-     *
-     * @return array
-     */
-    public function getBaseNodePath()
-    {
-        return array(
-            $this->genericPathDefinition->getLomPath(),
-            $this->genericPathDefinition->getGeneralPath(),
-        );
-    }
+    /** The classification source offset in the custom processable schema instances. */
+    const SCHEMA_CLASSIFICATION_SOURCE = 'classificationSource';
+
+    /** The classification entry offset in the custom processable schema instances. */
+    const SCHEMA_CLASSIFICATION_ENTRY = 'classificationEntry';
 }

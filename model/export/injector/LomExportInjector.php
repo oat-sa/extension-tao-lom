@@ -22,7 +22,7 @@
 namespace oat\taoLom\model\export\injector;
 
 use oat\oatbox\service\ServiceManager;
-use oat\taoLom\model\ontology\LomMapperService;
+use oat\taoLom\model\service\LomPathDefinitionService;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMapping;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataInjector;
 
@@ -30,15 +30,15 @@ class LomExportInjector extends ImsManifestMetadataInjector
 {
     public function __construct()
     {
-        /** @var LomMapperService $mappingService */
-        $mappingService = ServiceManager::getServiceManager()->get(LomMapperService::SERVICE_ID);
-        $mapper = $mappingService->getLomGenericMapper();
+        /** @var LomPathDefinitionService $pathDefinitionService */
+        $pathDefinitionService = ServiceManager::getServiceManager()->get(LomPathDefinitionService::SERVICE_ID);
+        $genericPathDefinition = $pathDefinitionService->getLomGenericPathDefinition();
 
         $mappings = [];
         $mappings[] = new ImsManifestMapping(
-            $mapper->getLomNameSpace(),
-            $mapper->getLomPrefix(),
-            $mapper->getLomSchema()
+            $genericPathDefinition->getLomNameSpace(),
+            $genericPathDefinition->getLomPrefix(),
+            $genericPathDefinition->getLomSchema()
         );
 
         parent::__construct($mappings);

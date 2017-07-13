@@ -46,8 +46,8 @@ class LomGeneralCoverageMetadata extends LomMetadataAbstract
     public function getNodeRelativePath()
     {
         return [
-            $this->genericMapper->getCoveragePath(),
-            $this->genericMapper->getStringPath(),
+            $this->genericPathDefinition->getCoveragePath(),
+            $this->genericPathDefinition->getStringPath(),
         ];
     }
 
@@ -58,6 +58,6 @@ class LomGeneralCoverageMetadata extends LomMetadataAbstract
      */
     public function getTaoPath()
     {
-        return $this->taoMapper->getGeneralCoverage();
+        return $this->taoPathDefinition->getGeneralCoverage();
     }
 }

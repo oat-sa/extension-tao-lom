@@ -24,7 +24,6 @@ namespace oat\taoLom\scripts\install;
 
 use oat\oatbox\action\Action;
 use oat\oatbox\service\ServiceManagerAwareTrait;
-use oat\taoLom\model\import\extractor\LomClassificationImportExtractor;
 use oat\taoLom\model\schema\imsglobal\classification\LomClassificationEntryMetadata;
 use oat\taoLom\model\schema\imsglobal\classification\LomClassificationSourceMetadata;
 use oat\taoLom\model\schema\imsglobal\general\LomGeneralCoverageMetadata;
@@ -33,7 +32,8 @@ use oat\taoLom\model\schema\imsglobal\general\LomGeneralIdentifierMetadata;
 use oat\taoLom\model\schema\imsglobal\general\LomGeneralKeywordMetadata;
 use oat\taoLom\model\schema\imsglobal\general\LomGeneralLanguageMetadata;
 use oat\taoLom\model\schema\imsglobal\general\LomGeneralTitleMetadata;
-use oat\taoLom\model\schema\LomSchemaService;
+use oat\taoLom\model\schema\imsglobal\LomSchemaServiceKeys;
+use oat\taoLom\model\service\LomSchemaService;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
 class InstallLomSchemaService implements Action, ServiceLocatorAwareInterface
@@ -55,8 +55,8 @@ class InstallLomSchemaService implements Action, ServiceLocatorAwareInterface
                 LomGeneralCoverageMetadata::class,
             ],
             LomSchemaService::CUSTOM_PROCESSABLE_INSTANCES => [
-                LomClassificationImportExtractor::SCHEMA_CLASSIFICATION_SOURCE => LomClassificationSourceMetadata::class,
-                LomClassificationImportExtractor::SCHEMA_CLASSIFICATION_ENTRY  => LomClassificationEntryMetadata::class,
+                LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_SOURCE => LomClassificationSourceMetadata::class,
+                LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_ENTRY  => LomClassificationEntryMetadata::class,
             ],
         ]);
     }

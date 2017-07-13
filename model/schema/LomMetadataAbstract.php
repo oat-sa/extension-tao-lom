@@ -22,21 +22,21 @@ namespace oat\taoLom\model\schema;
 
 
 use oat\oatbox\service\ServiceManager;
-use oat\taoLom\model\mapper\interfaces\LomGenericMapperInterface;
-use oat\taoLom\model\mapper\interfaces\LomTaoMapperInterface;
-use oat\taoLom\model\ontology\LomMapperService;
+use oat\taoLom\model\ontology\interfaces\LomGenericPathDefinitionInterface;
+use oat\taoLom\model\ontology\interfaces\LomTaoPathDefinitionInterface;
+use oat\taoLom\model\service\LomPathDefinitionService;
 
 abstract class LomMetadataAbstract implements LomMetadataInterface
 {
     /**
-     * @var LomTaoMapperInterface
+     * @var LomTaoPathDefinitionInterface
      */
-    protected $taoMapper;
+    protected $taoPathDefinition;
 
     /**
-     * @var LomGenericMapperInterface
+     * @var LomGenericPathDefinitionInterface
      */
-    protected $genericMapper;
+    protected $genericPathDefinition;
 
     /**
      * LomMetadataAbstract constructor.
@@ -46,10 +46,10 @@ abstract class LomMetadataAbstract implements LomMetadataInterface
      */
     public function __construct()
     {
-        /** @var LomMapperService $mappingService */
-        $mappingService = ServiceManager::getServiceManager()->get(LomMapperService::SERVICE_ID);
-        $this->taoMapper = $mappingService->getLomTaoMapper();
-        $this->genericMapper = $mappingService->getLomGenericMapper();
+        /** @var LomPathDefinitionService $pathDefinitionService */
+        $pathDefinitionService = ServiceManager::getServiceManager()->get(LomPathDefinitionService::SERVICE_ID);
+        $this->taoPathDefinition = $pathDefinitionService->getLomTaoPathDefinition();
+        $this->genericPathDefinition = $pathDefinitionService->getLomGenericPathDefinition();
     }
 
     /**

@@ -18,8 +18,9 @@
  *
  */
 
-use oat\taoLom\scripts\install\InstallLomMapperServices;
+use oat\taoLom\scripts\install\InstallLomPathDefinitionServices;
 use oat\taoLom\scripts\install\InstallLomMetadataServices;
+use oat\taoLom\scripts\install\InstallLomSchemaService;
 
 /**
  * Generated using taoDevTools 2.15.0
@@ -46,8 +47,9 @@ return array(
             dirname(__FILE__) . '/install/ontology/general.rdf',
         ),
         'php' => array(
-            InstallLomMapperServices::class,
+            InstallLomPathDefinitionServices::class,
             InstallLomMetadataServices::class,
+            InstallLomSchemaService::class,
 		)
     ),
     'uninstall' => array(

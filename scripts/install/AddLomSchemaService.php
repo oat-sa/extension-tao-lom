@@ -22,11 +22,11 @@ namespace oat\taoLom\scripts\install;
 
 use oat\oatbox\action\Action;
 use oat\oatbox\service\ServiceManagerAwareTrait;
-use oat\taoLom\model\schema\LomSchemaService;
+use oat\taoLom\model\service\LomSchemaService;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
 /**
- * Class InitMetadataService
+ * Class AddLomSchemaService
  *
  * @package oat\taoQtiItem\scripts\install
  */

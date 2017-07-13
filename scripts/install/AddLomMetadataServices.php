@@ -29,7 +29,7 @@ use oat\taoQtiItem\model\qti\metadata\MetadataService;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
 /**
- * Class InitMetadataService
+ * Class AddLomMetadataServices
  *
  * @package oat\taoQtiItem\scripts\install
  */

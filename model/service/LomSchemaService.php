@@ -17,10 +17,11 @@
  *  Copyright (c) 2017 (original work) Open Assessment Technologies SA
  */
 
-namespace oat\taoLom\model\schema;
+namespace oat\taoLom\model\service;
 
 
 use oat\oatbox\service\ConfigurableService;
+use oat\taoLom\model\schema\LomMetadataInterface;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 
 class LomSchemaService extends ConfigurableService

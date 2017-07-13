@@ -21,8 +21,9 @@
 namespace oat\taoLom\model\import\extractor;
 
 use oat\oatbox\service\ServiceManager;
-use oat\taoLom\model\ontology\LomMapperService;
-use oat\taoLom\model\schema\LomSchemaService;
+use oat\taoLom\model\service\LomPathDefinitionService;
+use oat\taoLom\model\schema\imsglobal\LomSchemaServiceKeys;
+use oat\taoLom\model\service\LomSchemaService;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataExtractor;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataValue;
 use oat\taoQtiItem\model\qti\metadata\MetadataValue;
@@ -30,12 +31,6 @@ use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
 class LomClassificationImportExtractor extends ImsManifestMetadataExtractor
 {
-    /** The classification source offset in the custom processable schema instances. */
-    const SCHEMA_CLASSIFICATION_SOURCE = 'classificationSource';
-
-    /** The classification entry offset in the custom processable schema instances. */
-    const SCHEMA_CLASSIFICATION_ENTRY = 'classificationEntry';
-
     /**
      * @see ImsManifestDataExtractor::extract()
      *
@@ -51,22 +46,22 @@ class LomClassificationImportExtractor extends ImsManifestMetadataExtractor
     {
         $values = parent::extract($manifest);
 
-        /** @var LomMapperService $mappingService */
-        $mappingService = ServiceManager::getServiceManager()->get(LomMapperService::SERVICE_ID);
-        $mapper = $mappingService->getLomGenericMapper();
+        /** @var LomPathDefinitionService $pathDefinitionService */
+        $pathDefinitionService = ServiceManager::getServiceManager()->get(LomPathDefinitionService::SERVICE_ID);
+        $genericPathDefinition = $pathDefinitionService->getLomGenericPathDefinition();
 
         /** @var LomSchemaService $schemaService */
         $schemaService  = ServiceManager::getServiceManager()->get(LomSchemaService::SERVICE_ID);
         $schemaInstances = $schemaService->getCustomProcessableSchemaInstances();
 
-        if (empty($schemaInstances[self::SCHEMA_CLASSIFICATION_SOURCE]) ||
-            empty($schemaInstances[self::SCHEMA_CLASSIFICATION_ENTRY])
+        if (empty($schemaInstances[LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_SOURCE]) ||
+            empty($schemaInstances[LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_ENTRY])
         ) {
             throw new \common_exception_NotFound(__('The necessary LOM classification schema instances are missing!'));
         }
 
-        $sourceSchema = $schemaInstances[self::SCHEMA_CLASSIFICATION_SOURCE];
-        $entrySchema = $schemaInstances[self::SCHEMA_CLASSIFICATION_ENTRY];
+        $sourceSchema = $schemaInstances[LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_SOURCE];
+        $entrySchema = $schemaInstances[LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_ENTRY];
 
         $valuesToImport = array();
 
@@ -90,7 +85,7 @@ class LomClassificationImportExtractor extends ImsManifestMetadataExtractor
                 if ($entryMetadata->getPath() === $entrySchema->getNodeAbsolutePath() && $entryMetadata->getValue() !== '') {
                     $valuesToImport[$resourceIdentifier][] = new SimpleMetadataValue(
                         $resourceIdentifier,
-                        array($mapper->getLomPath(), $metadataValue->getValue()),
+                        array($genericPathDefinition->getLomPath(), $metadataValue->getValue()),
                         $entryMetadata->getValue()
                     );
                 }

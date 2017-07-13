@@ -17,12 +17,12 @@
  *  Copyright (c) 2017 (original work) Open Assessment Technologies SA
  */
 
-namespace oat\taoLom\model\mapper;
+namespace oat\taoLom\model\ontology;
 
 
-use oat\taoLom\model\mapper\interfaces\LomTaoMapperInterface;
+use oat\taoLom\model\ontology\interfaces\LomTaoPathDefinitionInterface;
 
-class LomTaoMapper implements LomTaoMapperInterface
+class LomTaoPathDefinition implements LomTaoPathDefinitionInterface
 {
     /**
      * @inheritdoc

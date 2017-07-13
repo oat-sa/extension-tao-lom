@@ -22,12 +22,12 @@ namespace oat\taoLom\model\import\extractor;
 
 use oat\oatbox\service\ServiceManager;
 use oat\taoLom\model\schema\LomMetadataInterface;
-use oat\taoLom\model\schema\LomSchemaService;
+use oat\taoLom\model\service\LomSchemaService;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataExtractor;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataValue;
 use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
-class LomAutomaticProcessableSchemaImportExtractor extends ImsManifestMetadataExtractor
+class LomAutoProcessableSchemaImportExtractor extends ImsManifestMetadataExtractor
 {
     /**
      * @see ImsManifestDataExtractor::extract()

@@ -21,13 +21,16 @@
 namespace oat\taoLom\model\export\extractor;
 
 use oat\generis\model\OntologyAwareTrait;
-use oat\tao\model\metadata\exception\writer\MetadataWriterException;
-use oat\taoQtiItem\model\qti\metadata\imsManifest\classificationMetadata\ClassificationMetadataValue;
-use oat\taoLom\model\schema\classification\LomClassificationSourceMetadata;
-use oat\taoLom\model\schema\classification\LomClassificationEntryMetadata;
+use oat\oatbox\service\ServiceManager;
+use oat\taoLom\model\schema\imsglobal\classification\LomClassificationEntryMetadata;
+use oat\taoLom\model\schema\imsglobal\classification\LomClassificationSourceMetadata;
+use oat\taoLom\model\schema\imsglobal\LomSchemaServiceKeys;
+use oat\taoLom\model\service\LomSchemaService;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractionException;
+use oat\taoQtiItem\model\qti\metadata\simple\NestedMetadataValue;
+use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
-class LomClassificationExportExtractor extends LomNodeExportExtractorAbstract
+class LomClassificationExportExtractor extends LomExportExtractorAbstract
 {
     use OntologyAwareTrait;
 
@@ -48,8 +51,9 @@ class LomClassificationExportExtractor extends LomNodeExportExtractorAbstract
      * @return array
      *
      * @throws MetadataExtractionException
-     * @throws MetadataWriterException
      * @throws \InvalidArgumentException
+     * @throws \common_Exception
+     * @throws \common_exception_NotFound
      */
     public function extract($resource)
     {
@@ -57,25 +61,41 @@ class LomClassificationExportExtractor extends LomNodeExportExtractorAbstract
             throw new MetadataExtractionException(__('The given target is not an instance of core_kernel_classes_Resource'));
         }
 
-        $triples = $resource->getRdfTriples();
+        /** @var LomSchemaService $schemaService */
+        $schemaService  = ServiceManager::getServiceManager()->get(LomSchemaService::SERVICE_ID);
+        $schemaInstances = $schemaService->getCustomProcessableSchemaInstances();
+        /** @var LomClassificationSourceMetadata $sourceSchema */
+        $sourceSchema = $schemaInstances[LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_SOURCE];
+        /** @var LomClassificationEntryMetadata $entrySchema */
+        $entrySchema = $schemaInstances[LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_ENTRY];
+        $metadata = [];
 
+        $triples = $resource->getRdfTriples();
         /** @var \core_kernel_classes_Triple $triple */
         foreach ($triples->getIterator() as $triple) {
-
             /** @var \core_kernel_classes_Resource $property */
             $property = $this->getResource($triple->predicate);
             $value = $triple->object;
 
-            if (! empty($value) && $property->isProperty() && ! in_array($property->getUri(), self::$excludedProperties)) {
-                $metadata[] = new ClassificationMetadataValue(
-                    new LomClassificationSourceMetadata($resource->getUri(), $property->getUri(), $this->getLanguageCode()),
-                    [new LomClassificationEntryMetadata($resource->getUri(), $value, $this->getLanguageCode())]
+            if (!empty($value) && $property->isProperty() && ! in_array($property->getUri(), self::$excludedProperties)) {
+                $metadata[] = new NestedMetadataValue(
+                    $resource->getUri(),
+                    $sourceSchema->getNodeRelativePath(),
+                    $property->getUri(),
+                    $this->getLanguageCode($resource),
+                    $sourceSchema->getBaseNodePath(),
+                    [
+                        new SimpleMetadataValue(
+                            $resource->getUri(),
+                            $entrySchema->getNodeRelativePath(),
+                            $value,
+                            $this->getLanguageCode($resource)
+                        ),
+                    ]
                 );
             }
         }
 
-        return empty($metadata)
-            ? []
-            : $metadata;
+        return $this->getExtractOutput($resource, $metadata);
     }
 }

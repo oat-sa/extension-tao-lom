@@ -31,9 +31,9 @@ trait LomClassificationMetadataTrait
     public function getBaseNodePath()
     {
         return array(
-            $this->genericMapper->getLomPath(),
-            $this->genericMapper->getClassificationPath(),
-            $this->genericMapper->getTaxonPathPath(),
+            $this->genericPathDefinition->getLomPath(),
+            $this->genericPathDefinition->getClassificationPath(),
+            $this->genericPathDefinition->getTaxonPathPath(),
         );
     }
 }

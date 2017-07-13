@@ -17,10 +17,10 @@
  *  Copyright (c) 2017 (original work) Open Assessment Technologies SA
  */
 
-namespace oat\taoLom\model\mapper\interfaces;
+namespace oat\taoLom\model\ontology\interfaces;
 
 
-interface LomTaoMapperInterface
+interface LomTaoPathDefinitionInterface
 {
     /**
      * Returns the general identifier uri.

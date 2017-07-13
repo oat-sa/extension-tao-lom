@@ -17,12 +17,12 @@
  *  Copyright (c) 2017 (original work) Open Assessment Technologies SA
  */
 
-namespace oat\taoLom\model\mapper;
+namespace oat\taoLom\model\ontology;
 
 
-use oat\taoLom\model\mapper\interfaces\LomGenericMapperInterface;
+use oat\taoLom\model\ontology\interfaces\LomGenericPathDefinitionInterface;
 
-class LomGenericMapper implements LomGenericMapperInterface
+class LomGenericPathDefinition implements LomGenericPathDefinitionInterface
 {
     /**
      * LOM General details.

@@ -39,7 +39,15 @@ It's a schema instance which can be processed by the unified export/import solut
 It's a schema instance which cannot be processed with the unified export/import solutions. It needs custom extractors/injectors to process the instance.  
 *(for example: Classification elements)*
 
-#### Schema instance example
+## Structure
+
+## Implementation
+### TAO mapper service
+It needs to implement the ```LomTaoMapper``` interface.
+### Generic mapper service
+It needs to implement the ```LomGenericMapper``` interface.
+### Schema instance example
+It needs to implement the ```LomMetadataInterface``` interface.
 ```php
 namespace oat\taoLom\model\schema\imsglobal\general;
 

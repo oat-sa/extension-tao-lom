@@ -17,20 +17,20 @@
  *  Copyright (c) 2017 (original work) Open Assessment Technologies SA
  */
 
-namespace oat\taoLom\model\ontology;
+namespace oat\taoLom\model\service;
 
 
 use oat\oatbox\service\ConfigurableService;
-use oat\taoLom\model\mapper\interfaces\LomGenericMapperInterface;
-use oat\taoLom\model\mapper\interfaces\LomTaoMapperInterface;
+use oat\taoLom\model\ontology\interfaces\LomGenericPathDefinitionInterface;
+use oat\taoLom\model\ontology\interfaces\LomTaoPathDefinitionInterface;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 
-class LomMapperService extends ConfigurableService
+class LomPathDefinitionService extends ConfigurableService
 {
     /**
      * Service ID.
      */
-    const SERVICE_ID = 'taoLom/lomMappingService';
+    const SERVICE_ID = 'taoLom/lomPathDefinitionService';
 
     /**
      * Service config file path. (package name)
@@ -40,27 +40,27 @@ class LomMapperService extends ConfigurableService
     /**
      * Service config file name.
      */
-    const SERVICE_CONFIG_FILE_NAME = 'lomMappingService';
+    const SERVICE_CONFIG_FILE_NAME = 'lomPathDefinitionService';
 
     /**
-     * LOM mapper which defines the mapping rules in the TAO system.
+     * LOM path definition instance which defines the lom paths in the TAO system.
      */
-    const LOM_TAO_MAPPER_KEY = 'lomTaoMapper';
+    const LOM_TAO_PATH_DEFINITION_KEY = 'lomTaoPathDefinition';
 
     /**
-     * LOM mapper which defines the standard lom mapping rules.
+     * LOM path definition which defines the lom standard paths.
      *
-     * @example IMS Global mapping rules.
+     * @example IMS Global path definitions.
      */
-    const LOM_GENERIC_MAPPER_KEY = 'lomGenericMapper';
+    const LOM_GENERIC_PATH_DEFINITION_KEY = 'lomGenericPathDefinition';
 
     /**
-     * @var array Instances to manage mappers.
+     * @var array Instances of the path definitions.
      */
     protected $instances;
 
     /**
-     * Register an instance of LomTaoMapper, LomGenericMapper
+     * Register an instance of LomTaoPathDefinition, LomGenericPathDefinition
      *
      * @param $key
      * @param $name
@@ -82,21 +82,21 @@ class LomMapperService extends ConfigurableService
         }
 
         switch ($key) {
-            case self::LOM_TAO_MAPPER_KEY:
-                $this->registerInstance(self::LOM_GENERIC_MAPPER_KEY, $name, LomTaoMapperInterface::class);
+            case self::LOM_TAO_PATH_DEFINITION_KEY:
+                $this->registerInstance(self::LOM_GENERIC_PATH_DEFINITION_KEY, $name, LomTaoPathDefinitionInterface::class);
                 break;
-            case self::LOM_GENERIC_MAPPER_KEY:
-                $this->registerInstance(self::LOM_TAO_MAPPER_KEY, $name, LomGenericMapperInterface::class);
+            case self::LOM_GENERIC_PATH_DEFINITION_KEY:
+                $this->registerInstance(self::LOM_TAO_PATH_DEFINITION_KEY, $name, LomGenericPathDefinitionInterface::class);
                 break;
             default:
-                throw new \common_Exception(__('Unknown $key to register LomMappingService instance'));
+                throw new \common_Exception(__('Unknown $key to register LomPathDefinitionService instance'));
         }
 
         return true;
     }
 
     /**
-     * Unregister an instance of LomTaoMapper, LomGenericMapper
+     * Unregister an instance of LomTaoPathDefinition, LomGenericPathDefinition
      *
      * @param string $key
      * @param string $name
@@ -117,19 +117,19 @@ class LomMapperService extends ConfigurableService
         }
 
         switch ($key) {
-            case self::LOM_TAO_MAPPER_KEY:
-            case self::LOM_GENERIC_MAPPER_KEY:
+            case self::LOM_TAO_PATH_DEFINITION_KEY:
+            case self::LOM_GENERIC_PATH_DEFINITION_KEY:
                 $this->unregisterInstance($key, $name);
                 break;
             default:
-                throw new \common_Exception(__('Unknown $key to unregister LomMappingService instance'));
+                throw new \common_Exception(__('Unknown $key to unregister LomPathDefinitionService instance'));
         }
 
         return true;
     }
 
     /**
-     * Allow to register, into the config, the current mapping service
+     * Allow to register, into the config, the current path definition service
      *
      * @throws \common_Exception
      * @throws ServiceNotFoundException
@@ -189,27 +189,27 @@ class LomMapperService extends ConfigurableService
     }
 
     /**
-     * Return the LomTaoMapper stored into config
+     * Return the LomTaoPathDefinition stored into config
      *
-     * @return LomTaoMapperInterface
+     * @return LomTaoPathDefinitionInterface
      *
      * @throws \common_Exception
      */
-    public function getLomTaoMapper()
+    public function getLomTaoPathDefinition()
     {
-        return $this->getInstance(self::LOM_TAO_MAPPER_KEY, LomTaoMapperInterface::class);
+        return $this->getInstance(self::LOM_TAO_PATH_DEFINITION_KEY, LomTaoPathDefinitionInterface::class);
     }
 
     /**
-     * Return the LomTaoMapper stored into config
+     * Return the LomGenericPathDefinition stored into config
      *
-     * @return LomGenericMapperInterface
+     * @return LomGenericPathDefinitionInterface
      *
      * @throws \common_Exception
      */
-    public function getLomGenericMapper()
+    public function getLomGenericPathDefinition()
     {
-        return $this->getInstance(self::LOM_GENERIC_MAPPER_KEY, LomGenericMapperInterface::class);
+        return $this->getInstance(self::LOM_GENERIC_PATH_DEFINITION_KEY, LomGenericPathDefinitionInterface::class);
     }
 
     /**
@@ -232,12 +232,12 @@ class LomMapperService extends ConfigurableService
         }
 
         if (!$this->hasOption($id)) {
-            throw new \common_Exception(__('Unknown %s to get LOM mapper instance', $id));
+            throw new \common_Exception(__('Unknown %s to get LOM path definition instance', $id));
         }
 
         $instance = $this->getOption($id);
         if (!is_a($instance, $interface, true)) {
-            throw new \common_Exception(__('The registered service under the offset \'%s\' must be a mapper (%s) instance!', $id, $interface));
+            throw new \common_Exception(__('The registered service under the offset \'%s\' must be a path definition (%s) instance!', $id, $interface));
         }
 
         $this->instances[$id] = new $instance();
