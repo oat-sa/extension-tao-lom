@@ -18,8 +18,8 @@
  *
  */
 
-use oat\taoLom\scripts\install\InstallLomPathDefinitionServices;
-use oat\taoLom\scripts\install\InstallLomMetadataServices;
+use oat\taoLom\scripts\install\InstallLomPathDefinitionService;
+use oat\taoLom\scripts\install\InstallLomMetadataService;
 use oat\taoLom\scripts\install\InstallLomSchemaService;
 
 /**
@@ -47,8 +47,8 @@ return array(
             dirname(__FILE__) . '/install/ontology/general.rdf',
         ),
         'php' => array(
-            InstallLomPathDefinitionServices::class,
-            InstallLomMetadataServices::class,
+            InstallLomPathDefinitionService::class,
+            InstallLomMetadataService::class,
             InstallLomSchemaService::class,
 		)
     ),

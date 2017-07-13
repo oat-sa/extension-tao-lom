@@ -18,7 +18,7 @@
  *
  */
 
-namespace oat\taoLom\scripts\install;
+namespace oat\taoLom\scripts\update;
 
 use oat\oatbox\action\Action;
 use oat\oatbox\service\ServiceManagerAwareTrait;

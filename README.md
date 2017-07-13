@@ -61,74 +61,189 @@ It's a schema instance which cannot be processed with the unified export/import 
 ### Import process
 ![Import process](docs/structure_import.png "Import process")
 
+***
+
 ### Export process
 ![Export process](docs/structure_export.png "Export process")
+
+***
 
 ### Schema system
 ![Schema system](docs/schema_system.png "Schema system")
 
+## Directory structure
+* *docs*: rendered images and their source files
+* *install*: the ontology rdf files
+* *model*: 
+  * *export*: the export related classes
+    * *extractor*: the export extractors
+    * *injector*: the export injectors
+  * *import*: the import related classes
+    * *extractor*: the import extractors
+    * *guardian*: the import guardians
+    * *injector*: the import injectors
+  * *ontology*: the path definitions
+  * *schema*: the implemented schema folders
+    * *imsglobal*: the ims global standard lom implementation
+  * *service*: the path definition and schema services
+* *scripts*: the install/update scripts
+  * *install*: the service install scripts with the default configuration
+  * *update*: the service update scripts and the updater script
+
 ## Implementation
 
-### TAO path definition service
+### New ImportExtractor
+It needs to extend the ```ImsManifestMetadataExtractor``` because of the manifest extraction.
+```php
+<?php
+use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataExtractor;
+
+class LomAutoProcessableSchemaImportExtractor extends ImsManifestMetadataExtractor
+{
+    public function extract($manifest)
+    {
+        $values = parent::extract($manifest);
+        $metadata = [];
+        
+        foreach ($values as $resourceIdentifier => $metadataValueCollection) {
+            /**
+             * @TODO: do the logic on the values!
+             *
+             * @example: $metadata[$resourceIdentifier][] = new SimpleMetadataValue(...);
+             */
+        }
+        
+        return $metadata;
+    }
+}
+```
+
+### New ImportGuardian
+It needs to implement the ```MetadataGuardian``` interface. The ```guard()``` method needs to return false
+when the element is injectable. If it's not it returns the ```\core_kernel_classes_Resource``` instance of the element.
+
+### New ImportInjector
+It needs to implement the ```MetadataInjector``` interface. The default injector is quite flexible so it should do 
+the job in most of the cases.
+
+### New ExportExtractor
+It needs to implement the ```MetadataExtractor``` interface. It's recommended to use the 
+```LomExportExtractorAbstract``` class.
+```php
+<?php
+use oat\taoLom\model\export\extractor\LomExportExtractorAbstract;
+use oat\taoQtiItem\model\qti\metadata\MetadataExtractionException;
+
+class LomAutoProcessableSchemaExportExtractor extends LomExportExtractorAbstract
+{
+    public function extract($resource)
+    {
+        if (! $resource instanceof \core_kernel_classes_Resource) {
+            throw new MetadataExtractionException(__('The given target is not an instance of core_kernel_classes_Resource'));
+        }
+        
+        $metadata = [];
+
+        /**
+         * @TODO: Extract the metadata!
+         * 
+         * @example: $metadata[] = new SimpleMetadataValue(...);
+         */
+
+        return $this->getExtractOutput($resource, $metadata);
+    }
+}
+```
+
+### New ExportInjector
+It needs to extend the ```ImsManifestMetadataInjector``` class for being able to process the injection.
+The default injector is quite flexible so it should do the job in most of the cases.
+
+### New TAO path definition service
 It needs to implement the ```LomTaoPathDefinition``` interface.
 
-### Generic path definition service
+### New Generic path definition service
 It needs to implement the ```LomGenericPathDefinition``` interface.
 
-### Schema instance example
-It needs to implement the ```LomSchemaInterface``` interface.
+### New Schema instance
+It needs to implement the ```LomSchemaInterface``` interface. It's recommended to extend the 
+```LomSchemaAbstract``` abstract class which already contains some basic logic.
+
+## Install services
+
+### Install MetadataServices
+Just simply need to change the ```scripts/install/InstallLomMetadataService.php``` file's instantiation parameters.
+
+### Install PathDefinitionServices
+Just simply need to change the ```scripts/install/InstallLomPathDefinitionService.php``` file's instantiation parameters.
+
+### Install SchemaServices
+Just simply need to change the ```scripts/install/InstallLomSchemaService.php``` file's instantiation parameters.
+
+## Update services
+
+### Update MetadataServices
 ```php
-namespace oat\taoLom\model\schema\imsglobal\general;
+<?php
+if ($this->isVersion('a.b.c')) {
+    $lomMetadataServices = new AddLomMetadataService();
+    $lomMetadataServices->setServiceLocator($this->getServiceManager());
+    $lomMetadataServices([
+        MetadataService::IMPORTER_KEY => [
+            MetadataImporter::INJECTOR_KEY => [
+                // Class name list,
+            ],
+            MetadataImporter::EXTRACTOR_KEY => [
+                // Class name list,
+            ],
+            MetadataImporter::GUARDIAN_KEY => [
+                // Class name list,
+            ],
+        ],
+        MetadataService::EXPORTER_KEY => [
+            MetadataExporter::INJECTOR_KEY => [
+                // Class name list,
+            ],
+            MetadataExporter::EXTRACTOR_KEY => [
+                // Class name list,
+            ],
+        ],
+    ]);
 
+    $this->setVersion('e.f.d');
+}
+```
 
-use oat\taoLom\model\schema\LomSchemaAbstract;
+### Update PathDefinitionServices
+```php
+<?php
+if ($this->isVersion('a.b.c')) {
+    $lomSchemaService = new AddLomSchemaService();
+    $lomSchemaService->setServiceLocator($this->getServiceManager());
+    $lomSchemaService([
+        LomSchemaService::AUTOMATIC_PROCESSABLE_INSTANCES => [
+                // Class name list,
+        ],
+        LomSchemaService::CUSTOM_PROCESSABLE_INSTANCES => [
+                // Class name list,
+        ],
+    ]);
 
-class LomGeneralTitleSchema extends LomSchemaAbstract
-{
-    /**
-     * Get the default general node path
-     *
-     * @return array
-     */
-    public function getBaseNodePath()
-    {
-        return array(
-            $this->genericPathDefinition->getLomPath(),
-            $this->genericPathDefinition->getGeneralPath(),
-        );
-    }
+    $this->setVersion('e.f.d');
+}
+```
 
-    /**
-     * Get the general title node's relative path.
-     *
-     * @return array
-     */
-    public function getNodeRelativePath()
-    {
-        return [
-            $this->genericPathDefinition->getTitlePath(),
-            $this->genericPathDefinition->getStringPath(),
-        ];
-    }
+### Update SchemaServices
+```php
+<?php
+if ($this->isVersion('a.b.c')) {
+    $lomPathDefinitionServices = new AddLomPathDefinitionService();
+    $lomPathDefinitionServices->setServiceLocator($this->getServiceManager());
+    $lomPathDefinitionServices([
+        LomPathDefinitionService::LOM_TAO_PATH_DEFINITION_KEY     => 'Class name',
+        LomPathDefinitionService::LOM_GENERIC_PATH_DEFINITION_KEY => 'Class name',
+    ]);
 
-    /**
-     * Get the general title node's extract path.
-     *
-     * @return array
-     */
-    public function getNodePath()
-    {
-        return $this->getNodeAbsolutePath();
-    }
-
-    /**
-     * Returns the general title place in the TAO system.
-     *
-     * @return string
-     */
-    public function getTaoPath()
-    {
-        return $this->taoPathDefinition->getGeneralTitle();
-    }
+    $this->setVersion('e.f.d');
 }
 ```

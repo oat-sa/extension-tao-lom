@@ -40,9 +40,6 @@ use oat\taoLom\model\schema\imsglobal\general\LomGeneralLanguageSchema;
 use oat\taoLom\model\schema\imsglobal\general\LomGeneralTitleSchema;
 use oat\taoLom\model\schema\imsglobal\LomSchemaServiceKeys;
 use oat\taoLom\model\service\LomSchemaService;
-use oat\taoLom\scripts\install\AddLomPathDefinitionServices;
-use oat\taoLom\scripts\install\AddLomMetadataServices;
-use oat\taoLom\scripts\install\AddLomSchemaService;
 use oat\taoLom\scripts\install\AddMetadataExtractors;
 use oat\taoLom\scripts\install\AddMetadataInjectors;
 use oat\taoQtiItem\model\qti\metadata\exporter\MetadataExporter;
@@ -77,7 +74,7 @@ class Updater extends \common_ext_ExtensionUpdater
             OntologyUpdater::syncModels();
 
             // Add LOM metadata path definition services.
-            $lomPathDefinitionServices = new AddLomPathDefinitionServices();
+            $lomPathDefinitionServices = new AddLomPathDefinitionService();
             $lomPathDefinitionServices->setServiceLocator($this->getServiceManager());
             $lomPathDefinitionServices([
                 LomPathDefinitionService::LOM_TAO_PATH_DEFINITION_KEY     => LomTaoPathDefinition::class,
@@ -85,7 +82,7 @@ class Updater extends \common_ext_ExtensionUpdater
             ]);
 
             // Add LOM metadata export/import services.
-            $lomMetadataServices = new AddLomMetadataServices();
+            $lomMetadataServices = new AddLomMetadataService();
             $lomMetadataServices->setServiceLocator($this->getServiceManager());
             $lomMetadataServices([
                 MetadataService::IMPORTER_KEY => [
@@ -111,6 +108,7 @@ class Updater extends \common_ext_ExtensionUpdater
                 ],
             ]);
 
+            // Add LOM schema instances.
             $lomSchemaService = new AddLomSchemaService();
             $lomSchemaService->setServiceLocator($this->getServiceManager());
             $lomSchemaService([

@@ -17,7 +17,7 @@
  * Copyright (c) 2016 (original work) Open Assessment Technologies SA;
  *
  */
-namespace oat\taoLom\scripts\install;
+namespace oat\taoLom\scripts\update;
 
 use oat\oatbox\action\Action;
 use oat\oatbox\service\ServiceManager;
@@ -33,7 +33,7 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
  *
  * @package oat\taoQtiItem\scripts\install
  */
-class AddLomMetadataServices implements Action, ServiceLocatorAwareInterface
+class AddLomMetadataService implements Action, ServiceLocatorAwareInterface
 {
     use ServiceManagerAwareTrait;
 

@@ -27,15 +27,16 @@ use oat\oatbox\service\ServiceManagerAwareTrait;
 use oat\taoLom\model\ontology\LomGenericPathDefinition;
 use oat\taoLom\model\ontology\LomTaoPathDefinition;
 use oat\taoLom\model\service\LomPathDefinitionService;
+use oat\taoLom\scripts\update\AddLomPathDefinitionService;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
-class InstallLomPathDefinitionServices implements Action, ServiceLocatorAwareInterface
+class InstallLomPathDefinitionService implements Action, ServiceLocatorAwareInterface
 {
     use ServiceManagerAwareTrait;
 
     public function __invoke($params)
     {
-        $lomPathDefinitionServices = new AddLomPathDefinitionServices();
+        $lomPathDefinitionServices = new AddLomPathDefinitionService();
         $lomPathDefinitionServices->setServiceLocator($this->getServiceManager());
 
         return $lomPathDefinitionServices([

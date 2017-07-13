@@ -31,18 +31,19 @@ use oat\taoLom\model\import\extractor\LomAutoProcessableSchemaImportExtractor;
 use oat\taoLom\model\import\extractor\LomClassificationImportExtractor;
 use oat\taoLom\model\import\guardian\LomGeneralIdentifierImportGuardian;
 use oat\taoLom\model\import\injector\LomImportInjector;
+use oat\taoLom\scripts\update\AddLomMetadataService;
 use oat\taoQtiItem\model\qti\metadata\exporter\MetadataExporter;
 use oat\taoQtiItem\model\qti\metadata\importer\MetadataImporter;
 use oat\taoQtiItem\model\qti\metadata\MetadataService;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
-class InstallLomMetadataServices implements Action, ServiceLocatorAwareInterface
+class InstallLomMetadataService implements Action, ServiceLocatorAwareInterface
 {
     use ServiceManagerAwareTrait;
 
     public function __invoke($params)
     {
-        $lomMetadataServices = new AddLomMetadataServices();
+        $lomMetadataServices = new AddLomMetadataService();
         $lomMetadataServices->setServiceLocator($this->getServiceManager());
 
         return $lomMetadataServices([

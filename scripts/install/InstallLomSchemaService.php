@@ -34,6 +34,7 @@ use oat\taoLom\model\schema\imsglobal\general\LomGeneralLanguageSchema;
 use oat\taoLom\model\schema\imsglobal\general\LomGeneralTitleSchema;
 use oat\taoLom\model\schema\imsglobal\LomSchemaServiceKeys;
 use oat\taoLom\model\service\LomSchemaService;
+use oat\taoLom\scripts\update\AddLomSchemaService;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
 class InstallLomSchemaService implements Action, ServiceLocatorAwareInterface
