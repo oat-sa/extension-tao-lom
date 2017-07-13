@@ -21,7 +21,7 @@
 namespace oat\taoLom\model\import\extractor;
 
 use oat\oatbox\service\ServiceManager;
-use oat\taoLom\model\schema\LomMetadataInterface;
+use oat\taoLom\model\schema\LomSchemaInterface;
 use oat\taoLom\model\service\LomSchemaService;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataExtractor;
 use oat\taoQtiItem\model\qti\metadata\imsManifest\ImsManifestMetadataValue;
@@ -51,8 +51,8 @@ class LomAutoProcessableSchemaImportExtractor extends ImsManifestMetadataExtract
 
         foreach ($values as $resourceIdentifier => $metadataValueCollection) {
             /** @var ImsManifestMetadataValue $metadataValue */
-            foreach ($metadataValueCollection as $key => $metadataValue) {
-                /** @var LomMetadataInterface $current */
+            foreach ((array)$metadataValueCollection as $key => $metadataValue) {
+                /** @var LomSchemaInterface $current */
                 $path = '';
                 foreach ($schemaInstances as $current) {
                     if ($metadataValue->getPath() === $current->getNodeAbsolutePath()) {

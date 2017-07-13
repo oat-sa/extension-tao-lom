@@ -24,14 +24,14 @@ namespace oat\taoLom\scripts\install;
 
 use oat\oatbox\action\Action;
 use oat\oatbox\service\ServiceManagerAwareTrait;
-use oat\taoLom\model\schema\imsglobal\classification\LomClassificationEntryMetadata;
-use oat\taoLom\model\schema\imsglobal\classification\LomClassificationSourceMetadata;
-use oat\taoLom\model\schema\imsglobal\general\LomGeneralCoverageMetadata;
-use oat\taoLom\model\schema\imsglobal\general\LomGeneralDescriptionMetadata;
-use oat\taoLom\model\schema\imsglobal\general\LomGeneralIdentifierMetadata;
-use oat\taoLom\model\schema\imsglobal\general\LomGeneralKeywordMetadata;
-use oat\taoLom\model\schema\imsglobal\general\LomGeneralLanguageMetadata;
-use oat\taoLom\model\schema\imsglobal\general\LomGeneralTitleMetadata;
+use oat\taoLom\model\schema\imsglobal\classification\LomClassificationEntrySchema;
+use oat\taoLom\model\schema\imsglobal\classification\LomClassificationSourceSchema;
+use oat\taoLom\model\schema\imsglobal\general\LomGeneralCoverageSchema;
+use oat\taoLom\model\schema\imsglobal\general\LomGeneralDescriptionSchema;
+use oat\taoLom\model\schema\imsglobal\general\LomGeneralIdentifierSchema;
+use oat\taoLom\model\schema\imsglobal\general\LomGeneralKeywordSchema;
+use oat\taoLom\model\schema\imsglobal\general\LomGeneralLanguageSchema;
+use oat\taoLom\model\schema\imsglobal\general\LomGeneralTitleSchema;
 use oat\taoLom\model\schema\imsglobal\LomSchemaServiceKeys;
 use oat\taoLom\model\service\LomSchemaService;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
@@ -47,16 +47,16 @@ class InstallLomSchemaService implements Action, ServiceLocatorAwareInterface
 
         return $lomSchemaService([
             LomSchemaService::AUTOMATIC_PROCESSABLE_INSTANCES => [
-                LomGeneralIdentifierMetadata::class,
-                LomGeneralTitleMetadata::class,
-                LomGeneralLanguageMetadata::class,
-                LomGeneralDescriptionMetadata::class,
-                LomGeneralKeywordMetadata::class,
-                LomGeneralCoverageMetadata::class,
+                LomGeneralIdentifierSchema::class,
+                LomGeneralTitleSchema::class,
+                LomGeneralLanguageSchema::class,
+                LomGeneralDescriptionSchema::class,
+                LomGeneralKeywordSchema::class,
+                LomGeneralCoverageSchema::class,
             ],
             LomSchemaService::CUSTOM_PROCESSABLE_INSTANCES => [
-                LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_SOURCE => LomClassificationSourceMetadata::class,
-                LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_ENTRY  => LomClassificationEntryMetadata::class,
+                LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_SOURCE => LomClassificationSourceSchema::class,
+                LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_ENTRY  => LomClassificationEntrySchema::class,
             ],
         ]);
     }

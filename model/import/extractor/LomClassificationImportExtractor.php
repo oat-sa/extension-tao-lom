@@ -67,7 +67,7 @@ class LomClassificationImportExtractor extends ImsManifestMetadataExtractor
 
         foreach ($values as $resourceIdentifier => $metadataValueCollection) {
             /** @var ImsManifestMetadataValue $metadataValue */
-            foreach ($metadataValueCollection as $key => $metadataValue) {
+            foreach ((array)$metadataValueCollection as $key => $metadataValue) {
                 // If metadata is not a source or is empty then skip
                 if ($metadataValue->getValue() === '' || $metadataValue->getPath() !== $sourceSchema->getNodeAbsolutePath()) {
                     continue;
@@ -82,7 +82,10 @@ class LomClassificationImportExtractor extends ImsManifestMetadataExtractor
                 $entryMetadata = $metadataValueCollection[$key + 1];
 
                 // Handle metadata if it is an entry and is not empty
-                if ($entryMetadata->getPath() === $entrySchema->getNodeAbsolutePath() && $entryMetadata->getValue() !== '') {
+                if (
+                    $entryMetadata->getValue() !== '' &&
+                    $entryMetadata->getPath() === $entrySchema->getNodeAbsolutePath()
+                ) {
                     $valuesToImport[$resourceIdentifier][] = new SimpleMetadataValue(
                         $resourceIdentifier,
                         array($genericPathDefinition->getLomPath(), $metadataValue->getValue()),

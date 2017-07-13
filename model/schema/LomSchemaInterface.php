@@ -18,46 +18,41 @@
  *
  */
 
-namespace oat\taoLom\model\schema\imsglobal\general;
+namespace oat\taoLom\model\schema;
 
 
-use oat\taoLom\model\schema\LomMetadataAbstract;
-
-class LomGeneralLanguageMetadata extends LomMetadataAbstract
+interface LomSchemaInterface
 {
-    // Adding the getBaseNodePath method.
-    use LomGeneralMetadataTrait;
+    /**
+     * Get the node's path.
+     */
+    public function getNodePath();
 
     /**
-     * Get the classification source node's extract path.
+     * Get the node's base path
      *
      * @return array
      */
-    public function getNodePath()
-    {
-        return $this->getNodeAbsolutePath();
-    }
+    public function getBaseNodePath();
 
     /**
-     * Get the classification source node's relative path.
+     * Get the node's relative path.
      *
      * @return array
      */
-    public function getNodeRelativePath()
-    {
-        return [
-            $this->genericPathDefinition->getLanguagePath(),
-            $this->genericPathDefinition->getStringPath(),
-        ];
-    }
+    public function getNodeRelativePath();
 
     /**
-     * Returns the general language place in the TAO system.
+     * Get the node's absolute path.
+     *
+     * @return array
+     */
+    public function getNodeAbsolutePath();
+
+    /**
+     * Returns the node's place in TAO.
      *
      * @return string
      */
-    public function getTaoPath()
-    {
-        return $this->taoPathDefinition->getGeneralLanguage();
-    }
+    public function getTaoPath();
 }

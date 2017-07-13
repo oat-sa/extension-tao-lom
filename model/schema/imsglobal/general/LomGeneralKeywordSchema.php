@@ -21,12 +21,12 @@
 namespace oat\taoLom\model\schema\imsglobal\general;
 
 
-use oat\taoLom\model\schema\LomMetadataAbstract;
+use oat\taoLom\model\schema\LomSchemaAbstract;
 
-class LomGeneralKeywordMetadata extends LomMetadataAbstract
+class LomGeneralKeywordSchema extends LomSchemaAbstract
 {
     // Adding the getBaseNodePath method.
-    use LomGeneralMetadataTrait;
+    use LomGeneralSchemaTrait;
 
     /**
      * Get the classification source node's extract path.

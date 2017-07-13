@@ -22,8 +22,8 @@ namespace oat\taoLom\model\export\extractor;
 
 use oat\generis\model\OntologyAwareTrait;
 use oat\oatbox\service\ServiceManager;
-use oat\taoLom\model\schema\imsglobal\classification\LomClassificationEntryMetadata;
-use oat\taoLom\model\schema\imsglobal\classification\LomClassificationSourceMetadata;
+use oat\taoLom\model\schema\imsglobal\classification\LomClassificationEntrySchema;
+use oat\taoLom\model\schema\imsglobal\classification\LomClassificationSourceSchema;
 use oat\taoLom\model\schema\imsglobal\LomSchemaServiceKeys;
 use oat\taoLom\model\service\LomSchemaService;
 use oat\taoQtiItem\model\qti\metadata\MetadataExtractionException;
@@ -64,20 +64,20 @@ class LomClassificationExportExtractor extends LomExportExtractorAbstract
         /** @var LomSchemaService $schemaService */
         $schemaService  = ServiceManager::getServiceManager()->get(LomSchemaService::SERVICE_ID);
         $schemaInstances = $schemaService->getCustomProcessableSchemaInstances();
-        /** @var LomClassificationSourceMetadata $sourceSchema */
+        /** @var LomClassificationSourceSchema $sourceSchema */
         $sourceSchema = $schemaInstances[LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_SOURCE];
-        /** @var LomClassificationEntryMetadata $entrySchema */
+        /** @var LomClassificationEntrySchema $entrySchema */
         $entrySchema = $schemaInstances[LomSchemaServiceKeys::SCHEMA_CLASSIFICATION_ENTRY];
         $metadata = [];
 
         $triples = $resource->getRdfTriples();
         /** @var \core_kernel_classes_Triple $triple */
-        foreach ($triples->getIterator() as $triple) {
+        foreach ((array)$triples->getIterator() as $triple) {
             /** @var \core_kernel_classes_Resource $property */
             $property = $this->getResource($triple->predicate);
             $value = $triple->object;
 
-            if (!empty($value) && $property->isProperty() && ! in_array($property->getUri(), self::$excludedProperties)) {
+            if (!empty($value) && $property->isProperty() && ! in_array($property->getUri(), self::$excludedProperties, true)) {
                 $metadata[] = new NestedMetadataValue(
                     $resource->getUri(),
                     $sourceSchema->getNodeRelativePath(),

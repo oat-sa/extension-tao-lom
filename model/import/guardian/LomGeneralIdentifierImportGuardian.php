@@ -50,7 +50,6 @@ class LomGeneralIdentifierImportGuardian implements MetadataGuardian
                 );
 
                 if (count($instances) > 0) {
-                    //var_dump($instances);
                     return reset($instances);
                 }
             }

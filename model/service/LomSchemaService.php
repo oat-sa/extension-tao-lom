@@ -21,7 +21,7 @@ namespace oat\taoLom\model\service;
 
 
 use oat\oatbox\service\ConfigurableService;
-use oat\taoLom\model\schema\LomMetadataInterface;
+use oat\taoLom\model\schema\LomSchemaInterface;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 
 class LomSchemaService extends ConfigurableService
@@ -74,7 +74,7 @@ class LomSchemaService extends ConfigurableService
     /**
      * Returns the automatic processable schema instances.
      *
-     * @return LomMetadataInterface[]
+     * @return LomSchemaInterface[]
      *
      * @throws \common_Exception
      * @throws \InvalidArgumentException
@@ -88,7 +88,7 @@ class LomSchemaService extends ConfigurableService
     /**
      * Returns the custom processable schema instances.
      *
-     * @return LomMetadataInterface[]
+     * @return LomSchemaInterface[]
      *
      * @throws \common_Exception
      * @throws \InvalidArgumentException
@@ -116,7 +116,7 @@ class LomSchemaService extends ConfigurableService
      *
      * @param string $offset   The metadata schema offset.
      *
-     * @return LomMetadataInterface[]
+     * @return LomSchemaInterface[]
      *
      * @throws \common_Exception
      * @throws \InvalidArgumentException
@@ -139,7 +139,7 @@ class LomSchemaService extends ConfigurableService
 
         $instances = [];
         foreach ($classes as $classKey => $class) {
-            if (!is_a($class, LomMetadataInterface::class, true)) {
+            if (!is_a($class, LomSchemaInterface::class, true)) {
                 throw new \InvalidArgumentException(
                     __('The requested LOM Metadata Schema offset contains invalid schema classes!')
                 );

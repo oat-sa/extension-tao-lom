@@ -72,7 +72,6 @@ abstract class LomExportExtractorAbstract implements MetadataExtractor
             ) {
                 $this->languageCode = \tao_helpers_translation_Utils::getDefaultLanguage();
             }
-
         }
 
         return $this->languageCode;

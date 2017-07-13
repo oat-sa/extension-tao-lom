@@ -21,43 +21,18 @@
 namespace oat\taoLom\model\schema\imsglobal\general;
 
 
-use oat\taoLom\model\schema\LomMetadataAbstract;
-
-class LomGeneralCoverageMetadata extends LomMetadataAbstract
+trait LomGeneralSchemaTrait
 {
-    // Adding the getBaseNodePath method.
-    use LomGeneralMetadataTrait;
-
     /**
-     * Get the classification source node's extract path.
+     * Get the default general source path
      *
      * @return array
      */
-    public function getNodePath()
+    public function getBaseNodePath()
     {
-        return $this->getNodeAbsolutePath();
-    }
-
-    /**
-     * Get the classification source node's relative path.
-     *
-     * @return array
-     */
-    public function getNodeRelativePath()
-    {
-        return [
-            $this->genericPathDefinition->getCoveragePath(),
-            $this->genericPathDefinition->getStringPath(),
-        ];
-    }
-
-    /**
-     * Returns the general coverage place in the TAO system.
-     *
-     * @return string
-     */
-    public function getTaoPath()
-    {
-        return $this->taoPathDefinition->getGeneralCoverage();
+        return array(
+            $this->genericPathDefinition->getLomPath(),
+            $this->genericPathDefinition->getGeneralPath(),
+        );
     }
 }

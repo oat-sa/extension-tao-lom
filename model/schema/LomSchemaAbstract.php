@@ -26,7 +26,7 @@ use oat\taoLom\model\ontology\interfaces\LomGenericPathDefinitionInterface;
 use oat\taoLom\model\ontology\interfaces\LomTaoPathDefinitionInterface;
 use oat\taoLom\model\service\LomPathDefinitionService;
 
-abstract class LomMetadataAbstract implements LomMetadataInterface
+abstract class LomSchemaAbstract implements LomSchemaInterface
 {
     /**
      * @var LomTaoPathDefinitionInterface

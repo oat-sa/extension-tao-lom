@@ -21,12 +21,12 @@
 namespace oat\taoLom\model\schema\imsglobal\general;
 
 
-use oat\taoLom\model\schema\LomMetadataAbstract;
+use oat\taoLom\model\schema\LomSchemaAbstract;
 
-class LomGeneralDescriptionMetadata extends LomMetadataAbstract
+class LomGeneralTitleSchema extends LomSchemaAbstract
 {
     // Adding the getBaseNodePath method.
-    use LomGeneralMetadataTrait;
+    use LomGeneralSchemaTrait;
 
     /**
      * Get the classification source node's extract path.
@@ -46,18 +46,18 @@ class LomGeneralDescriptionMetadata extends LomMetadataAbstract
     public function getNodeRelativePath()
     {
         return [
-            $this->genericPathDefinition->getDescriptionPath(),
+            $this->genericPathDefinition->getTitlePath(),
             $this->genericPathDefinition->getStringPath(),
         ];
     }
 
     /**
-     * Returns the general description place in the TAO system.
+     * Returns the general title place in the TAO system.
      *
      * @return string
      */
     public function getTaoPath()
     {
-        return $this->taoPathDefinition->getGeneralDescription();
+        return $this->taoPathDefinition->getGeneralTitle();
     }
 }

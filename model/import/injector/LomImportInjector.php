@@ -40,8 +40,7 @@ class LomImportInjector implements MetadataInjector
     public function inject($target, array $values)
     {
         if (!$target instanceof \core_kernel_classes_Resource) {
-            $msg = "The given target is not an instance of core_kernel_classes_Resource.";
-            throw new MetadataInjectionException($msg);
+            throw new MetadataInjectionException('The given target is not an instance of core_kernel_classes_Resource.');
         }
 
         /** @var \core_kernel_classes_Class $targetClass */
@@ -50,6 +49,7 @@ class LomImportInjector implements MetadataInjector
         $classProperties = $targetClass->getProperties(true);
 
         $properties = [];
+        /** @var \core_kernel_classes_Property $property */
         foreach ($classProperties as $property) {
             $properties[] = $property->getUri();
         }
@@ -59,11 +59,11 @@ class LomImportInjector implements MetadataInjector
 
         foreach ($values as $metadataValues) {
             /** @var MetadataValue $metadataValue */
-            foreach ($metadataValues as $metadataValue) {
+            foreach ((array)$metadataValues as $metadataValue) {
                 $lang = $metadataValue->getLanguage() ?: DEFAULT_LANG;
                 $path = $metadataValue->getPath();
                 $valuePath = end($path);
-                if (in_array($valuePath, $properties)) {
+                if (in_array($valuePath, $properties, true)) {
                     $target->setPropertyValueByLg($this->getProperty($valuePath), $metadataValue->getValue(), $lang);
                 }
             }
