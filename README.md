@@ -10,8 +10,8 @@ support the reusability of learning objects, to aid discoverability, and to faci
 interoperability, usually in the context of online learning management systems (LMS). [1]  
   
 ### Useful links
-[IMS Learning Resource Meta-data Specification](https://www.imsglobal.org/metadata/index.html)  
-[IMS Meta-data Best Practice Guide](https://www.imsglobal.org/metadata/mdv1p3/imsmd_bestv1p3.html)
+* [IMS Learning Resource Meta-data Specification](https://www.imsglobal.org/metadata/index.html)  
+* [IMS Meta-data Best Practice Guide](https://www.imsglobal.org/metadata/mdv1p3/imsmd_bestv1p3.html)
 
 ***
 
