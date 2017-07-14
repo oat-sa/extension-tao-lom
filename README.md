@@ -1,6 +1,20 @@
 # extension-tao-lom
 An extension enabling LOM Metadata support for Assessment Content resources
 
+***
+
+## LOM(Learning Object Metadata)
+Learning Object Metadata is a data model, usually encoded in XML, used to describe a learning object 
+and similar digital resources used to support learning. The purpose of learning object metadata is to 
+support the reusability of learning objects, to aid discoverability, and to facilitate their 
+interoperability, usually in the context of online learning management systems (LMS). [1]  
+  
+### Useful links
+[IMS Learning Resource Meta-data Specification](https://www.imsglobal.org/metadata/index.html)
+[IMS Meta-data Best Practice Guide](https://www.imsglobal.org/metadata/mdv1p3/imsmd_bestv1p3.html)
+
+***
+
 ## Definitions
 
 ### Metadata service
@@ -57,6 +71,8 @@ It's a schema instance which can be processed by the unified export/import solut
 It's a schema instance which cannot be processed with the unified export/import solutions. It needs custom extractors/injectors to process the instance.  
 *(for example: Classification elements)*
 
+***
+
 ## Structure
 ### Import process
 ![Import process](docs/structure_import.png "Import process")
@@ -70,6 +86,8 @@ It's a schema instance which cannot be processed with the unified export/import 
 
 ### Schema system
 ![Schema system](docs/schema_system.png "Schema system")
+
+***
 
 ## Directory structure
 * *docs*: rendered images and their source files
@@ -89,6 +107,8 @@ It's a schema instance which cannot be processed with the unified export/import 
 * *scripts*: the install/update scripts
   * *install*: the service install scripts with the default configuration
   * *update*: the service update scripts and the updater script
+
+***
 
 ## Implementation
 
@@ -169,6 +189,8 @@ It needs to implement the ```LomGenericPathDefinition``` interface.
 It needs to implement the ```LomSchemaInterface``` interface. It's recommended to extend the 
 ```LomSchemaAbstract``` abstract class which already contains some basic logic.
 
+***
+
 ## Install services
 
 ### Install MetadataServices
@@ -179,6 +201,8 @@ Just simply need to change the ```scripts/install/InstallLomPathDefinitionServic
 
 ### Install SchemaServices
 Just simply need to change the ```scripts/install/InstallLomSchemaService.php``` file's instantiation parameters.
+
+***
 
 ## Update services
 
@@ -247,3 +271,5 @@ if ($this->isVersion('a.b.c')) {
     $this->setVersion('e.f.d');
 }
 ```
+
+[1]: https://en.wikipedia.org/wiki/Learning_object_metadata "wikipedia.org"
