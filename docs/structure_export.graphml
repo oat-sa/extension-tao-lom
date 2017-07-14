@@ -76,7 +76,7 @@ INSTANCES<y:LabelModel>
           <y:Geometry height="118.0" width="118.0" x="-315.5" y="-404.0"/>
           <y:Fill color="#FF99CC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="FreeSans" fontSize="14" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.7830810546875" horizontalTextPosition="center" iconTextGap="4" modelName="free" modelPosition="anywhere" textColor="#000000" verticalTextPosition="bottom" visible="true" width="101.28852844238281" x="8.355735778808594" y="73.60845947265625">IMPORT
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="FreeSans" fontSize="14" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.7830810546875" horizontalTextPosition="center" iconTextGap="4" modelName="free" modelPosition="anywhere" textColor="#000000" verticalTextPosition="bottom" visible="true" width="101.28852844238281" x="8.355735778808594" y="73.60845947265625">EXPORT
 EXTRACTORS</y:NodeLabel>
           <y:Shape type="trapezoid"/>
         </y:ShapeNode>
@@ -88,7 +88,7 @@ EXTRACTORS</y:NodeLabel>
           <y:Geometry height="120.0" width="120.0" x="-83.0" y="-405.0"/>
           <y:Fill color="#FFFF99" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="FreeSans" fontSize="14" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.7830810546875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="76.32624816894531" x="21.836875915527344" y="42.60845947265625">IMPORT
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="FreeSans" fontSize="14" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="34.7830810546875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="76.32624816894531" x="21.836875915527344" y="42.60845947265625">EXPORT
 INJECTOR<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
@@ -101,7 +101,6 @@ INJECTOR<y:LabelModel>
       </data>
     </node>
     <node id="n5">
-      <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="116.0" width="116.0" x="-551.0" y="-403.0"/>
@@ -114,7 +113,6 @@ INJECTOR<y:LabelModel>
     </node>
     <node id="n6">
       <data key="d4"/>
-      <data key="d5"/>
       <data key="d6">
         <y:UMLNoteNode>
           <y:Geometry height="115.0" width="100.0" x="151.5" y="-402.5"/>
@@ -198,7 +196,6 @@ INJECTOR<y:LabelModel>
       </data>
     </edge>
     <edge id="e4" source="n5" target="n3">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -217,7 +214,6 @@ INJECTOR<y:LabelModel>
       </data>
     </edge>
     <edge id="e5" source="n3" target="n4">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -236,7 +232,6 @@ INJECTOR<y:LabelModel>
       </data>
     </edge>
     <edge id="e6" source="n4" target="n6">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
