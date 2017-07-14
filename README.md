@@ -7,7 +7,7 @@ An extension enabling LOM Metadata support for Assessment Content resources
 Learning Object Metadata is a data model, usually encoded in XML, used to describe a learning object 
 and similar digital resources used to support learning. The purpose of learning object metadata is to 
 support the reusability of learning objects, to aid discoverability, and to facilitate their 
-interoperability, usually in the context of online learning management systems (LMS). [1]  
+interoperability, usually in the context of online learning management systems (LMS). <sup>[1]</sup>  
   
 ### Useful links
 * [IMS Learning Resource Meta-data Specification](https://www.imsglobal.org/metadata/index.html)  
