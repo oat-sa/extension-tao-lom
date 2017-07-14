@@ -3,14 +3,14 @@ An extension enabling LOM Metadata support for Assessment Content resources
 
 ***
 
-## LOM(Learning Object Metadata)
+## LOM (Learning Object Metadata)
 Learning Object Metadata is a data model, usually encoded in XML, used to describe a learning object 
 and similar digital resources used to support learning. The purpose of learning object metadata is to 
 support the reusability of learning objects, to aid discoverability, and to facilitate their 
 interoperability, usually in the context of online learning management systems (LMS). [1]  
   
 ### Useful links
-[IMS Learning Resource Meta-data Specification](https://www.imsglobal.org/metadata/index.html)
+[IMS Learning Resource Meta-data Specification](https://www.imsglobal.org/metadata/index.html)  
 [IMS Meta-data Best Practice Guide](https://www.imsglobal.org/metadata/mdv1p3/imsmd_bestv1p3.html)
 
 ***
