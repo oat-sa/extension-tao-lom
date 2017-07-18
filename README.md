@@ -139,7 +139,8 @@ class LomMyImportExtractor extends ImsManifestMetadataExtractor
 ```
 
 ### New ImportGuardian
-It needs to implement the ```MetadataGuardian``` interface. The ```guard()``` method needs to return false
+It needs to implement the ```MetadataGuardian``` interface. You can extend ```LomImportGuardianAbstract``` 
+class which already has the taoPathDefinition as an instance. The ```guard()``` method needs to return false
 when the element is injectable. If it's not it returns the ```core_kernel_classes_Resource``` instance of the element.
 
 ### New ImportInjector
@@ -242,15 +243,11 @@ if ($this->isVersion('a.b.c')) {
 ```php
 <?php
 if ($this->isVersion('a.b.c')) {
-    $lomSchemaService = new AddLomSchemaService();
-    $lomSchemaService->setServiceLocator($this->getServiceManager());
-    $lomSchemaService([
-        LomSchemaService::AUTOMATIC_PROCESSABLE_INSTANCES => [
-                // Class name list,
-        ],
-        LomSchemaService::CUSTOM_PROCESSABLE_INSTANCES => [
-                // Class name list,
-        ],
+    $lomPathDefinitionServices = new AddLomPathDefinitionService();
+    $lomPathDefinitionServices->setServiceLocator($this->getServiceManager());
+    $lomPathDefinitionServices([
+        LomPathDefinitionService::LOM_TAO_PATH_DEFINITION_KEY     => 'Class name',
+        LomPathDefinitionService::LOM_GENERIC_PATH_DEFINITION_KEY => 'Class name',
     ]);
 
     $this->setVersion('e.f.d');
@@ -261,11 +258,15 @@ if ($this->isVersion('a.b.c')) {
 ```php
 <?php
 if ($this->isVersion('a.b.c')) {
-    $lomPathDefinitionServices = new AddLomPathDefinitionService();
-    $lomPathDefinitionServices->setServiceLocator($this->getServiceManager());
-    $lomPathDefinitionServices([
-        LomPathDefinitionService::LOM_TAO_PATH_DEFINITION_KEY     => 'Class name',
-        LomPathDefinitionService::LOM_GENERIC_PATH_DEFINITION_KEY => 'Class name',
+    $lomSchemaService = new AddLomSchemaService();
+    $lomSchemaService->setServiceLocator($this->getServiceManager());
+    $lomSchemaService([
+        LomSchemaService::AUTOMATIC_PROCESSABLE_INSTANCES => [
+                // Class name list,
+        ],
+        LomSchemaService::CUSTOM_PROCESSABLE_INSTANCES => [
+                // Class name list,
+        ],
     ]);
 
     $this->setVersion('e.f.d');
