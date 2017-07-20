@@ -127,8 +127,7 @@ class Updater extends \common_ext_ExtensionUpdater
             ]);
 
             // Setting the version.
-            $this->setVersion('1.0.0');
-//            $this->setVersion('2.0.0');
+            $this->setVersion('2.0.0');
         }
     }
 }
