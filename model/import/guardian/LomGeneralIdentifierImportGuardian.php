@@ -21,12 +21,9 @@
 namespace oat\taoLom\model\import\guardian;
 
 
-use oat\oatbox\service\ServiceManager;
-use oat\taoLom\model\service\LomPathDefinitionService;
-use oat\taoQtiItem\model\qti\metadata\MetadataGuardian;
 use oat\taoQtiItem\model\qti\metadata\simple\SimpleMetadataValue;
 
-class LomGeneralIdentifierImportGuardian implements MetadataGuardian
+class LomGeneralIdentifierImportGuardian extends LomImportGuardianAbstract
 {
     /**
      * @inheritdoc
@@ -35,17 +32,13 @@ class LomGeneralIdentifierImportGuardian implements MetadataGuardian
      */
     public function guard(array $metadataValues)
     {
-        /** @var LomPathDefinitionService $pathDefinitionService */
-        $pathDefinitionService = ServiceManager::getServiceManager()->get(LomPathDefinitionService::SERVICE_ID);
-        $taoPathDefinition = $pathDefinitionService->getLomTaoPathDefinition();
-
         /** @var SimpleMetadataValue $metadataValue */
         foreach($metadataValues as $metadataValue) {
-            if ($metadataValue->getPath() === array($taoPathDefinition->getGeneralIdentifier())) {
+            if ($metadataValue->getPath() === array($this->getTaoPathDefinition()->getGeneralIdentifier())) {
                 \common_Logger::i('Guarding Lom General identifier...');
-                $class = new \core_kernel_classes_Class(TAO_TEST_CLASS);
+                $class = $this->getTestClass();
                 $instances = $class->searchInstances(
-                    array($taoPathDefinition->getGeneralIdentifier() => $metadataValue->getValue()),
+                    array($this->getTaoPathDefinition()->getGeneralIdentifier() => $metadataValue->getValue()),
                     array('like' => false, 'recursive' => true)
                 );
 
@@ -56,5 +49,15 @@ class LomGeneralIdentifierImportGuardian implements MetadataGuardian
         }
 
         return false;
+    }
+
+    /**
+     * Returns the test class instance.
+     *
+     * @return \core_kernel_classes_Class
+     */
+    protected function getTestClass()
+    {
+        return new \core_kernel_classes_Class(TAO_TEST_CLASS);
     }
 }
