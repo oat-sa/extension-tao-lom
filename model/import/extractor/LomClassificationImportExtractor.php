@@ -97,10 +97,4 @@ class LomClassificationImportExtractor extends ImsManifestMetadataExtractor
 
         return $valuesToImport;
     }
-
 }
-
-
-
-
-

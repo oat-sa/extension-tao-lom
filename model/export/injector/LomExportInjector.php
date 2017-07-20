@@ -43,5 +43,4 @@ class LomExportInjector extends ImsManifestMetadataInjector
 
         parent::__construct($mappings);
     }
-
 }
