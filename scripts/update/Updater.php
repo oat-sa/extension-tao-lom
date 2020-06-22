@@ -23,6 +23,9 @@ use oat\tao\scripts\update\OntologyUpdater;
 use oat\taoLom\scripts\install\AddMetadataExtractors;
 use oat\taoLom\scripts\install\AddMetadataInjectors;
 
+/**
+ * @deprecated use migrations instead. See https://github.com/oat-sa/generis/wiki/Tao-Update-Process
+ */
 class Updater extends \common_ext_ExtensionUpdater
 {
     public function update($initialVersion)
@@ -45,5 +48,10 @@ class Updater extends \common_ext_ExtensionUpdater
         }
 
         $this->skip('0.2.0', '1.0.2');
+        
+        //Updater files are deprecated. Please use migrations.
+        //See: https://github.com/oat-sa/generis/wiki/Tao-Update-Process
+
+        $this->setVersion($this->getExtension()->getManifest()->getVersion());
     }
 }
