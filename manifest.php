@@ -29,12 +29,7 @@ return array(
     'label'       => 'Learning Object Metadata',
     'description' => 'An extension supporting the IMS Global Loose version of the Learning Object Metadata standard.',
     'license'     => 'GPL-2.0',
-    'version'     => '1.1.0',
     'author'      => 'Open Assessment Technologies SA',
-    'requires' => array(
-        'tao' => '>=9.0.0',
-        'taoQtiItem' => '>=6.4.0'
-    ),
     'managementRole' => 'http://www.tao.lu/Ontologies/generis.rdf#taoLomManager',
     'acl' => array(
         array('grant', 'http://www.tao.lu/Ontologies/generis.rdf#taoLomManager', array('ext'=>'taoLom')),
